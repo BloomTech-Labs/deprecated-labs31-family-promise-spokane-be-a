@@ -4,10 +4,21 @@ exports.up = function(knex) {
     .createTable('logs', tbl => {
         tbl
             .increments()
+        
+        tbl
+            .integer('user_id')
+            .unsigned()
+            .references('id')
+            .inTable('users')
+
+        tbl
+            .boolean('checked_in')
+
         tbl
             .date('date')
+
         tbl
-            .datetime('time');
+            .datetime('time')
       })
   
 };
