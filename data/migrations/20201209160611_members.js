@@ -1,4 +1,5 @@
-
+// Members have their own table because the database contains specific data
+// for individuals of families. Members are not users 
 exports.up = function(knex) {
     return knex.schema
         .createTable('members', tbl => { 
