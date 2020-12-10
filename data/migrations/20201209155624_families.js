@@ -18,31 +18,31 @@ exports.up = function(knex) {
                 .integer('case_number')
 
             tbl
-                .json('phone_one')
+                .jsonb('phone_one')
 
             tbl
-                .json('phone_two')
+                .jsonb('phone_two')
 
             tbl
-                .json('emergencyContact')
+                .jsonb('emergencyContact')
 
             tbl
-                .json('vehicle')
+                .jsonb('vehicle')
 
             tbl
                 .string('last_permanent_address')
 
             tbl
-                .json('homeless_info')
+                .jsonb('homeless_info')
 
             tbl
-                .json('gov_benefits')
+                .jsonb('gov_benefits')
 
             tbl
-                .json('insurance')
+                .jsonb('insurance')
 
             tbl
-                .json('domestic_violence_info')
+                .jsonb('domestic_violence_info')
 
             tbl
                 .string('avatar_url')
