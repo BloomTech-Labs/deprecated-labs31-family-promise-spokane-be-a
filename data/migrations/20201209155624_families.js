@@ -1,4 +1,6 @@
-
+// This table is the primary table for guests. 
+// many members can belong to a family but only families are users 
+// that log in and members are attributes not users
 exports.up = function(knex) {
     return knex.schema
         .createTable('families', tbl => {
