@@ -21,7 +21,6 @@ const swaggerUIOptions = {
 //###[  Routers ]###
 const indexRouter = require('./index/indexRouter');
 
-
 const app = express();
 
 process.on('unhandledRejection', (reason, p) => {
