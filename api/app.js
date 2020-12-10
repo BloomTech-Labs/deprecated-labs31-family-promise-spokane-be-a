@@ -20,8 +20,14 @@ const swaggerUIOptions = {
 
 //###[  Routers ]###
 const indexRouter = require('./index/indexRouter');
-const profileRouter = require('./profile/profileRouter');
-const dsRouter = require('./dsService/dsRouter');
+// const profileRouter = require('./profile/profileRouter');
+// const dsRouter = require('./dsService/dsRouter');
+
+const userRouter = require('./users/userRouter');
+const familiesRouter = require('./families/familiesRouter');
+const memberRouter = require('./members/membersRouter');
+const notesRouter = require('./notes/notesRouter');
+const logsRouter = require('./logs/logsRouter');
 
 const app = express();
 
@@ -46,11 +52,15 @@ app.use(
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 // application routes
 app.use('/', indexRouter);
-app.use(['/profile', '/profiles'], profileRouter);
-app.use('/data', dsRouter);
+// app.use(['/profile', '/profiles'], profileRouter);
+// app.use('/data', dsRouter);
+app.use('/users', userRouter);
+app.use('/families', familiesRouter);
+app.use('/members', memberRouter);
+app.use('/notes', notesRouter);
+app.use('/logs', logsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
