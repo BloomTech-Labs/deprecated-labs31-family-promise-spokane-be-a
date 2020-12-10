@@ -9,30 +9,30 @@ How many files and/or lines were changed?
 ## Type of Change
 ​
 Types of Change:
-- [ ] New feature
-- [ ] Refactoring / Bug fix
-- [ ] Documentation update 
+- [] New feature
+- [] Refactoring / Bug fix
+- [] Documentation update 
 ​
 ​
 ## Testing
 ​
-- [ ] Yes
-- [ ] No
-- [ ] Not needed
+- [] Yes
+- [] No
+- [] Not needed
 ​
 ​
 ## Completeness
 Is this feature complete
-- [ ] Feature Complete
-- [ ] Feature Incomplete, user story/trello card linked
+- [] Feature Complete
+- [] Feature Incomplete, user story/trello card linked
 ​
 # PR Requirements
-- [ ] Clean and concise commenting
-- [ ] Clean and comprehensive documentation included
-- [ ] Conforms to engineering standards and checks
-- [ ] There are no merge conflicts
-- [ ] There are no warnings
-- [ ] Corresponding documentation elsewhere has been updated to reflect these changes
+- [] Clean and concise commenting
+- [] Clean and comprehensive documentation included
+- [] Conforms to engineering standards and checks
+- [] There are no merge conflicts
+- [] There are no warnings
+- [] Corresponding documentation elsewhere has been updated to reflect these changes
 ​
 ​
 ## Requester Questions
