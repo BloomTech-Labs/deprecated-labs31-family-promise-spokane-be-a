@@ -10,8 +10,8 @@ exports.up = function(knex) {
             .notNullable()
             .references('id')
             .inTable('families')
-            .onDelete('RESTRICT')
-            .onUpdate('CASCADE') // @abdi should it be 'RESTRICT'? 
+            .onDelete('RESTRICT') // should stay 'RESTRICT' to keep notes in the database in case families with notes on their files return to shelter in the future
+            .onUpdate('CASCADE') 
 
         tbl
             .integer('author')
@@ -19,8 +19,8 @@ exports.up = function(knex) {
             .notNullable()
             .references('id')
             .inTable('users')
-            .onDelete('RESTRICT')
-            .onUpdate('RESTRICT')
+            .onDelete('RESTRICT') // users should never be deleted 
+            .onUpdate('CASCADE') 
 
         tbl
             .string('subject')

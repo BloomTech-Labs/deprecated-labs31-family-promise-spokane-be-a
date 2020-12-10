@@ -10,9 +10,10 @@ exports.up = function(knex) {
                 .unsigned()
                 .notNullable()
                 .references('id')
-                .inTable('users')
+                .inTable('users') 
+                .notNullable()
                 .onDelete('CASCADE')
-                .onUpdate('CASCADE') // should it be 'RESTRICT'? 
+                .onUpdate('CASCADE') 
 
             tbl
                 .integer('case_number')
