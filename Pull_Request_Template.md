@@ -23,11 +23,10 @@ Types of Change:
 ​
 ## Completeness
 Is this feature complete
-- Feature Complete
-- Feature Incomplete, user story/trello card linked
+- [ ] Feature Complete
+- [ ] Feature Incomplete, user story/trello card linked
 ​
 # PR Requirements
-- [ ] Follows stylistic guidelines
 - [ ] Clean and concise commenting
 - [ ] Clean and comprehensive documentation included
 - [ ] Conforms to engineering standards and checks
