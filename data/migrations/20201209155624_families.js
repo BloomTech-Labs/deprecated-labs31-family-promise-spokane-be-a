@@ -17,6 +17,7 @@ exports.up = function(knex) {
 
             tbl
                 .integer('case_number')
+                .notNullable()
 
             tbl
                 .jsonb('phone_one')
