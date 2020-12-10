@@ -1,4 +1,5 @@
-
+// Notes can be about entire families or specify users however notes are tied to the family table
+// This makes it so admins can search notes by family id
 exports.up = function(knex) {
     return knex.schema
     .createTable('notes', tbl => {
