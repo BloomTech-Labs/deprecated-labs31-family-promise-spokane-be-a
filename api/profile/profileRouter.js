@@ -262,7 +262,7 @@ router.put('/', authRequired, (req, res) => {
  *      404:
  *        $ref: '#/components/responses/NotFound'
  *      200:
- *        description: A profile object
+ *        description: A profil object
  *        content:
  *          application/json:
  *            schema:
