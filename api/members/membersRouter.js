@@ -1,7 +1,6 @@
 const express = require('express');
 
 const Members = require('./membersModel');
-const Families = require('../families/familiesModel');
 const router = express.Router();
 
 router.get('/', function (req, res) {
@@ -16,8 +15,8 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:id', function (req, res) {
-  const id = String(req.params.id);
-  Members.findById(id)
+  const family_id = String(req.params.id);
+  Members.findById(family_id)
     .then((members) => {
       if (members) {
         res.status(200).json(members);
@@ -87,8 +86,8 @@ router.put('/', (req, res) => {
 router.delete('/:id', (req, res) => {
   const id = req.params.id;
   try {
-    Families.findById(id).then((members) => {
-      members.remove(members['family_id']).then(() => {
+    Members.findById(id).then((members) => {
+      Members.remove(members['family_id']).then(() => {
         res
           .status(200)
           .json({ message: `members '${id}' was deleted.`, members: members });

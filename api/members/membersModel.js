@@ -11,8 +11,8 @@ const findBy = (filter) => {
 const findByfamilyId = async (id) => {
   return db('families').where({ id }).first().select('*');
 };
-const findById = async (id) => {
-  return db('members').where({ id }).first().select('families');
+const findById = async (family_id) => {
+  return db('members').where({ family_id }).first().select('*');
 };
 
 const create = async (profile) => {

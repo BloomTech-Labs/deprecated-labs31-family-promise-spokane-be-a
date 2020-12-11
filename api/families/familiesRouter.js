@@ -61,8 +61,7 @@ router.put('/', (req, res) => {
     const id = families.id || 0;
     Families.findById(id)
       .then(
-        families
-          .update(id, families)
+        Families.update(id, families)
           .then((updated) => {
             res
               .status(200)
@@ -88,7 +87,7 @@ router.delete('/:id', (req, res) => {
   const id = req.params.id;
   try {
     Families.findById(id).then((families) => {
-      families.remove(families.id).then(() => {
+      Families.remove(families.id).then(() => {
         res.status(200).json({
           message: `families '${id}' was deleted.`,
           families: families,
