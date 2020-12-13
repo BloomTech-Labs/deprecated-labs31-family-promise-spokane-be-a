@@ -85,12 +85,8 @@
     "jest-sonar-reporter": "^2.0.0",
     "lint-staged": "^10.4.2",
     "nodemon": "^2.0.4",
-<<<<<<< HEAD
-    "prettier": "^2.2.1",
-=======
     "prettier": "^2.0.5",
     "pretty-quick": "^3.1.0",
->>>>>>> 516562d0c05d78cf4c7782fd1e17921e48afe6d4
     "supertest": "^4.0.2"
   }
 }
