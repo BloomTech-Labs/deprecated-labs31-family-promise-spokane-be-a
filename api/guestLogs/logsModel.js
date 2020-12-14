@@ -44,6 +44,4 @@ module.exports = {
   update,
   remove,
   findOrCreateLog,
-  findByFamilyId,
-  findByUserId,
 };
