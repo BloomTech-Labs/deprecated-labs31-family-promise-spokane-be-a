@@ -14,12 +14,12 @@ const findByfamilyId = async (id) => {
   return db('families').where({ id }).first().select('*');
 };
 
-//an endpoint to find member by id
+//a function to find member by id
 const findById = async (id) => {
   return db('members').where({ id }).first().select('*');
 };
 
-//an endpoint to find ALL members by family id
+//a function to find ALL members by family id
 const findMembersByFamilyId = async (family_id) => {
   return db('members').where({ family_id }).first().select('*');
 };
