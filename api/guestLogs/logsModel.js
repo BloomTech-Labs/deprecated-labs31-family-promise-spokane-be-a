@@ -13,12 +13,6 @@ const findById = async (id) => {
   return db('logs').where({ id }).first().select('*');
 };
 
-//a function to find ALL logs by user id
-// needs work
-const findByUserId = async (user_id) => {
-  return db('logs').where({ user_id }).first().select('*');
-};
-
 const create = async (log) => {
   return db('logs').insert(log).returning('*');
 };
