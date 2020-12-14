@@ -22,7 +22,7 @@ const update = (id, log) => {
 };
 
 const remove = async (id) => {
-  return await db('logs').where({ id }).del();
+  return db('logs').where({ id }).del();
 };
 
 const findOrCreateLog = async (logObj) => {

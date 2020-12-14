@@ -78,7 +78,6 @@ router.put('/', (req, res) => {
   const families = req.body;
   const id = req.params.id;
   if (families) {
-    // const id = families.id || 0;
     Families.findById(id)
       .then(
         Families.update(id, families)
