@@ -8,8 +8,14 @@ const findBy = (filter) => {
   return db('notes').where(filter);
 };
 
+//an endpoint to find member by id
 const findById = async (id) => {
   return db('notes').where({ id }).first().select('*');
+};
+
+//an endpoint to find ALL members by family id
+const findNotesByFamilyId = async (family_id) => {
+  return db('members').where({ family_id }).first().select('*');
 };
 
 const create = async (note) => {
@@ -44,4 +50,5 @@ module.exports = {
   update,
   remove,
   findOrCreateNote,
+  findNotesByFamilyId
 };
