@@ -3,6 +3,7 @@ const authRequired = require('../middleware/authRequired');
 const Users = require('./userModel');
 const router = express.Router();
 
+
 router.get('/', function (req, res) {
   Users.findAll()
     .then((users) => {
@@ -29,7 +30,7 @@ router.get('/:id', function (req, res) {
     });
 });
 
-router.post('/', authRequired, async (req, res) => {
+router.post('/',  async (req, res) => {
   const users = req.body;
   if (users) {
     const id = users.id || 0;
@@ -53,10 +54,11 @@ router.post('/', authRequired, async (req, res) => {
   }
 });
 
-router.put('/', authRequired, (req, res) => {
+router.put('/:id',  (req, res) => {
+  const id = req.params.id;
   const users = req.body;
   if (users) {
-    const id = users.id || 0;
+    // const id = users.id || 0;
     Users.findById(id)
       .then(
         Users.update(id, users)

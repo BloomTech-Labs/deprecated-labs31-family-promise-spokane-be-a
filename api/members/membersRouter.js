@@ -55,10 +55,11 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
   const members = req.body;
+  const id = req.params.id;
   if (members) {
-    const id = members['family_id'] || 0;
+    // const id = members['family_id'] || 0;
     Members.indById(id)
       .then(
         Members.update(id, members)
