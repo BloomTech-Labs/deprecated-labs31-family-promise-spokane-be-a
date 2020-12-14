@@ -34,8 +34,9 @@ router.post('/', async (req, res) => {
   if (notes) {
     const id = notes['family_id'] || 0;
     try {
-      await Notes.findByfamilyId(id).then(async (pf) => {
+      await Notes.findByFamilyId(id).then(async (pf) => {
         if (pf) {
+          console.log(pf);
           //notes not found so lets insert it
           await Notes.create(notes).then((notes) =>
             res.status(200).json({ message: 'notes created', notes: notes[0] })
@@ -57,7 +58,7 @@ router.put('/', (req, res) => {
   const notes = req.body;
   if (notes) {
     const id = notes['family_id'] || 0;
-    Notes.indById(id)
+    Notes.findById(id)
       .then(
         Notes.update(id, notes)
           .then((updated) => {
