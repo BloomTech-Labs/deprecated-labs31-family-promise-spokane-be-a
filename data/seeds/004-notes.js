@@ -8,8 +8,8 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('notes').insert([
         {
-          author: 'abdi',
-          family_id: 2,
+          family_id: 1,
+          author_id: 1,
           subject: 'Please be aware of sensitive information',
           content:
             'Family came in after fire destroyed their home, youngest is still in the hostipal.',

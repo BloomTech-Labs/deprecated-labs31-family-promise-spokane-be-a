@@ -8,7 +8,7 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('members').insert([
         {
-          family_id: 2,
+          family_id: 1,
           demographics: {
             first_name: 'Joe',
             last_name: 'Clemmons',
