@@ -21,7 +21,7 @@ router.get('/:id', function (req, res) {
       if (members) {
         res.status(200).json(members);
       } else {
-        res.status(404).json({ error: 'members NotFound' });
+        res.status(404).json({ error: 'members Not Found' });
       }
     })
     .catch((err) => {

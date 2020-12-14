@@ -23,7 +23,7 @@ router.get('/:id', function (req, res) {
       if (families) {
         res.status(200).json(families);
       } else {
-        res.status(404).json({ error: 'Families NotFound' });
+        res.status(404).json({ error: 'Families Not Found' });
       }
     })
     .catch((err) => {
@@ -40,7 +40,7 @@ router.get('/:id/logs', function (req, res) {
       if (logs) {
         res.status(200).json(logs);
       } else {
-        res.status(404).json({ error: 'logs NotFound' });
+        res.status(404).json({ error: 'logs Not Found' });
       }
     })
     .catch((err) => {
@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
               .json({ message: 'families created', families: families[0] })
           );
         } else {
-          res.status(400).json({ message: 'families already exists' });
+          res.status(400).json({ message: 'families already exists!' });
         }
       });
     } catch (e) {
@@ -109,7 +109,7 @@ router.delete('/:id', (req, res) => {
     Families.findById(id).then((families) => {
       Families.remove(families.id).then(() => {
         res.status(200).json({
-          message: `families '${id}' was deleted.`,
+          message: `families '${id}' was deleted!`,
           families: families,
         });
       });
