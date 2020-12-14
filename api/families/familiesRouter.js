@@ -1,6 +1,8 @@
 const express = require('express');
 
 const Families = require('./familiesModel');
+const Logs = require('../guestLogs/logsModel');
+
 const router = express.Router();
 
 router.get('/', function (req, res) {
@@ -22,6 +24,23 @@ router.get('/:id', function (req, res) {
         res.status(200).json(families);
       } else {
         res.status(404).json({ error: 'Families NotFound' });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+//get all logs by family id
+router.get('/:id/logs', function (req, res) {
+  const family_id = String(req.params.id);
+  console.log(family_id);
+  Logs.findByFamilyId(family_id)
+    .then((logs) => {
+      if (logs) {
+        res.status(200).json(logs);
+      } else {
+        res.status(404).json({ error: 'logs NotFound' });
       }
     })
     .catch((err) => {

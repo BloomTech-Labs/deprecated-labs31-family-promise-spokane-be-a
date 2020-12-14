@@ -13,12 +13,6 @@ const findById = async (id) => {
   return db('logs').where({ id }).first().select('*');
 };
 
-//a function to find ALL logs by family id
-// needs works
-const findByFamilyId = async (family_id) => {
-  return db('logs').where({ family_id }).first().select('*');
-};
-
 //a function to find ALL logs by user id
 // needs work
 const findByUserId = async (user_id) => {
