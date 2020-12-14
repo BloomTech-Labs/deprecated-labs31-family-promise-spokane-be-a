@@ -14,9 +14,10 @@ router.get('/', function (req, res) {
     });
 });
 
+//get a log by log id
 router.get('/:id', function (req, res) {
-  const family_id = String(req.params.id);
-  Logs.findById(family_id)
+  const log_id = String(req.params.id);
+  Logs.findById(log_id)
     .then((logs) => {
       if (logs) {
         res.status(200).json(logs);
@@ -29,6 +30,21 @@ router.get('/:id', function (req, res) {
     });
 });
 
+//get all logs by family id
+router.get('families/:id', function (req, res) {
+  const family_id = String(req.params.id);
+  Logs.findByFamilyId(family_id)
+    .then((logs) => {
+      if (logs) {
+        res.status(200).json(logs);
+      } else {
+        res.status(404).json({ error: 'logs NotFound' });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
 router.post('/', async (req, res) => {
   const logs = req.body;
   if (logs) {
