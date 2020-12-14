@@ -23,7 +23,6 @@ const create = async (note) => {
 };
 
 const update = (id, note) => {
-  console.log(note);
   return db('notes').where({ id: id }).first().update(note).returning('*');
 };
 
@@ -50,5 +49,5 @@ module.exports = {
   update,
   remove,
   findOrCreateNote,
-  findNotesByFamilyId
+  findNotesByFamilyId,
 };
