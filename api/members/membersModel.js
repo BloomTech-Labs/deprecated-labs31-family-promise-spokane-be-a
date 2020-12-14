@@ -22,26 +22,26 @@ const findMembersByFamilyId = async (family_id) => {
   return db('members').where({ family_id }).first().select('*');
 };
 
-const create = async (profile) => {
-  return db('members').insert(profile).returning('*');
+const create = async (member) => {
+  return db('members').insert(member).returning('*');
 };
 
-const update = (id, profile) => {
-  console.log(profile);
-  return db('members').where({ id: id }).first().update(profile).returning('*');
+const update = (id, member) => {
+  console.log(member);
+  return db('members').where({ id: id }).first().update(member).returning('*');
 };
 
 const remove = async (family_id) => {
   return await db('members').where({ family_id }).del();
 };
 
-const findOrCreateProfile = async (profileObj) => {
-  const foundProfile = await findById(profileObj.id).then((profile) => profile);
-  if (foundProfile) {
-    return foundProfile;
+const findOrCreateMember = async (memberObj) => {
+  const foundMember = await findById(memberObj.id).then((member) => member);
+  if (foundMember) {
+    return foundMember;
   } else {
-    return await create(profileObj).then((newProfile) => {
-      return newProfile ? newProfile[0] : newProfile;
+    return await create(memberObj).then((newMember) => {
+      return newMember ? newMember[0] : newMember;
     });
   }
 };
@@ -53,6 +53,7 @@ module.exports = {
   create,
   update,
   remove,
-  findOrCreateProfile,
+  findOrCreateMember,
   findByfamilyId,
+  findMembersByFamilyId
 };
