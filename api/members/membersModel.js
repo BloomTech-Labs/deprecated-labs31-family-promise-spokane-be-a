@@ -14,7 +14,7 @@ const findByfamilyId = async (id) => {
 
 //an endpoint to find member by id
 const findById = async (id) => {
-  return db('notes').where({ id }).first().select('*');
+  return db('members').where({ id }).first().select('*');
 };
 
 //an endpoint to find ALL members by family id
