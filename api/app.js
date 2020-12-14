@@ -27,7 +27,7 @@ const userRouter = require('./users/userRouter');
 const familiesRouter = require('./families/familiesRouter');
 const memberRouter = require('./members/membersRouter');
 const notesRouter = require('./notes/notesRouter');
-// const logsRouter = require('./logs/logsRouter');
+const logsRouter = require('./guestLogs/logsRouter');
 
 const app = express();
 
@@ -60,7 +60,7 @@ app.use('/users', userRouter);
 app.use('/families', familiesRouter);
 app.use('/members', memberRouter);
 app.use('/notes', notesRouter);
-// app.use('/logs', logsRouter);
+app.use('/logs', logsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
