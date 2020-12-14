@@ -12,26 +12,26 @@ const findById = async (id) => {
   return db('notes').where({ id }).first().select('*');
 };
 
-const create = async (profile) => {
-  return db('notes').insert(profile).returning('*');
+const create = async (note) => {
+  return db('notes').insert(note).returning('*');
 };
 
-const update = (id, profile) => {
-  console.log(profile);
-  return db('notes').where({ id: id }).first().update(profile).returning('*');
+const update = (id, note) => {
+  console.log(note);
+  return db('notes').where({ id: id }).first().update(note).returning('*');
 };
 
 const remove = async (id) => {
   return await db('notes').where({ id }).del();
 };
 
-const findOrCreateProfile = async (profileObj) => {
-  const foundProfile = await findById(profileObj.id).then((profile) => profile);
-  if (foundProfile) {
-    return foundProfile;
+const findOrCreateNote = async (profileObj) => {
+  const foundNote = await findById(profileObj.id).then((note) => note);
+  if (foundNote) {
+    return foundNote;
   } else {
-    return await create(profileObj).then((newProfile) => {
-      return newProfile ? newProfile[0] : newProfile;
+    return await create(profileObj).then((newNote) => {
+      return newNote ? newNote[0] : newNote;
     });
   }
 };
@@ -43,5 +43,5 @@ module.exports = {
   create,
   update,
   remove,
-  findOrCreateProfile,
+  findOrCreateNote,
 };

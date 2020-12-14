@@ -7,7 +7,8 @@ exports.seed = function (knex) {
     .then(function () {
       // Inserts seed entries
       return knex('users').insert([
-        { id: 1, username: 'abdi', password: 'passowrd', role: 'supervisor' },
+        { id: 1, username: 'abdi', password: 'password', role: 'supervisor' },
+        { id: 2, username: 'mark', password: 'guestpassword', role: 'guest' },
       ]);
     });
 };
