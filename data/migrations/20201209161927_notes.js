@@ -9,16 +9,16 @@ exports.up = function (knex) {
       .notNullable()
       .references('id')
       .inTable('families')
-      .onDelete('RESTRICT') // should stay 'RESTRICT' to keep notes in the database in case families with notes on their files return to shelter in the future
+      .onDelete('CASCADE')
       .onUpdate('CASCADE');
 
     tbl
-      .integer('author')
+      .integer('author_id')
       .unsigned()
       .notNullable()
       .references('id')
       .inTable('users')
-      .onDelete('RESTRICT') // users should never be deleted
+      .onDelete('CASCADE')
       .onUpdate('CASCADE');
 
     tbl.string('subject').notNullable();
@@ -31,4 +31,6 @@ exports.up = function (knex) {
   });
 };
 
-exports.down = function (knex) {};
+exports.down = function (knex) {
+  return knex.schema.dropTableIfExists('notes');
+};

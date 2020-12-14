@@ -1,7 +1,4 @@
 /* eslint-disable no-debugger, no-console */
-/* one of the main reasons we decided to connected logs to users and not families is because
-if families get deleted we want to cascade down to members and delete members as well
-but logs should continue to persist in the database */
 exports.up = function (knex) {
   return knex.schema.createTable('logs', (tbl) => {
     tbl.increments();
@@ -11,6 +8,16 @@ exports.up = function (knex) {
       .unsigned()
       .references('id')
       .inTable('users')
+      .notNullable()
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE');
+
+    tbl
+      .integer('family_id')
+      .unsigned()
+      .notNullable()
+      .references('id')
+      .inTable('families')
       .notNullable()
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
