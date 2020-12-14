@@ -8,8 +8,6 @@ const findBy = (filter) => {
   return db('members').where(filter);
 };
 
-// @abdi could this one be redundatn?
-// lets decide on this one or findMembersByFamilyId
 const findByfamilyId = async (id) => {
   return db('families').where({ id }).first().select('*');
 };

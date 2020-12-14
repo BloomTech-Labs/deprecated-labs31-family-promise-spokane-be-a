@@ -12,13 +12,13 @@ const findById = async (id) => {
   return db('users').where({ id }).first().select('*');
 };
 
-const create = async (profile) => {
-  return db('users').insert(profile).returning('*');
+const create = async (user) => {
+  return db('users').insert(user).returning('*');
 };
 
-const update = (id, profile) => {
-  console.log(profile);
-  return db('users').where({ id: id }).first().update(profile).returning('*');
+const update = (id, user) => {
+  console.log(user);
+  return db('users').where({ id: id }).first().update(user).returning('*');
 };
 
 const remove = async (id) => {
@@ -26,7 +26,7 @@ const remove = async (id) => {
 };
 
 const findOrCreateProfile = async (profileObj) => {
-  const foundProfile = await findById(profileObj.id).then((profile) => profile);
+  const foundProfile = await findById(profileObj.id).then((user) => user);
   if (foundProfile) {
     return foundProfile;
   } else {

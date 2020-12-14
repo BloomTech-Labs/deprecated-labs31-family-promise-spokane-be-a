@@ -21,7 +21,7 @@ router.get('/:id', function (req, res) {
       if (members) {
         res.status(200).json(members);
       } else {
-        res.status(404).json({ error: 'members NotFound' });
+        res.status(404).json({ error: 'members Not Found' });
       }
     })
     .catch((err) => {
@@ -59,7 +59,6 @@ router.put('/:id', (req, res) => {
   const members = req.body;
   const id = req.params.id;
   if (members) {
-    // const id = members['family_id'] || 0;
     Members.indById(id)
       .then(
         Members.update(id, members)

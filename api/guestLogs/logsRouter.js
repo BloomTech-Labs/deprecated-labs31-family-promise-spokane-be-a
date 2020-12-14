@@ -23,7 +23,7 @@ router.get('/:id', function (req, res) {
       if (logs) {
         res.status(200).json(logs);
       } else {
-        res.status(404).json({ error: 'logs NotFound' });
+        res.status(404).json({ error: 'logs Not Found' });
       }
     })
     .catch((err) => {

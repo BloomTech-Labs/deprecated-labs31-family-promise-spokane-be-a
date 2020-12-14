@@ -21,7 +21,7 @@ router.get('/:id', function (req, res) {
       if (notes) {
         res.status(200).json(notes);
       } else {
-        res.status(404).json({ error: 'notes NotFound' });
+        res.status(404).json({ error: 'notes Not Found' });
       }
     })
     .catch((err) => {

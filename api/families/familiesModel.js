@@ -12,16 +12,16 @@ const findById = async (id) => {
   return db('families').where({ id }).first().select('*');
 };
 
-const create = async (profile) => {
-  return db('families').insert(profile).returning('*');
+const create = async (family)) => {
+  return db('families').insert(family)).returning('*');
 };
 
 const update = (id, profile) => {
-  console.log(profile);
+  console.log(family));
   return db('families')
     .where({ id: id })
     .first()
-    .update(profile)
+    .update(family))
     .returning('*');
 };
 
@@ -30,7 +30,7 @@ const remove = async (id) => {
 };
 
 const findOrCreateProfile = async (profileObj) => {
-  const foundProfile = await findById(profileObj.id).then((profile) => profile);
+  const foundProfile = await findById(profileObj.id).then((family)) => profile);
   if (foundProfile) {
     return foundProfile;
   } else {
