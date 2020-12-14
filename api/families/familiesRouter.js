@@ -51,9 +51,9 @@ router.get('/:id/logs', function (req, res) {
 router.post('/', async (req, res) => {
   const families = req.body;
   if (families) {
-    const id = families.id || 0;
+    const user_id = families.id || 0;
     try {
-      await Families.findById(id).then(async (pf) => {
+      await Families.findById(user_id).then(async (pf) => {
         if (pf == undefined) {
           //families not found so lets insert it
           await Families.create(families).then((families) =>
