@@ -58,7 +58,6 @@ router.put('/:id', (req, res) => {
   const newNote = req.body;
   const id = req.params.id;
   if (newNote) {
-    // const id = notes['family_id'] || 0;
     Notes.findById(id)
       .then(
         Notes.update(id, newNote)
