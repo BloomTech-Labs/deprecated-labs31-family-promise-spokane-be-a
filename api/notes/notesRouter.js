@@ -54,17 +54,18 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/', (req, res) => {
-  const notes = req.body;
-  if (notes) {
-    const id = notes['family_id'] || 0;
+router.put('/:id', (req, res) => {
+  const newNote = req.body;
+  const id = req.params.id;
+  if (newNote) {
+    // const id = notes['family_id'] || 0;
     Notes.findById(id)
       .then(
-        Notes.update(id, notes)
+        Notes.update(id, newNote)
           .then((updated) => {
             res
               .status(200)
-              .json({ message: 'notes created', notes: updated[0] });
+              .json({ message: `note ${id} updated`, notes: updated[0] });
           })
           .catch((err) => {
             res.status(500).json({
