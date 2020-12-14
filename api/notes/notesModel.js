@@ -15,7 +15,7 @@ const findById = async (id) => {
 
 //an endpoint to find ALL members by family id
 const findNotesByFamilyId = async (family_id) => {
-  return db('members').where({ family_id }).first().select('*');
+  return db('notes').where({ family_id }).first().select('*');
 };
 
 const create = async (note) => {
@@ -30,12 +30,12 @@ const remove = async (id) => {
   return await db('notes').where({ id }).del();
 };
 
-const findOrCreateNote = async (profileObj) => {
-  const foundNote = await findById(profileObj.id).then((note) => note);
+const findOrCreateNote = async (noteObj) => {
+  const foundNote = await findById(noteObj.id).then((note) => note);
   if (foundNote) {
     return foundNote;
   } else {
-    return await create(profileObj).then((newNote) => {
+    return await create(noteObj).then((newNote) => {
       return newNote ? newNote[0] : newNote;
     });
   }

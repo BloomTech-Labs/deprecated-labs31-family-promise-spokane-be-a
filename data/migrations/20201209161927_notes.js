@@ -9,7 +9,7 @@ exports.up = function (knex) {
       .notNullable()
       .references('id')
       .inTable('families')
-      .onDelete('CASCADE') 
+      .onDelete('CASCADE')
       .onUpdate('CASCADE');
 
     tbl
@@ -18,7 +18,7 @@ exports.up = function (knex) {
       .notNullable()
       .references('id')
       .inTable('users')
-      .onDelete('CASCADE') 
+      .onDelete('CASCADE')
       .onUpdate('CASCADE');
 
     tbl.string('subject').notNullable();
@@ -31,4 +31,6 @@ exports.up = function (knex) {
   });
 };
 
-exports.down = function (knex) {};
+exports.down = function (knex) {
+  return knex.schema.dropTableIfExists('notes');
+};

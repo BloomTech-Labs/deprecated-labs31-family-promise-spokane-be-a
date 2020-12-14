@@ -3,7 +3,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('members', (tbl) => {
     tbl.increments();
-    
+
     tbl
       .integer('family_id')
       .unsigned()
