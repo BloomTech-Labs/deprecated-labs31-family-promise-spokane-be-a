@@ -16,7 +16,7 @@ router.get('/', function (req, res) {
 
 router.get('/:id', function (req, res) {
   const family_id = String(req.params.id);
-  Members.findById(family_id)
+  Members.findByfamilyId(family_id)
     .then((members) => {
       if (members) {
         res.status(200).json(members);
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
   if (members) {
     const id = members['family_id'] || 0;
     try {
-      await Members.findByfamilyId(id).then(async (pf) => {
+      await Members.findMembersByFamilyId(id).then(async (pf) => {
         if (pf) {
           //members not found so lets insert it
           await Members.create(members).then((members) =>
