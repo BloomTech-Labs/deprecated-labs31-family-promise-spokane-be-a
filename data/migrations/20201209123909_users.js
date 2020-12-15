@@ -4,7 +4,7 @@ exports.up = function (knex) {
     tbl.increments();
 
     // TODO: check with isaiah to see if this username can stay without breaking Okta Auth
-    // tbl.string('username', 128).notNullable().unique().index();
+    tbl.string('username', 128);
 
     tbl.string('name');
 
@@ -12,6 +12,8 @@ exports.up = function (knex) {
 
     // this gets created on sign up
     tbl.string('okta_id', 256);
+
+    tbl.string('role').defaultsTo('pending');
   });
 };
 
