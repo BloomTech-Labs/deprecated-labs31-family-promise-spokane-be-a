@@ -23,7 +23,7 @@ exports.seed = function (knex) {
             homeless_info:
               '{ "current_location": "car", "length_at_current_location": "3 days", "prior_location": "relatives", "length_at_prior_location": "2 weeks", "homeless_start_date": "26-AUG-2019", "num_times_homeless": 2, "total_len_homeless": 1 }',
             gov_benefits:
-              '{ "foodstamps": true, "cps/fps": false, "RRH": false, "housing_voucher": false, "veteran_services": true, "snap": true }',
+              '{ "foodstamps": true, "cps_fps": false, "RRH": false, "housing_voucher": false, "veteran_services": true, "snap": true }',
             insurance:
               '{"has_insurance": true, "members_covered": 2, "health_insurance_type": "Medicare", "pregnancies": false}',
             domestic_violence_info:

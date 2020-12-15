@@ -8,34 +8,29 @@ const findBy = (filter) => {
   return db('families').where(filter);
 };
 
-const findById = async (id) => {
+const findById = (id) => {
   return db('families').where({ id }).first().select('*');
 };
 
-const create = async (family)) => {
-  return db('families').insert(family)).returning('*');
+const create = (family) => {
+  return db('families').insert(family).returning('*');
 };
 
-const update = (id, profile) => {
-  console.log(family));
-  return db('families')
-    .where({ id: id })
-    .first()
-    .update(family))
-    .returning('*');
+const update = (id, family) => {
+  return db('families').where({ id: id }).first().update(family).returning('*');
 };
 
 const remove = async (id) => {
   return await db('families').where({ id }).del();
 };
 
-const findOrCreateProfile = async (profileObj) => {
-  const foundProfile = await findById(profileObj.id).then((family)) => profile);
-  if (foundProfile) {
-    return foundProfile;
+const findOrCreateFamily = async (familyObj) => {
+  const foundFamily = await findById(familyObj.id).then((profile) => profile);
+  if (foundFamily) {
+    return foundFamily;
   } else {
-    return await create(profileObj).then((newProfile) => {
-      return newProfile ? newProfile[0] : newProfile;
+    return await create(familyObj).then((newFamily) => {
+      return newFamily ? newFamily[0] : newFamily;
     });
   }
 };
@@ -47,5 +42,5 @@ module.exports = {
   create,
   update,
   remove,
-  findOrCreateProfile,
+  findOrCreateFamily,
 };
