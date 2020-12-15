@@ -3,11 +3,16 @@ exports.up = function (knex) {
   return knex.schema.createTable('users', (tbl) => {
     tbl.increments();
 
-    tbl.string('username', 128).notNullable().unique().index();
+    tbl.string('username', 128);
 
-    tbl.string('password', 256).notNullable();
+    tbl.string('name');
 
-    tbl.string('role').notNullable().defaultTo('guest');
+    tbl.string('email');
+
+    // this gets created on sign up
+    tbl.string('okta_id', 256);
+
+    tbl.string('role').defaultsTo('pending');
   });
 };
 
