@@ -3,11 +3,15 @@ exports.up = function (knex) {
   return knex.schema.createTable('users', (tbl) => {
     tbl.increments();
 
-    tbl.string('username', 128).notNullable().unique().index();
+    // TODO: check with isaiah to see if this username can stay without breaking Okta Auth
+    // tbl.string('username', 128).notNullable().unique().index();
 
-    tbl.string('password', 256).notNullable();
+    tbl.string('name');
 
-    tbl.string('role').notNullable().defaultTo('guest');
+    tbl.string('email');
+
+    // this gets created on sign up
+    tbl.string('okta_id', 256);
   });
 };
 
