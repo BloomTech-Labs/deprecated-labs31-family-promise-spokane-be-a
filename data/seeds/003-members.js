@@ -20,7 +20,7 @@ exports.seed = function (knex) {
             employer: 'union',
             race: 'White',
           },
-          bearers: {
+          barriers: {
             alcohol_abuse: false,
             developmental_disabilities: false,
             chronic_health_issues: false,
@@ -40,7 +40,7 @@ exports.seed = function (knex) {
             school_name: null,
             mckinney_school: false,
           },
-          flag: 'none',
+          flag: null,
         },
       ]);
     });
