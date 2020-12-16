@@ -15,7 +15,7 @@ exports.up = function (knex) {
 
     tbl.json('demographics');
 
-    tbl.json('bearers');
+    tbl.json('barriers');
 
     tbl.json('schools');
 
