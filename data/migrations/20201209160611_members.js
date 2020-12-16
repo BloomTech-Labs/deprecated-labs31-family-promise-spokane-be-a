@@ -19,6 +19,8 @@ exports.up = function (knex) {
 
     tbl.json('schools');
 
+    tbl.integer('case_members');
+
     tbl.string('flag');
   });
 };
