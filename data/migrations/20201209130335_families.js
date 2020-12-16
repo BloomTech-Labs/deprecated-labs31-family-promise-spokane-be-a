@@ -21,6 +21,8 @@ exports.up = function (knex) {
 
     tbl.jsonb('phone_two');
 
+    tbl.jsonb('safe_alternate');
+
     tbl.jsonb('emergencyContact');
 
     tbl.jsonb('vehicle');
