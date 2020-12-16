@@ -20,8 +20,6 @@ exports.up = function (knex) {
     tbl.json('schools');
 
     tbl.string('flag');
-
-    tbl.integer('pet');
   });
 };
 

@@ -38,6 +38,8 @@ exports.up = function (knex) {
     tbl.jsonb('domestic_violence_info');
 
     tbl.string('avatar_url');
+
+    tbl.integer('pets');
   });
 };
 
