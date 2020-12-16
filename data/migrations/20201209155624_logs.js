@@ -24,6 +24,8 @@ exports.up = function (knex) {
 
     tbl.boolean('checked_in');
 
+    tbl.boolean('on_sight');
+
     tbl.date('date');
 
     tbl.datetime('time');
