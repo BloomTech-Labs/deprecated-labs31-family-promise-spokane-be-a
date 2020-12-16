@@ -15,7 +15,7 @@ exports.up = function (knex) {
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
 
-    tbl.integer('case_number').notNullable();
+    tbl.integer('case_number');
 
     tbl.jsonb('phone_one');
 
