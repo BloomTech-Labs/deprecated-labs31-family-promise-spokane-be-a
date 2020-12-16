@@ -41,7 +41,6 @@ exports.seed = function (knex) {
             mckinney_school: false,
           },
           flag: 'none',
-          pet: 0,
         },
       ]);
     });
