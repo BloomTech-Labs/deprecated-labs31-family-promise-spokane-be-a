@@ -9,7 +9,7 @@ exports.seed = function (knex) {
       return knex('notes').insert([
         {
           family_id: 1,
-          author_id: 1,
+          author_id: '00u2lgca4zIaSTPqE5d6',
           subject: 'Please be aware of sensitive information',
           content:
             'Family came in after fire destroyed their home, youngest is still in the hostipal.',

@@ -35,6 +35,10 @@ const findOrCreateFamily = async (familyObj) => {
   }
 };
 
+const findAllFamilyMembersById = async (id) => {
+  return db('members').where({ family_id: id }).returning('*');
+};
+
 module.exports = {
   findAll,
   findBy,
@@ -43,4 +47,5 @@ module.exports = {
   update,
   remove,
   findOrCreateFamily,
+  findAllFamilyMembersById,
 };

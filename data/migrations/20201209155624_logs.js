@@ -4,8 +4,8 @@ exports.up = function (knex) {
     tbl.increments();
 
     tbl
-      .integer('supervisor_id')
-      .unsigned()
+      .string('supervisor_id')
+      .notNullable()
       .references('id')
       .inTable('users')
       .notNullable()

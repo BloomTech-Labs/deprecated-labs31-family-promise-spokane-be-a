@@ -1,31 +1,51 @@
 const express = require('express');
 const authRequired = require('../middleware/authRequired');
-const checkRole = require('./familiesMiddleware')
+const checkRole = require('./familiesMiddleware');
 const Families = require('./familiesModel');
 const Logs = require('../guestLogs/logsModel');
 
 const router = express.Router();
 
-router.get('/', authRequired,checkRole.grantAccess('readAny', 'families'), function (req, res) {
-  Families.findAll()
-    .then((families) => {
-      res.status(200).json(families);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ message: err.message });
-    });
-});
-
-router.get('/:id', authRequired,checkRole.grantAccess('readOwn', 'families'), function (req, res) {
-  const id = String(req.params.id);
-  Families.findById(id)
-    .then((families) => {
-      if (families) {
+router.get(
+  '/',
+  authRequired,
+  checkRole.grantAccess('readAny', 'families'),
+  function (req, res) {
+    Families.findAll()
+      .then((families) => {
         res.status(200).json(families);
-      } else {
-        res.status(404).json({ error: 'Families Not Found' });
-      }
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: err.message });
+      });
+  }
+);
+
+router.get(
+  '/:id',
+  authRequired,
+  checkRole.grantAccess('readOwn', 'families'),
+  function (req, res) {
+    const id = String(req.params.id);
+    Families.findById(id)
+      .then((families) => {
+        if (families) {
+          res.status(200).json(families);
+        } else {
+          res.status(404).json({ error: 'Families Not Found' });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  }
+);
+
+router.get('/:id/members', function (req, res) {
+  Families.findAllFamilyMembersById(req.params.id)
+    .then((data) => {
+      res.status(200).json(data);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -49,34 +69,39 @@ router.get('/:id/logs', authRequired, function (req, res) {
     });
 });
 
-router.post('/', authRequired,checkRole.grantAccess('createOwn', 'families'), async (req, res) => {
-  const families = req.body;
-  if (families) {
-    const user_id = families.id || 0;
-    try {
-      await Families.findById(user_id).then(async (pf) => {
-        if (pf == undefined) {
-          //families not found so lets insert it
-          await Families.create(families).then((families) =>
-            res
-              .status(200)
-              .json({ message: 'families created', families: families[0] })
-          );
-        } else {
-          res.status(400).json({ message: 'families already exists!' });
-        }
-      });
-    } catch (e) {
-      console.error(e);
-      res.status(500).json({ message: e.message });
+router.post(
+  '/',
+  authRequired,
+  checkRole.grantAccess('createOwn', 'families'),
+  async (req, res) => {
+    const families = req.body;
+    if (families) {
+      const user_id = families.id || 0;
+      try {
+        await Families.findById(user_id).then(async (pf) => {
+          if (pf == undefined) {
+            //families not found so lets insert it
+            await Families.create(families).then((families) =>
+              res
+                .status(200)
+                .json({ message: 'families created', families: families[0] })
+            );
+          } else {
+            res.status(400).json({ message: 'families already exists!' });
+          }
+        });
+      } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: e.message });
+      }
+    } else {
+      res.status(404).json({ message: 'families missing' });
     }
-  } else {
-    res.status(404).json({ message: 'families missing' });
   }
-});
+);
 
 // not found
-router.put('/',checkRole.grantAccess('updateOwn', 'families'), (req, res) => {
+router.put('/', checkRole.grantAccess('updateOwn', 'families'), (req, res) => {
   const families = req.body;
   const id = req.params.id;
   if (families) {
@@ -104,23 +129,28 @@ router.put('/',checkRole.grantAccess('updateOwn', 'families'), (req, res) => {
   }
 });
 
-router.delete('/:id', authRequired,checkRole.grantAccess('deleteAny', 'families'), (req, res) => {
-  const id = req.params.id;
-  try {
-    Families.findById(id).then((families) => {
-      Families.remove(families.id).then(() => {
-        res.status(200).json({
-          message: `families '${id}' was deleted!`,
-          families: families,
+router.delete(
+  '/:id',
+  authRequired,
+  checkRole.grantAccess('deleteAny', 'families'),
+  (req, res) => {
+    const id = req.params.id;
+    try {
+      Families.findById(id).then((families) => {
+        Families.remove(families.id).then(() => {
+          res.status(200).json({
+            message: `families '${id}' was deleted!`,
+            families: families,
+          });
         });
       });
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: `Could not delete families with ID: ${id}`,
-      error: err.message,
-    });
+    } catch (err) {
+      res.status(500).json({
+        message: `Could not delete families with ID: ${id}`,
+        error: err.message,
+      });
+    }
   }
-});
+);
 
 module.exports = router;

@@ -17,13 +17,13 @@ const findByOktaId = async (okta_id) => {
   return db('users').where({ okta_id });
 };
 
-const create = async (user) => {
-  return db('users').insert(user).returning('*');
+const create = async (profile) => {
+  return db('users').insert(profile).returning('*');
 };
 
-const update = (id, user) => {
-  console.log(user);
-  return db('users').where({ id: id }).first().update(user).returning('*');
+const update = (id, profile) => {
+  console.log(profile);
+  return db('users').where({ id: id }).first().update(profile).returning('*');
 };
 
 const remove = async (id) => {
@@ -31,7 +31,7 @@ const remove = async (id) => {
 };
 
 const findOrCreateProfile = async (profileObj) => {
-  const foundProfile = await findByOktaId(profileObj.id).then((user) => user);
+  const foundProfile = await findById(profileObj.id).then((profile) => profile);
   if (foundProfile) {
     return foundProfile;
   } else {

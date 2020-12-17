@@ -1,10 +1,11 @@
 const express = require('express');
-const checkRole = require('./membersMiddleware')
+// const checkRole = require('./membersMiddleware')
 const authRequired = require('../middleware/authRequired');
 const Members = require('./membersModel');
 const router = express.Router();
 
-router.get('/', authRequired, checkRole.grantAccess('readAny', 'members'), function (req, res) {
+// checkRole.grantAccess('readAny', 'members'),
+router.get('/', authRequired, function (req, res) {
   Members.findAll()
     .then((members) => {
       res.status(200).json(members);
@@ -15,7 +16,8 @@ router.get('/', authRequired, checkRole.grantAccess('readAny', 'members'), funct
     });
 });
 
-router.get('/:id', authRequired,checkRole.grantAccess('readOwn', 'members'), function (req, res) {
+// checkRole.grantAccess('readOwn', 'members'),
+router.get('/:id', authRequired, function (req, res) {
   const family_id = String(req.params.id);
   Members.findById(family_id)
     .then((members) => {
@@ -30,7 +32,8 @@ router.get('/:id', authRequired,checkRole.grantAccess('readOwn', 'members'), fun
     });
 });
 
-router.post('/', authRequired,checkRole.grantAccess('createOwn', 'members'), async (req, res) => {
+// checkRole.grantAccess('createOwn', 'members'),
+router.post('/', authRequired, async (req, res) => {
   const members = req.body;
   if (members) {
     const id = members['family_id'] || 0;
@@ -56,7 +59,8 @@ router.post('/', authRequired,checkRole.grantAccess('createOwn', 'members'), asy
   }
 });
 
-router.put('/:id',authRequired, checkRole.grantAccess('updateOwn', 'members'), (req, res) => {
+// heckRole.grantAccess('updateOwn', 'members'),
+router.put('/:id', authRequired, (req, res) => {
   const members = req.body;
   const id = req.params.id;
   if (members) {
@@ -84,7 +88,8 @@ router.put('/:id',authRequired, checkRole.grantAccess('updateOwn', 'members'), (
   }
 });
 
-router.delete('/:id', authRequired,checkRole.grantAccess('deleteAny', 'members'), (req, res) => {
+// checkRole.grantAccess('deleteAny', 'members')
+router.delete('/:id', authRequired, (req, res) => {
   const id = req.params.id;
   try {
     Members.findById(id).then((members) => {
