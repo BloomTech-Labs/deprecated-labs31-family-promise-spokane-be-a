@@ -13,15 +13,19 @@ exports.up = function (knex) {
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
 
+    tbl.date('date_of_enrollment');
+
     tbl.json('demographics');
 
-    tbl.json('bearers');
+    tbl.json('barriers');
 
     tbl.json('schools');
 
+    tbl.integer('case_members');
+
     tbl.string('flag');
 
-    tbl.integer('pet');
+    tbl.integer('percent_complete');
   });
 };
 
