@@ -39,7 +39,8 @@ CREATE TABLE public.families (
     insurance jsonb,
     domestic_violence_info jsonb,
     pets integer,
-    avatar_url character varying(255)
+    avatar_url character varying(255),
+    percent_complete integer
 );
 
 
@@ -183,11 +184,13 @@ ALTER SEQUENCE public.logs_id_seq OWNED BY public.logs.id;
 CREATE TABLE public.members (
     id integer NOT NULL,
     family_id integer NOT NULL,
+    date_of_enrollment date,
     demographics json,
     barriers json,
     schools json,
     case_members integer,
-    flag character varying(255)
+    flag character varying(255),
+    percent_complete integer
 );
 
 
@@ -345,8 +348,8 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: families; Type: TABLE DATA; Schema: public; Owner: lrod
 --
 
-COPY public.families (id, user_id, case_number, phone_one, phone_two, safe_alternate, "emergencyContact", vehicle, last_permanent_address, homeless_info, gov_benefits, insurance, domestic_violence_info, pets, avatar_url) FROM stdin;
-1	2	22	{"name": "Mark", "number": "202-555-0177", "safeToLeaveMssg": true}	{"name": "Jacob Smith", "number": "770-555-0114", "safeToLeaveMssg": false}	{"name": "Mr. Rios", "number": "809-323-5959"}	{"name": "Steve Martin", "number": "410-555-0173"}	{"make": "BMW", "year": 2007, "color": "red", "model": "K1200LT", "license_plate": "699-VHT"}	7271 Hickory Rd Sterling VA 20164 	{"prior_location": "relatives", "current_location": "car", "num_times_homeless": 2, "total_len_homeless": 1, "homeless_start_date": "26-AUG-2019", "length_at_prior_location": "2 weeks", "length_at_current_location": "3 days"}	{"RRH": false, "snap": true, "cps_fps": false, "foodstamps": true, "housing_voucher": false, "veteran_services": true}	{"pregnancies": false, "has_insurance": true, "members_covered": 2, "health_insurance_type": "Medicare"}	{"fleeing_dv": false, "YWCA_contacted": false, "has_court_order": false, "date_last_incident": false, "anonymity_preferred": true}	0	https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg
+COPY public.families (id, user_id, case_number, phone_one, phone_two, safe_alternate, "emergencyContact", vehicle, last_permanent_address, homeless_info, gov_benefits, insurance, domestic_violence_info, pets, avatar_url, percent_complete) FROM stdin;
+1	2	22	{"name": "Mark", "number": "202-555-0177", "safeToLeaveMssg": true}	{"name": "Jacob Smith", "number": "770-555-0114", "safeToLeaveMssg": false}	{"name": "Mr. Rios", "number": "809-323-5959"}	{"name": "Steve Martin", "number": "410-555-0173"}	{"make": "BMW", "year": 2007, "color": "red", "model": "K1200LT", "license_plate": "699-VHT"}	7271 Hickory Rd Sterling VA 20164 	{"prior_location": "relatives", "current_location": "car", "num_times_homeless": 2, "total_len_homeless": 1, "homeless_start_date": "26-AUG-2019", "length_at_prior_location": "2 weeks", "length_at_current_location": "3 days"}	{"RRH": false, "snap": true, "cps_fps": false, "foodstamps": true, "housing_voucher": false, "veteran_services": true}	{"pregnancies": false, "has_insurance": true, "members_covered": 2, "health_insurance_type": "Medicare"}	{"fleeing_dv": false, "YWCA_contacted": false, "has_court_order": false, "date_last_incident": false, "anonymity_preferred": true}	0	https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg	0
 \.
 
 
@@ -355,11 +358,11 @@ COPY public.families (id, user_id, case_number, phone_one, phone_two, safe_alter
 --
 
 COPY public.knex_migrations (id, name, batch, migration_time) FROM stdin;
-1	20201209123909_users.js	1	2020-12-16 18:03:34.125-06
-2	20201209130335_families.js	1	2020-12-16 18:03:34.134-06
-3	20201209155624_logs.js	1	2020-12-16 18:03:34.14-06
-4	20201209160611_members.js	1	2020-12-16 18:03:34.163-06
-5	20201209161927_notes.js	1	2020-12-16 18:03:34.173-06
+1	20201209123909_users.js	1	2020-12-17 09:10:33.375-06
+2	20201209130335_families.js	1	2020-12-17 09:10:33.4-06
+3	20201209155624_logs.js	1	2020-12-17 09:10:33.405-06
+4	20201209160611_members.js	1	2020-12-17 09:10:33.41-06
+5	20201209161927_notes.js	1	2020-12-17 09:10:33.415-06
 \.
 
 
@@ -388,9 +391,9 @@ COPY public.logs (id, supervisor_id, family_id, checked_in, on_sight, date, "tim
 -- Data for Name: members; Type: TABLE DATA; Schema: public; Owner: lrod
 --
 
-COPY public.members (id, family_id, demographics, barriers, schools, case_members, flag) FROM stdin;
-1	1	{"first_name":"Joe","last_name":"Clemmons","gender":"male","relationship":"cousin","DOB":"10-23-1992","SSN":9999,"income":20000,"employer":"union","race":"White"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":null,"list_issues":null}	{"highest_grade_completed":"12th grade","enrolled_status":false,"reason_not_enrolled":"finished","attendance_status":"inactive","school_type":null,"school_name":null,"mckinney_school":false}	3	\N
-2	1	{"first_name":"Josh","last_name":"Clemmons","gender":"male","relationship":"son","DOB":"10-23-2002","SSN":9999,"income":20000,"employer":null,"race":"White"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":null,"list_issues":null}	{"highest_grade_completed":"12th grade","enrolled_status":false,"reason_not_enrolled":"finished","attendance_status":"inactive","school_type":null,"school_name":null,"mckinney_school":false}	3	\N
+COPY public.members (id, family_id, date_of_enrollment, demographics, barriers, schools, case_members, flag, percent_complete) FROM stdin;
+1	1	2020-10-09	{"first_name":"Joe","last_name":"Clemmons","gender":"male","relationship":"cousin","DOB":"10-23-1992","SSN":9999,"income":20000,"employer":"union","race":"White"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":null,"list_issues":null}	{"highest_grade_completed":"12th grade","enrolled_status":false,"reason_not_enrolled":"finished","attendance_status":"inactive","school_type":null,"school_name":null,"mckinney_school":false}	3	\N	0
+2	1	2020-10-09	{"first_name":"Josh","last_name":"Clemmons","gender":"male","relationship":"son","DOB":"10-23-2002","SSN":9999,"income":20000,"employer":null,"race":"White"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":null,"list_issues":null}	{"highest_grade_completed":"12th grade","enrolled_status":false,"reason_not_enrolled":"finished","attendance_status":"inactive","school_type":null,"school_name":null,"mckinney_school":false}	3	\N	0
 \.
 
 
