@@ -1,16 +1,15 @@
 /* eslint-disable no-debugger, no-console */
 exports.up = function (knex) {
   return knex.schema.createTable('users', (tbl) => {
-    tbl.increments();
+    tbl.string('id').unique().notNullable()
 
-    tbl.string('username', 128);
+    tbl.string('email', 128).unique().notNullable()
 
-    tbl.string('name');
+    tbl.string('first_name', 128).notNullable()
 
-    tbl.string('email');
+    tbl.string('last_name', 128).notNullable()
 
     // this gets created on sign up
-    tbl.string('okta_id', 256);
 
     tbl.string('role').defaultsTo('pending');
   });
