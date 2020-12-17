@@ -1,9 +1,10 @@
 const express = require('express');
 const authRequired = require('../middleware/authRequired');
+const checkRole = require('./userMiddleware')
 const Users = require('./userModel');
 const router = express.Router();
 
-router.get('/', authRequired, function (req, res) {
+router.get('/', authRequired,checkRole.grantAccess('readAny', 'profile'), function (req, res) {
   Users.findAll()
     .then((users) => {
       res.status(200).json(users);
@@ -14,7 +15,7 @@ router.get('/', authRequired, function (req, res) {
     });
 });
 
-router.get('/:id', authRequired, function (req, res) {
+router.get('/:id', authRequired,checkRole.grantAccess('readOwn', 'profile'), function (req, res) {
   const id = String(req.params.id);
   Users.findById(id)
     .then((users) => {
@@ -29,7 +30,7 @@ router.get('/:id', authRequired, function (req, res) {
     });
 });
 
-router.post('/', authRequired, async (req, res) => {
+router.post('/', authRequired,checkRole.grantAccess('createAny', 'profile'), async (req, res) => {
   const users = req.body;
   if (users) {
     try {
@@ -46,7 +47,7 @@ router.post('/', authRequired, async (req, res) => {
   }
 });
 
-router.put('/:id', authRequired, (req, res) => {
+router.put('/:id', authRequired,authRequired,checkRole.grantAccess('updateOwn', 'profile') (req, res) => {
   const id = req.params.id;
   const users = req.body;
   if (users) {
@@ -75,7 +76,7 @@ router.put('/:id', authRequired, (req, res) => {
   }
 });
 
-router.delete('/:id', authRequired, async (req, res) => {
+router.delete('/:id', authRequired, checkRole.grantAccess('deleteAny', 'profile'), async (req, res) => {
   const id = req.params.id;
   try {
     Users.remove(id).then(() => {

@@ -1,11 +1,12 @@
 const express = require('express');
 const authRequired = require('../middleware/authRequired');
+const checkRole = require('./familiesMiddleware')
 const Families = require('./familiesModel');
 const Logs = require('../guestLogs/logsModel');
 
 const router = express.Router();
 
-router.get('/', authRequired, function (req, res) {
+router.get('/', authRequired,checkRole.grantAccess('readAny', 'families'), function (req, res) {
   Families.findAll()
     .then((families) => {
       res.status(200).json(families);
@@ -16,7 +17,7 @@ router.get('/', authRequired, function (req, res) {
     });
 });
 
-router.get('/:id', authRequired, function (req, res) {
+router.get('/:id', authRequired,checkRole.grantAccess('readOwn', 'families'), function (req, res) {
   const id = String(req.params.id);
   Families.findById(id)
     .then((families) => {
@@ -48,7 +49,7 @@ router.get('/:id/logs', authRequired, function (req, res) {
     });
 });
 
-router.post('/', authRequired, async (req, res) => {
+router.post('/', authRequired,checkRole.grantAccess('createOwn', 'families'), async (req, res) => {
   const families = req.body;
   if (families) {
     const user_id = families.id || 0;
@@ -75,7 +76,7 @@ router.post('/', authRequired, async (req, res) => {
 });
 
 // not found
-router.put('/', (req, res) => {
+router.put('/',checkRole.grantAccess('updateOwn', 'families'), (req, res) => {
   const families = req.body;
   const id = req.params.id;
   if (families) {
@@ -103,7 +104,7 @@ router.put('/', (req, res) => {
   }
 });
 
-router.delete('/:id', authRequired, (req, res) => {
+router.delete('/:id', authRequired,checkRole.grantAccess('deleteAny', 'families'), (req, res) => {
   const id = req.params.id;
   try {
     Families.findById(id).then((families) => {
