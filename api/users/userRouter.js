@@ -225,32 +225,30 @@ router.post('/', authRequired, async (req, res) => {
  *                profile:
  *                  $ref: '#/components/schemas/Profile'
  */
-router.put('/', authRequired, (req, res) => {
+router.put('/:id', authRequired, (req, res) => {
   const profile = req.body;
-  if (profile) {
-    const id = profile.id || 0;
-    Users.findById(id)
-      .then(
-        Users.update(id, profile)
-          .then((updated) => {
-            res
-              .status(200)
-              .json({ message: 'profile created', profile: updated[0] });
-          })
-          .catch((err) => {
-            res.status(500).json({
-              message: `Could not update profile '${id}'`,
-              error: err.message,
-            });
-          })
-      )
-      .catch((err) => {
-        res.status(404).json({
-          message: `Could not find profile '${id}'`,
-          error: err.message,
-        });
+  const { id } = req.params;
+  Users.findById(id)
+    .then(
+      Users.update(id, profile)
+        .then((updated) => {
+          res
+            .status(200)
+            .json({ message: 'profile updated', profile: updated[0] });
+        })
+        .catch((err) => {
+          res.status(500).json({
+            message: `Could not update profile '${id}'`,
+            error: err.message,
+          });
+        })
+    )
+    .catch((err) => {
+      res.status(404).json({
+        message: `Could not find profile '${id}'`,
+        error: err.message,
       });
-  }
+    });
 });
 /**
  * @swagger

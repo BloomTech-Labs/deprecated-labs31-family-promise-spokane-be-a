@@ -9,7 +9,7 @@ exports.seed = function (knex) {
         // Inserts seed entries
         return knex('families').insert([
           {
-            user_id: 2,
+            user_id: '00u2lh0bsAliwLEe75d6',
             case_number: 22,
             phone_one:
               '{"name":"Mark", "number":"202-555-0177", "safeToLeaveMssg":true}',

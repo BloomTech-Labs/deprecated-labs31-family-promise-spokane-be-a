@@ -10,8 +10,8 @@ exports.up = function (knex) {
     tbl.string('last_name', 128).notNullable()
 
     // this gets created on sign up
-
-    tbl.string('role').notNullable().defaultsTo('pending');
+    
+    tbl.enu('role',['pending', 'guest', 'case_manager', 'supervisor', 'executive_director']).notNullable().defaultsTo('pending')
   });
 };
 
