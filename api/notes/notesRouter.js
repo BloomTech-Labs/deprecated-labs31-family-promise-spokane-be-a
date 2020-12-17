@@ -1,9 +1,10 @@
 const express = require('express');
 
 const Notes = require('./notesModel');
+const authRequired = require('../middleware/authRequired');
 const router = express.Router();
 
-router.get('/', function (req, res) {
+router.get('/', authRequired, function (req, res) {
   Notes.findAll()
     .then((notes) => {
       res.status(200).json(notes);
@@ -14,7 +15,7 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/:id', function (req, res) {
+router.get('/:id', authRequired, function (req, res) {
   const family_id = String(req.params.id);
   Notes.findById(family_id)
     .then((notes) => {
@@ -29,7 +30,7 @@ router.get('/:id', function (req, res) {
     });
 });
 
-router.post('/', async (req, res) => {
+router.post('/', authRequired, async (req, res) => {
   const notes = req.body;
   if (notes) {
     const id = notes['family_id'] || 0;
@@ -82,7 +83,7 @@ router.put('/:id', (req, res) => {
   }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authRequired, (req, res) => {
   const id = req.params.id;
   try {
     Notes.findById(id).then((notes) => {
