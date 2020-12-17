@@ -13,6 +13,8 @@ exports.up = function (knex) {
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
 
+    tbl.date('date_of_enrollment');
+
     tbl.json('demographics');
 
     tbl.json('barriers');

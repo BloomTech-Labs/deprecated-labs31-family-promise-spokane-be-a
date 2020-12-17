@@ -9,6 +9,7 @@ exports.seed = function (knex) {
       return knex('members').insert([
         {
           family_id: 1,
+          date_of_enrollment: '2020-10-09T17:38:31.123Z',
           demographics: {
             first_name: 'Joe',
             last_name: 'Clemmons',
@@ -45,6 +46,7 @@ exports.seed = function (knex) {
         },
         {
           family_id: 1,
+          date_of_enrollment: '2020-10-09T17:38:31.123Z',
           demographics: {
             first_name: 'Josh',
             last_name: 'Clemmons',
