@@ -4,7 +4,7 @@ exports.up = function (knex) {
     tbl.increments();
 
     tbl
-      .string('user_id')
+      .string('supervisor_id')
       .notNullable()
       .references('id')
       .inTable('users')
@@ -23,6 +23,8 @@ exports.up = function (knex) {
       .onUpdate('CASCADE');
 
     tbl.boolean('checked_in');
+
+    tbl.boolean('on_sight');
 
     tbl.date('date');
 

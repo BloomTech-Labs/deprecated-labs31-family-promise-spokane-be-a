@@ -14,11 +14,13 @@ exports.up = function (knex) {
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
 
-    tbl.integer('case_number').notNullable();
+    tbl.integer('case_number');
 
     tbl.jsonb('phone_one');
 
     tbl.jsonb('phone_two');
+
+    tbl.jsonb('safe_alternate');
 
     tbl.jsonb('emergencyContact');
 
@@ -34,7 +36,11 @@ exports.up = function (knex) {
 
     tbl.jsonb('domestic_violence_info');
 
+    tbl.integer('pets');
+
     tbl.string('avatar_url');
+
+    tbl.integer('percent_complete');
   });
 };
 
