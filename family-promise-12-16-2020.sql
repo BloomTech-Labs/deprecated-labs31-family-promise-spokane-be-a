@@ -27,9 +27,10 @@ SET default_table_access_method = heap;
 CREATE TABLE public.families (
     id integer NOT NULL,
     user_id integer NOT NULL,
-    case_number integer NOT NULL,
+    case_number integer,
     phone_one jsonb,
     phone_two jsonb,
+    safe_alternate jsonb,
     "emergencyContact" jsonb,
     vehicle jsonb,
     last_permanent_address character varying(255),
@@ -37,6 +38,7 @@ CREATE TABLE public.families (
     gov_benefits jsonb,
     insurance jsonb,
     domestic_violence_info jsonb,
+    pets integer,
     avatar_url character varying(255)
 );
 
@@ -141,9 +143,10 @@ ALTER SEQUENCE public.knex_migrations_lock_index_seq OWNED BY public.knex_migrat
 
 CREATE TABLE public.logs (
     id integer NOT NULL,
-    user_id integer NOT NULL,
+    supervisor_id integer NOT NULL,
     family_id integer NOT NULL,
     checked_in boolean,
+    on_sight boolean,
     date date,
     "time" timestamp with time zone
 );
@@ -181,10 +184,10 @@ CREATE TABLE public.members (
     id integer NOT NULL,
     family_id integer NOT NULL,
     demographics json,
-    bearers json,
+    barriers json,
     schools json,
-    flag character varying(255),
-    pet integer
+    case_members integer,
+    flag character varying(255)
 );
 
 
@@ -342,12 +345,8 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: families; Type: TABLE DATA; Schema: public; Owner: lrod
 --
 
-COPY public.families (id, user_id, case_number, phone_one, phone_two, "emergencyContact", vehicle, last_permanent_address, homeless_info, gov_benefits, insurance, domestic_violence_info, avatar_url) FROM stdin;
-1	2	22	{"name": "Mark", "number": "202-555-0177", "safeToLeaveMssg": true}	{"name": "Jacob Smith", "number": "770-555-0114", "safeToLeaveMssg": false}	{"name": "Steve Martin", "number": "410-555-0173"}	{"make": "BMW", "year": 2007, "color": "red", "model": "K1200LT", "license_plate": "699-VHT"}	7271 Hickory Rd Sterling VA 20164 	{"prior_location": "relatives", "current_location": "car", "num_times_homeless": 2, "total_len_homeless": 1, "homeless_start_date": "26-AUG-2019", "length_at_prior_location": "2 weeks", "length_at_current_location": "3 days"}	{"RRH": false, "snap": true, "cps_fps": false, "foodstamps": true, "housing_voucher": false, "veteran_services": true}	{"pregnancies": false, "has_insurance": true, "members_covered": 2, "health_insurance_type": "Medicare"}	{"fleeing_dv": false, "YWCA_contacted": false, "has_court_order": false, "date_last_incident": false, "anonymity_preferred": true}	https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg
-2	1	25	{"name": "John", "number": "202-555-0177", "safeToLeaveMssg": true}	{"name": "lee Smith", "number": "770-555-0114", "safeToLeaveMssg": false}	{"name": "Steve Guy", "number": "410-555-0173"}	{"make": "BMW", "year": 2007, "color": "red", "model": "K1200LT", "license_plate": "699-VHT"}	7271 Hickory Rd Sterling VA 20164 	{"prior_location": "relatives", "current_location": "car", "num_times_homeless": 2, "total_len_homeless": 1, "homeless_start_date": "26-AUG-2019", "length_at_prior_location": "2 weeks", "length_at_current_location": "3 days"}	{"RRH": false, "snap": true, "cps/fps": false, "foodstamps": true, "housing_voucher": false, "veteran_services": true}	{"pregnancies": false, "has_insurance": true, "members_covered": 2, "health_insurance_type": "Medicare"}	{"fleeing_dv": false, "YWCA_contacted": false, "has_court_order": false, "date_last_incident": false, "anonymity_preferred": true}	https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg
-3	1	25	{"name": "John", "number": "202-555-0177", "safeToLeaveMssg": true}	{"name": "lee Smith", "number": "770-555-0114", "safeToLeaveMssg": false}	{"name": "Steve Guy", "number": "410-555-0173"}	{"make": "BMW", "year": 2007, "color": "red", "model": "K1200LT", "license_plate": "699-VHT"}	7271 Hickory Rd Sterling VA 20164 	{"prior_location": "relatives", "current_location": "car", "num_times_homeless": 2, "total_len_homeless": 1, "homeless_start_date": "26-AUG-2019", "length_at_prior_location": "2 weeks", "length_at_current_location": "3 days"}	{"RRH": false, "snap": true, "cps/fps": false, "foodstamps": true, "housing_voucher": false, "veteran_services": true}	{"pregnancies": false, "has_insurance": true, "members_covered": 2, "health_insurance_type": "Medicare"}	{"fleeing_dv": false, "YWCA_contacted": false, "has_court_order": false, "date_last_incident": false, "anonymity_preferred": true}	https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg
-4	1	25	{"name": "John", "number": "202-555-0177", "safeToLeaveMssg": true}	{"name": "lee Smith", "number": "770-555-0114", "safeToLeaveMssg": false}	{"name": "Steve Guy", "number": "410-555-0173"}	{"make": "BMW", "year": 2007, "color": "red", "model": "K1200LT", "license_plate": "699-VHT"}	7271 Hickory Rd Sterling VA 20164 	{"prior_location": "relatives", "current_location": "car", "num_times_homeless": 2, "total_len_homeless": 1, "homeless_start_date": "26-AUG-2019", "length_at_prior_location": "2 weeks", "length_at_current_location": "3 days"}	{"RRH": false, "snap": true, "cps/fps": false, "foodstamps": true, "housing_voucher": false, "veteran_services": true}	{"pregnancies": false, "has_insurance": true, "members_covered": 2, "health_insurance_type": "Medicare"}	{"fleeing_dv": false, "YWCA_contacted": false, "has_court_order": false, "date_last_incident": false, "anonymity_preferred": true}	https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg
-5	1	25	{"name": "John", "number": "202-555-0177", "safeToLeaveMssg": true}	{"name": "lee Smith", "number": "770-555-0114", "safeToLeaveMssg": false}	{"name": "Steve Guy", "number": "410-555-0173"}	{"make": "BMW", "year": 2007, "color": "red", "model": "K1200LT", "license_plate": "699-VHT"}	7271 Hickory Rd Sterling VA 20164 	{"prior_location": "relatives", "current_location": "car", "num_times_homeless": 2, "total_len_homeless": 1, "homeless_start_date": "26-AUG-2019", "length_at_prior_location": "2 weeks", "length_at_current_location": "3 days"}	{"RRH": false, "snap": true, "cps/fps": false, "foodstamps": true, "housing_voucher": false, "veteran_services": true}	{"pregnancies": false, "has_insurance": true, "members_covered": 2, "health_insurance_type": "Medicare"}	{"fleeing_dv": false, "YWCA_contacted": false, "has_court_order": false, "date_last_incident": false, "anonymity_preferred": true}	https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg
+COPY public.families (id, user_id, case_number, phone_one, phone_two, safe_alternate, "emergencyContact", vehicle, last_permanent_address, homeless_info, gov_benefits, insurance, domestic_violence_info, pets, avatar_url) FROM stdin;
+1	2	22	{"name": "Mark", "number": "202-555-0177", "safeToLeaveMssg": true}	{"name": "Jacob Smith", "number": "770-555-0114", "safeToLeaveMssg": false}	{"name": "Mr. Rios", "number": "809-323-5959"}	{"name": "Steve Martin", "number": "410-555-0173"}	{"make": "BMW", "year": 2007, "color": "red", "model": "K1200LT", "license_plate": "699-VHT"}	7271 Hickory Rd Sterling VA 20164 	{"prior_location": "relatives", "current_location": "car", "num_times_homeless": 2, "total_len_homeless": 1, "homeless_start_date": "26-AUG-2019", "length_at_prior_location": "2 weeks", "length_at_current_location": "3 days"}	{"RRH": false, "snap": true, "cps_fps": false, "foodstamps": true, "housing_voucher": false, "veteran_services": true}	{"pregnancies": false, "has_insurance": true, "members_covered": 2, "health_insurance_type": "Medicare"}	{"fleeing_dv": false, "YWCA_contacted": false, "has_court_order": false, "date_last_incident": false, "anonymity_preferred": true}	0	https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg
 \.
 
 
@@ -356,11 +355,11 @@ COPY public.families (id, user_id, case_number, phone_one, phone_two, "emergency
 --
 
 COPY public.knex_migrations (id, name, batch, migration_time) FROM stdin;
-1	20201209123909_users.js	1	2020-12-15 11:08:36.055-06
-2	20201209130335_families.js	1	2020-12-15 11:08:36.064-06
-3	20201209155624_logs.js	1	2020-12-15 11:08:36.068-06
-4	20201209160611_members.js	1	2020-12-15 11:08:36.073-06
-5	20201209161927_notes.js	1	2020-12-15 11:08:36.079-06
+1	20201209123909_users.js	1	2020-12-16 18:03:34.125-06
+2	20201209130335_families.js	1	2020-12-16 18:03:34.134-06
+3	20201209155624_logs.js	1	2020-12-16 18:03:34.14-06
+4	20201209160611_members.js	1	2020-12-16 18:03:34.163-06
+5	20201209161927_notes.js	1	2020-12-16 18:03:34.173-06
 \.
 
 
@@ -377,11 +376,11 @@ COPY public.knex_migrations_lock (index, is_locked) FROM stdin;
 -- Data for Name: logs; Type: TABLE DATA; Schema: public; Owner: lrod
 --
 
-COPY public.logs (id, user_id, family_id, checked_in, date, "time") FROM stdin;
-1	1	1	t	2020-10-09	2020-12-09 11:38:31.123-06
-2	1	1	t	2020-12-10	2020-12-10 12:01:40.038-06
-3	1	1	t	2020-12-11	2020-12-11 11:38:31.123-06
-4	1	1	t	2020-12-12	2020-12-12 11:38:31.123-06
+COPY public.logs (id, supervisor_id, family_id, checked_in, on_sight, date, "time") FROM stdin;
+1	1	1	t	t	2020-10-09	2020-12-09 11:38:31.123-06
+2	1	1	t	t	2020-12-10	2020-12-10 12:01:40.038-06
+3	1	1	t	f	2020-12-11	2020-12-11 11:38:31.123-06
+4	1	1	t	t	2020-12-12	2020-12-12 11:38:31.123-06
 \.
 
 
@@ -389,9 +388,9 @@ COPY public.logs (id, user_id, family_id, checked_in, date, "time") FROM stdin;
 -- Data for Name: members; Type: TABLE DATA; Schema: public; Owner: lrod
 --
 
-COPY public.members (id, family_id, demographics, bearers, schools, flag, pet) FROM stdin;
-1	1	{"first_name":"Joe","last_name":"Clemmons","gender":"male","relationship":"cousin","DOB":"10-23-1992","SSN":9999,"income":20000,"employer":"union","race":"White"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV-AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":null,"list_issues":null}	{"highest_grade_completed":"12th grade","enrolled_status":false,"reason_not_enrolled":"finished","attendance_status":"inactive","school_type":null,"school_name":null,"mckinney_school":false}	none	0
-2	1	{"first_name":"Susy","last_name":"Clemmons","gender":"female","relationship":"daughter","DOB":"01-03-2012","SSN":9999,"income":20000,"employer":"na","race":"White"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV-AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":null,"list_issues":null}	{"highest_grade_completed":"2nd grade","enrolled_status":true,"reason_not_enrolled":"na","attendance_status":"active","school_type":"elementary","school_name":"wright elementary","mckinney_school":false}	none	0
+COPY public.members (id, family_id, demographics, barriers, schools, case_members, flag) FROM stdin;
+1	1	{"first_name":"Joe","last_name":"Clemmons","gender":"male","relationship":"cousin","DOB":"10-23-1992","SSN":9999,"income":20000,"employer":"union","race":"White"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":null,"list_issues":null}	{"highest_grade_completed":"12th grade","enrolled_status":false,"reason_not_enrolled":"finished","attendance_status":"inactive","school_type":null,"school_name":null,"mckinney_school":false}	3	\N
+2	1	{"first_name":"Josh","last_name":"Clemmons","gender":"male","relationship":"son","DOB":"10-23-2002","SSN":9999,"income":20000,"employer":null,"race":"White"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":null,"list_issues":null}	{"highest_grade_completed":"12th grade","enrolled_status":false,"reason_not_enrolled":"finished","attendance_status":"inactive","school_type":null,"school_name":null,"mckinney_school":false}	3	\N
 \.
 
 
@@ -400,7 +399,7 @@ COPY public.members (id, family_id, demographics, bearers, schools, flag, pet) F
 --
 
 COPY public.notes (id, family_id, author_id, subject, content, date, "time") FROM stdin;
-2	1	1	Family needs	Family needs assitance with hospital bills	2020-12-14	2020-12-13 21:15:31.031-06
+1	1	1	Please be aware of sensitive information	Family came in after fire destroyed their home, youngest is still in the hostipal.	2020-12-14	2020-12-13 21:15:31.031-06
 \.
 
 
@@ -418,7 +417,7 @@ COPY public.users (id, username, name, email, okta_id, role) FROM stdin;
 -- Name: families_id_seq; Type: SEQUENCE SET; Schema: public; Owner: lrod
 --
 
-SELECT pg_catalog.setval('public.families_id_seq', 5, true);
+SELECT pg_catalog.setval('public.families_id_seq', 1, true);
 
 
 --
@@ -453,7 +452,7 @@ SELECT pg_catalog.setval('public.members_id_seq', 2, true);
 -- Name: notes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: lrod
 --
 
-SELECT pg_catalog.setval('public.notes_id_seq', 2, true);
+SELECT pg_catalog.setval('public.notes_id_seq', 1, true);
 
 
 --
@@ -536,11 +535,11 @@ ALTER TABLE ONLY public.logs
 
 
 --
--- Name: logs logs_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: lrod
+-- Name: logs logs_supervisor_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: lrod
 --
 
 ALTER TABLE ONLY public.logs
-    ADD CONSTRAINT logs_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT logs_supervisor_id_foreign FOREIGN KEY (supervisor_id) REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
