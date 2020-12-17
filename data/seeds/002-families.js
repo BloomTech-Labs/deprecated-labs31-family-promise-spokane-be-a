@@ -15,6 +15,7 @@ exports.seed = function (knex) {
               '{"name":"Mark", "number":"202-555-0177", "safeToLeaveMssg":true}',
             phone_two:
               '{"name":"Jacob Smith", "number":"770-555-0114", "safeToLeaveMssg":false}',
+            safe_alternate: { name: 'Mr. Rios', number: '809-323-5959' },
             emergencyContact:
               '{ "name": "Steve Martin", "number":"410-555-0173"}',
             vehicle:
@@ -28,8 +29,10 @@ exports.seed = function (knex) {
               '{"has_insurance": true, "members_covered": 2, "health_insurance_type": "Medicare", "pregnancies": false}',
             domestic_violence_info:
               '{ "fleeing_dv": false, "anonymity_preferred": true, "date_last_incident": false, "has_court_order": false, "YWCA_contacted": false }',
+            pets: 0,
             avatar_url:
               'https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg',
+            percent_complete: 0,
           },
         ]);
       })
