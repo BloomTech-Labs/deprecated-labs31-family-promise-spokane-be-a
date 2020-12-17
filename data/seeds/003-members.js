@@ -19,7 +19,7 @@ exports.seed = function (knex) {
             SSN: 9999,
             income: 20000,
             employer: 'union',
-            race: 'White',
+            race: ['White'],
           },
           barriers: {
             alcohol_abuse: false,
@@ -57,7 +57,7 @@ exports.seed = function (knex) {
             SSN: 9999,
             income: 20000,
             employer: null,
-            race: 'White',
+            race: ['White'],
           },
           barriers: {
             alcohol_abuse: false,
