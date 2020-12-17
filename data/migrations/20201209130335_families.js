@@ -40,6 +40,8 @@ exports.up = function (knex) {
     tbl.integer('pets');
 
     tbl.string('avatar_url');
+
+    tbl.integer('percent_complete');
   });
 };
 

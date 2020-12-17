@@ -24,6 +24,8 @@ exports.up = function (knex) {
     tbl.integer('case_members');
 
     tbl.string('flag');
+
+    tbl.integer('percent_complete');
   });
 };
 

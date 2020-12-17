@@ -41,8 +41,9 @@ exports.seed = function (knex) {
             school_name: null,
             mckinney_school: false,
           },
-          flag: null,
           case_members: 3,
+          flag: null,
+          percent_complete: 0,
         },
         {
           family_id: 1,
@@ -80,6 +81,7 @@ exports.seed = function (knex) {
           },
           case_members: 3,
           flag: null,
+          percent_complete: 0,
         },
       ]);
     });

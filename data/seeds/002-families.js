@@ -32,6 +32,7 @@ exports.seed = function (knex) {
             pets: 0,
             avatar_url:
               'https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg',
+            percent_complete: 0,
           },
         ]);
       })
