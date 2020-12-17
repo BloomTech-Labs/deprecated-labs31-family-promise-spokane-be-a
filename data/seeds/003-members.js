@@ -20,7 +20,7 @@ exports.seed = function (knex) {
             income: 20000,
             employer: 'union',
             race: ['White'],
-            ethnicity: 'Caucasian'
+            ethnicity: 'Caucasian',
           },
           barriers: {
             alcohol_abuse: false,
@@ -59,7 +59,7 @@ exports.seed = function (knex) {
             income: 20000,
             employer: null,
             race: ['White'],
-            ethnicity: 'Caucasian'
+            ethnicity: 'Caucasian',
           },
           barriers: {
             alcohol_abuse: false,
