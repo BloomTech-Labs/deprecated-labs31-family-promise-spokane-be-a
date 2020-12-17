@@ -11,7 +11,7 @@ exports.up = function (knex) {
 
     // this gets created on sign up
 
-    tbl.string('role').defaultsTo('pending');
+    tbl.string('role').notNullable().defaultsTo('pending');
   });
 };
 
