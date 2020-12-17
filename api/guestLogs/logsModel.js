@@ -12,6 +12,9 @@ const findBy = (filter) => {
 const findById = async (id) => {
   return db('logs').where({ id }).first().select('*');
 };
+const findByFamilyId = async (family_id) => {
+  return db('logs').where({ family_id }).first().select('*');
+};
 
 const create = async (log) => {
   return db('logs').insert(log).returning('*');
@@ -40,6 +43,7 @@ module.exports = {
   findAll,
   findBy,
   findById,
+  findByFamilyId,
   create,
   update,
   remove,

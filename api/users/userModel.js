@@ -9,7 +9,12 @@ const findBy = (filter) => {
 };
 
 const findById = async (id) => {
-  return db('users').where({ id }).first().select('*');
+  return db('users').where({ id });
+};
+
+const findByOktaId = async (okta_id) => {
+  console.log(okta_id);
+  return db('users').where({ okta_id });
 };
 
 const create = async (profile) => {
@@ -40,6 +45,7 @@ module.exports = {
   findAll,
   findBy,
   findById,
+  findByOktaId,
   create,
   update,
   remove,

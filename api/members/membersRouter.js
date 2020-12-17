@@ -1,9 +1,11 @@
 const express = require('express');
-
+// const checkRole = require('./membersMiddleware')
+const authRequired = require('../middleware/authRequired');
 const Members = require('./membersModel');
 const router = express.Router();
 
-router.get('/', function (req, res) {
+// checkRole.grantAccess('readAny', 'members'),
+router.get('/', authRequired, function (req, res) {
   Members.findAll()
     .then((members) => {
       res.status(200).json(members);
@@ -14,9 +16,10 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/:id', function (req, res) {
+// checkRole.grantAccess('readOwn', 'members'),
+router.get('/:id', authRequired, function (req, res) {
   const family_id = String(req.params.id);
-  Members.findByfamilyId(family_id)
+  Members.findById(family_id)
     .then((members) => {
       if (members) {
         res.status(200).json(members);
@@ -29,7 +32,8 @@ router.get('/:id', function (req, res) {
     });
 });
 
-router.post('/', async (req, res) => {
+// checkRole.grantAccess('createOwn', 'members'),
+router.post('/', authRequired, async (req, res) => {
   const members = req.body;
   if (members) {
     const id = members['family_id'] || 0;
@@ -55,11 +59,12 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
+// heckRole.grantAccess('updateOwn', 'members'),
+router.put('/:id', authRequired, (req, res) => {
   const members = req.body;
   const id = req.params.id;
   if (members) {
-    Members.indById(id)
+    Members.findById(id)
       .then(
         Members.update(id, members)
           .then((updated) => {
@@ -83,7 +88,8 @@ router.put('/:id', (req, res) => {
   }
 });
 
-router.delete('/:id', (req, res) => {
+// checkRole.grantAccess('deleteAny', 'members')
+router.delete('/:id', authRequired, (req, res) => {
   const id = req.params.id;
   try {
     Members.findById(id).then((members) => {
