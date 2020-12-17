@@ -6,7 +6,7 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('logs').insert([
         {
-          supervisor_id: 1,
+          supervisor_id: '00u2lh0bsAliwLEe75d6',
           family_id: 1,
           checked_in: true,
           on_sight: true,
@@ -14,7 +14,7 @@ exports.seed = function (knex) {
           time: '2020-12-09T17:38:31.123Z',
         },
         {
-          supervisor_id: 1,
+          supervisor_id: '00u2lh0bsAliwLEe75d6',
           family_id: 1,
           checked_in: true,
           on_sight: true,
@@ -22,7 +22,7 @@ exports.seed = function (knex) {
           time: '2020-12-10T18:01:40.038Z',
         },
         {
-          supervisor_id: 1,
+          supervisor_id: '00u2lh0bsAliwLEe75d6',
           family_id: 1,
           checked_in: true,
           on_sight: false,
@@ -30,7 +30,7 @@ exports.seed = function (knex) {
           time: '2020-12-11T17:38:31.123Z',
         },
         {
-          supervisor_id: 1,
+          supervisor_id: '00u2lh0bsAliwLEe75d6',
           family_id: 1,
           checked_in: true,
           on_sight: true,
