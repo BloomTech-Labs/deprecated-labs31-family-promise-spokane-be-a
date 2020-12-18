@@ -10,6 +10,8 @@ exports.seed = function (knex) {
         {
           family_id: 1,
           date_of_enrollment: '2020-10-09T17:38:31.123Z',
+          household_type: 'Adults and Children',
+          length_of_stay: '6 weeks',
           demographics: {
             first_name: 'Joe',
             last_name: 'Clemmons',
@@ -23,13 +25,13 @@ exports.seed = function (knex) {
             ethnicity: 'Caucasian',
           },
           barriers: {
-            alcohol_abuse: false,
+            alcohol_abuse: true,
             developmental_disabilities: false,
             chronic_health_issues: false,
             drug_abuse: false,
             HIV_AIDs: false,
             mental_illness: false,
-            physical_disabilities: false,
+            physical_disabilities: true,
             list_indefinite_conditions: null,
             list_issues: null,
           },
@@ -43,12 +45,15 @@ exports.seed = function (knex) {
             mckinney_school: false,
           },
           case_members: 3,
+          predicted_exit_destination: 'permanent exit',
           flag: null,
           percent_complete: 0,
         },
         {
           family_id: 1,
           date_of_enrollment: '2020-10-09T17:38:31.123Z',
+          household_type: 'Adults and Children',
+          length_of_stay: '16 weeks',
           demographics: {
             first_name: 'Josh',
             last_name: 'Clemmons',
@@ -82,6 +87,7 @@ exports.seed = function (knex) {
             mckinney_school: false,
           },
           case_members: 3,
+          predicted_exit_destination: 'temporary exit',
           flag: null,
           percent_complete: 0,
         },

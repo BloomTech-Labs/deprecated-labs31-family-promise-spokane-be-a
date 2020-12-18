@@ -19,7 +19,7 @@ exports.up = function (knex) {
     tbl.string('household_type');
 
     // length_of_stay string example: One month or more, but less than 90 days
-    tbl.string('length_of_stay string');
+    tbl.string('length_of_stay');
 
     tbl.json('demographics');
 
