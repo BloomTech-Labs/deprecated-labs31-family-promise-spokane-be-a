@@ -29,6 +29,7 @@ exports.up = function (knex) {
 
     tbl.integer('case_members');
 
+    // predicted_exit_destination examples: permanent exit, temporary exit. unknown
     tbl.string('predicted_exit_destination');
 
     tbl.string('flag');
