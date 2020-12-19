@@ -87,6 +87,16 @@ router.get(
   }
 );
 
+router.post('/', authRequired, function (req, res) {
+  Users.findOrCreateProfile(req.body)
+    .then(() => {
+      res.status(201).json({ message: 'Profile created' });
+    })
+    .catch(() => {
+      res.status(500).json({ message: 'Unable to create profile' });
+    });
+});
+
 /**
  * @swagger
  * components:

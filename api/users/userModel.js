@@ -9,11 +9,10 @@ const findBy = (filter) => {
 };
 
 const findById = async (id) => {
-  return db('users').where({ id });
+  return db('users').where({ id }).first('*');
 };
 
 const findByOktaId = async (okta_id) => {
-  console.log(okta_id);
   return db('users').where({ okta_id });
 };
 
