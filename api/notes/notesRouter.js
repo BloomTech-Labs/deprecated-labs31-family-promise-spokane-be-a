@@ -6,7 +6,9 @@ const router = express.Router();
 
 // checkRole.grantAccess('readAny', 'notes'),
 router.get('/', authRequired, function (req, res) {
-  Notes.findAll()
+  const queries = { ...req.query };
+
+  Notes.findAll(queries)
     .then((notes) => {
       res.status(200).json(notes);
     })

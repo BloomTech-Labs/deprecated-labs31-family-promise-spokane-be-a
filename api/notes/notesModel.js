@@ -1,7 +1,11 @@
 const db = require('../../data/db-config');
 
-const findAll = async () => {
-  return await db('notes');
+const findAll = async (queries) => {
+  return await db('notes').modify((qb) => {
+    if (queries.shareable) {
+      qb.where({ shareable: queries.shareable });
+    }
+  });
 };
 
 const findBy = (filter) => {
