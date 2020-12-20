@@ -39,6 +39,19 @@ const findAllFamilyMembersById = async (id) => {
   return db('members').where({ family_id: id }).returning('*');
 };
 
+const findAllNotesByFamilyId = async (id, role) => {
+  return db('notes')
+    .where({ family_id: id })
+    .returning('*')
+    .modify((qb) => {
+      // Only send back the shareable notes if the user is a guest
+
+      if (role == 'guest') {
+        qb.where({ shareable: true });
+      }
+    });
+};
+
 module.exports = {
   findAll,
   findBy,
@@ -48,4 +61,5 @@ module.exports = {
   remove,
   findOrCreateFamily,
   findAllFamilyMembersById,
+  findAllNotesByFamilyId,
 };

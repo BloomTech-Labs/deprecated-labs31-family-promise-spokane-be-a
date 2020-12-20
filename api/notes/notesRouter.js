@@ -20,8 +20,8 @@ router.get('/', authRequired, function (req, res) {
 
 // checkRole.grantAccess('readOwn', 'notes'),
 router.get('/:id', authRequired, function (req, res) {
-  const family_id = String(req.params.id);
-  Notes.findById(family_id)
+  const { id } = req.params;
+  Notes.findById(id)
     .then((notes) => {
       if (notes) {
         res.status(200).json(notes);
