@@ -35,7 +35,7 @@ const findOrCreateFamily = async (familyObj) => {
   }
 };
 
-const findAllFamilyMembersById = async (id) => {
+const findAllFamilyMembersById = (id) => {
   return db('members').where({ family_id: id }).returning('*');
 };
 
