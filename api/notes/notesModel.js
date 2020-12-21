@@ -45,6 +45,10 @@ const findOrCreateNote = async (noteObj) => {
   }
 };
 
+const findByIdAndRemove = async (id) => {
+  return await db('notes').where({ id }).del();
+};
+
 module.exports = {
   findAll,
   findBy,
@@ -54,4 +58,5 @@ module.exports = {
   remove,
   findOrCreateNote,
   findByFamilyId,
+  findByIdAndRemove,
 };

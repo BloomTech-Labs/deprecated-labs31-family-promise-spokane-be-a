@@ -93,12 +93,8 @@ router.put('/:id', authRequired, (req, res) => {
 router.delete('/:id', authRequired, (req, res) => {
   const id = req.params.id;
   try {
-    Notes.findById(id).then((notes) => {
-      Notes.remove(notes['family_id']).then(() => {
-        res
-          .status(200)
-          .json({ message: `notes '${id}' was deleted.`, notes: notes });
-      });
+    Notes.findByIdAndRemove(id).then(() => {
+      res.status(204).json({ message: 'deleted' });
     });
   } catch (err) {
     res.status(500).json({
