@@ -23,8 +23,10 @@ exports.up = function (knex) {
     tbl.string('subject').notNullable();
 
     tbl.string('content').notNullable();
+    
+    tbl.boolean('shareable').notNullable().defaultTo(true)
 
-    tbl.date('date');
+    tbl.date('date').defaultTo(knex.fn.now())
 
     tbl.datetime('time');
   });

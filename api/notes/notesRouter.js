@@ -1,12 +1,12 @@
 const express = require('express');
-// const checkRole = require('./notesMiddleware')
 const Notes = require('./notesModel');
 const authRequired = require('../middleware/authRequired');
 const router = express.Router();
 
-// checkRole.grantAccess('readAny', 'notes'),
 router.get('/', authRequired, function (req, res) {
-  Notes.findAll()
+  const queries = { ...req.query };
+
+  Notes.findAll(queries)
     .then((notes) => {
       res.status(200).json(notes);
     })
@@ -16,10 +16,9 @@ router.get('/', authRequired, function (req, res) {
     });
 });
 
-// checkRole.grantAccess('readOwn', 'notes'),
 router.get('/:id', authRequired, function (req, res) {
-  const family_id = String(req.params.id);
-  Notes.findById(family_id)
+  const { id } = req.params;
+  Notes.findById(id)
     .then((notes) => {
       if (notes) {
         res.status(200).json(notes);
@@ -32,7 +31,6 @@ router.get('/:id', authRequired, function (req, res) {
     });
 });
 
-// checkRole.grantAccess('updateAny', 'notes'),
 router.post('/', authRequired, async (req, res) => {
   const notes = req.body;
   if (notes) {
@@ -58,7 +56,6 @@ router.post('/', authRequired, async (req, res) => {
   }
 });
 
-// checkRole.grantAccess('updateAny', 'notes'),
 router.put('/:id', authRequired, (req, res) => {
   const newNote = req.body;
   const id = req.params.id;
@@ -87,16 +84,11 @@ router.put('/:id', authRequired, (req, res) => {
   }
 });
 
-//checkRole.grantAccess('deleteAny', 'notes'),
 router.delete('/:id', authRequired, (req, res) => {
   const id = req.params.id;
   try {
-    Notes.findById(id).then((notes) => {
-      Notes.remove(notes['family_id']).then(() => {
-        res
-          .status(200)
-          .json({ message: `notes '${id}' was deleted.`, notes: notes });
-      });
+    Notes.findByIdAndRemove(id).then(() => {
+      res.status(204).json({ message: 'deleted' });
     });
   } catch (err) {
     res.status(500).json({

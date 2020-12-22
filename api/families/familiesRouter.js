@@ -34,10 +34,23 @@ router.get('/:id', authRequired, function (req, res) {
     });
 });
 
-router.get('/:id/members', function (req, res) {
+router.get('/:id/members', authRequired, function (req, res) {
   Families.findAllFamilyMembersById(req.params.id)
     .then((data) => {
       res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.get('/:id/notes', authRequired, function (req, res) {
+  const { role } = req.user;
+  const { id } = req.params;
+
+  Families.findAllNotesByFamilyId(id, role)
+    .then((notes) => {
+      res.status(200).json(notes);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
