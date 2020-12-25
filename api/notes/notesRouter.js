@@ -87,16 +87,23 @@ router.put('/:id', authRequired, async (req, res) => {
   }
 });
 
-router.delete('/:id', authRequired, (req, res) => {
-  const id = req.params.id;
+router.delete('/:id', authRequired, async (req, res) => {
+  const { id } = req.params;
   try {
-    Notes.findByIdAndRemove(id).then(() => {
-      res.status(204).json({ message: 'deleted' });
-    });
-  } catch (err) {
+    let note = await Notes.findByIdAndRemove(id);
+
+    note = note[0];
+
+    if (!note) {
+      return res
+        .status(404)
+        .json({ message: `Note with id of ${id} does not exist` });
+    }
+
+    res.status(204).json({ message: 'Deleted' });
+  } catch {
     res.status(500).json({
-      message: `Could not delete notes with ID: ${id}`,
-      error: err.message,
+      message: `Could not delete note with ID: ${id}`,
     });
   }
 });

@@ -45,7 +45,7 @@ const findOrCreateNote = async (noteObj) => {
 };
 
 const findByIdAndRemove = (id) => {
-  return db('notes').where({ id }).del();
+  return db('notes').where({ id }).del().returning('*');
 };
 
 module.exports = {
