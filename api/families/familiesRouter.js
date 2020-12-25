@@ -3,7 +3,7 @@ const authRequired = require('../middleware/authRequired');
 // const checkRole = require('./familiesMiddleware');
 const Families = require('./familiesModel');
 const Logs = require('../guestLogs/logsModel');
-
+const { verifyUserId } = require('./familiesMiddleware');
 const router = express.Router();
 
 //  checkRole.grantAccess('readAny', 'families'),
@@ -60,7 +60,7 @@ router.get('/:id/notes', authRequired, function (req, res) {
 //get all logs by family id
 router.get('/:id/logs', authRequired, function (req, res) {
   const family_id = String(req.params.id);
-  console.log(family_id);
+
   Logs.findByFamilyId(family_id)
     .then((logs) => {
       if (logs) {
@@ -75,29 +75,16 @@ router.get('/:id/logs', authRequired, function (req, res) {
 });
 
 // checkRole.grantAccess('createOwn', 'families'),
-router.post('/', authRequired, async (req, res) => {
-  const families = req.body;
-  if (families) {
-    const user_id = families.id || 0;
-    try {
-      await Families.findById(user_id).then(async (pf) => {
-        if (pf == undefined) {
-          //families not found so lets insert it
-          await Families.create(families).then((families) =>
-            res
-              .status(200)
-              .json({ message: 'families created', families: families[0] })
-          );
-        } else {
-          res.status(400).json({ message: 'families already exists!' });
-        }
-      });
-    } catch (e) {
-      console.error(e);
-      res.status(500).json({ message: e.message });
-    }
-  } else {
-    res.status(404).json({ message: 'families missing' });
+
+router.post('/', authRequired, verifyUserId, async (req, res) => {
+  const newFamily = req.body;
+
+  try {
+    const family = await Families.create(newFamily);
+
+    res.status(201).json({ families: family[0] });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 

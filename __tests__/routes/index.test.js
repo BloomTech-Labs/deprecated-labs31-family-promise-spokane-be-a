@@ -3,7 +3,9 @@ const request = require('supertest');
 const server = require('../../api/app.js');
 
 describe('index router endpoints', () => {
-  beforeAll(() => {});
+  beforeAll(() => {
+
+  });
 
   describe('GET /', () => {
     it('should return json with api:up', async () => {

@@ -9,7 +9,11 @@ const findBy = (filter) => {
 };
 
 const findById = (id) => {
-  return db('families').where({ id }).first().select('*');
+  return db('families').where({ id }).returning('*');
+};
+
+const findByUserId = (user_id) => {
+  return db('families').where({ user_id }).returning('*').first();
 };
 
 const create = (family) => {
@@ -62,4 +66,5 @@ module.exports = {
   findOrCreateFamily,
   findAllFamilyMembersById,
   findAllNotesByFamilyId,
+  findByUserId,
 };
