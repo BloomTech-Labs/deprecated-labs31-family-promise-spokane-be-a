@@ -13,16 +13,16 @@ const findBy = (filter) => {
 };
 
 //a function to find member by id
-const findById = async (id) => {
+const findById = (id) => {
   return db('notes').where({ id }).first().select('*');
 };
 
 //a function to find ALL notes by family id
-const findByFamilyId = async (family_id) => {
-  return db('notes').where({ family_id }).first().select('*');
+const findByFamilyId = (family_id) => {
+  return db('families').where({ id: family_id }).first().select('*');
 };
 
-const create = async (note) => {
+const create = (note) => {
   return db('notes').insert(note).returning('*');
 };
 
@@ -30,8 +30,8 @@ const update = (id, note) => {
   return db('notes').where({ id: id }).first().update(note).returning('*');
 };
 
-const remove = async (id) => {
-  return await db('notes').where({ id }).del();
+const remove = (id) => {
+  return db('notes').where({ id }).del();
 };
 
 const findOrCreateNote = async (noteObj) => {
@@ -45,8 +45,8 @@ const findOrCreateNote = async (noteObj) => {
   }
 };
 
-const findByIdAndRemove = async (id) => {
-  return await db('notes').where({ id }).del();
+const findByIdAndRemove = (id) => {
+  return db('notes').where({ id }).del();
 };
 
 module.exports = {

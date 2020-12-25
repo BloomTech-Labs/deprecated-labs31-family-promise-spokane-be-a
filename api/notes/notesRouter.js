@@ -2,6 +2,7 @@ const express = require('express');
 const Notes = require('./notesModel');
 const authRequired = require('../middleware/authRequired');
 const router = express.Router();
+const Families = require('../families/familiesModel');
 
 router.get('/', authRequired, function (req, res) {
   const queries = { ...req.query };
@@ -32,27 +33,30 @@ router.get('/:id', authRequired, function (req, res) {
 });
 
 router.post('/', authRequired, async (req, res) => {
-  const notes = req.body;
-  if (notes) {
-    const id = notes['family_id'] || 0;
-    try {
-      await Notes.findByFamilyId(id).then(async (pf) => {
-        if (pf) {
-          console.log(pf);
-          //notes not found so lets insert it
-          await Notes.create(notes).then((notes) =>
-            res.status(200).json({ message: 'notes created', notes: notes[0] })
-          );
-        } else {
-          res.status(400).json({ message: 'family id doesnt exist!' });
-        }
-      });
-    } catch (e) {
-      console.error(e);
-      res.status(500).json({ message: e.message });
+  const note = req.body;
+
+  const id = note['family_id'] || 0;
+
+  try {
+    // Verify if family exists
+
+    const family = await Families.findById(id);
+
+    if (!family) {
+      return res
+        .status(404)
+        .json({ message: `Family with id of ${id} does not exist` });
     }
-  } else {
-    res.status(404).json({ message: 'notes missing' });
+
+    // Create note
+
+    const newNote = await Notes.create(note);
+
+    res.status(201).json({
+      note: newNote[0],
+    });
+  } catch {
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
