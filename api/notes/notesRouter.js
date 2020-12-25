@@ -4,17 +4,14 @@ const authRequired = require('../middleware/authRequired');
 const router = express.Router();
 const Families = require('../families/familiesModel');
 
-router.get('/', authRequired, function (req, res) {
-  const queries = { ...req.query };
+router.get('/', authRequired, async (req, res) => {
+  try {
+    const notes = await Notes.findAll();
 
-  Notes.findAll(queries)
-    .then((notes) => {
-      res.status(200).json(notes);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ message: err.message });
-    });
+    res.status(200).json({ notes });
+  } catch {
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 router.get('/:id', authRequired, function (req, res) {
