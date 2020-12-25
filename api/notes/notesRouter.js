@@ -33,9 +33,9 @@ router.get('/:id', authRequired, function (req, res) {
 });
 
 router.post('/', authRequired, async (req, res) => {
-  const note = req.body;
+  const newNote = req.body;
 
-  const id = note['family_id'] || 0;
+  const id = newNote['family_id'] || 0;
 
   try {
     // Verify if family exists
@@ -50,41 +50,40 @@ router.post('/', authRequired, async (req, res) => {
 
     // Create note
 
-    const newNote = await Notes.create(note);
+    let note = await Notes.create(newNote);
 
-    res.status(201).json({
-      note: newNote[0],
-    });
+    note = note[0];
+
+    res.status(201).json({ note });
   } catch {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
 
-router.put('/:id', authRequired, (req, res) => {
-  const newNote = req.body;
-  const id = req.params.id;
-  if (newNote) {
-    Notes.findById(id)
-      .then(
-        Notes.update(id, newNote)
-          .then((updated) => {
-            res
-              .status(200)
-              .json({ message: `note ${id} updated`, notes: updated[0] });
-          })
-          .catch((err) => {
-            res.status(500).json({
-              message: `Could not update notes '${id}'`,
-              error: err.message,
-            });
-          })
-      )
-      .catch((err) => {
-        res.status(404).json({
-          message: `Could not find notes '${id}'`,
-          error: err.message,
-        });
-      });
+router.put('/:id', authRequired, async (req, res) => {
+  const updatedNote = req.body;
+  const { id } = req.params;
+
+  try {
+    // Update note
+
+    let note = await Notes.findByIdAndUpdate(id, updatedNote);
+
+    note = note[0];
+
+    // If nothing is returned, the note doesn't exist
+
+    if (!note) {
+      return res
+        .status(404)
+        .json({ message: `Note with id of ${id} does not exist` });
+    }
+
+    res.status(200).json({ note });
+  } catch {
+    res.status(500).json({
+      message: `Could not update note with id of '${id}'`,
+    });
   }
 });
 

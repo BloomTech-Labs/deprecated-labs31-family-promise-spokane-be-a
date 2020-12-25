@@ -17,9 +17,8 @@ const findById = (id) => {
   return db('notes').where({ id }).first().select('*');
 };
 
-//a function to find ALL notes by family id
-const findByFamilyId = (family_id) => {
-  return db('families').where({ id: family_id }).first().select('*');
+const findByIdAndUpdate = (id, newNote) => {
+  return db('notes').where({ id }).update(newNote).returning('*');
 };
 
 const create = (note) => {
@@ -57,6 +56,6 @@ module.exports = {
   update,
   remove,
   findOrCreateNote,
-  findByFamilyId,
   findByIdAndRemove,
+  findByIdAndUpdate,
 };
