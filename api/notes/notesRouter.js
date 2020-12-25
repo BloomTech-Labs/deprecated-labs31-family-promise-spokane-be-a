@@ -33,8 +33,9 @@ router.post('/', authRequired, verifyFamilyExists, async (req, res) => {
     const note = await Notes.create(newNote);
 
     res.status(201).json({ note: note[0] });
-  } catch {
-    res.status(500).json({ message: ' server error' });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
