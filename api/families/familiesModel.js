@@ -13,7 +13,7 @@ const findById = (id) => {
 };
 
 const findFamilyByUserId = async (id) => {
-  return db('families').where({ user_id: id }).returning('*');
+  return db('families').where({ user_id: id }).first();
 };
 
 const create = (family) => {

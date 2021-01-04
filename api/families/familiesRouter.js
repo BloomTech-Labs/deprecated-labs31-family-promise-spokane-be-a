@@ -51,8 +51,8 @@ router.get('/user/:id', function (req, res) {
   const { id } = req.params;
 
   Families.findFamilyByUserId(id)
-    .then((notes) => {
-      res.status(200).json(notes);
+    .then((family) => {
+      res.status(200).json(family);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
