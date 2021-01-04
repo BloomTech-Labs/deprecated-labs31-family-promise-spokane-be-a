@@ -12,10 +12,10 @@ exports.seed = function (knex) {
             user_id: '00u2lh0bsAliwLEe75d6',
             case_number: 22,
             phone_one:
-              '{"name":"Mark", "number":"202-555-0177", "safeToLeaveMssg":true}',
+              '{"name":"Thomas Shelby", "number":"202-555-0177", "safeToLeaveMssg":true}',
             phone_two:
-              '{"name":"Jacob Smith", "number":"770-555-0114", "safeToLeaveMssg":false}',
-            safe_alternate: { name: 'Mr. Rios', number: '809-323-5959' },
+              '{"name": "Maria Shelby", "number":"770-555-0114", "safeToLeaveMssg":false}',
+            safe_alternate: { name: 'Mark Shelby', number: '809-323-5959' },
             emergencyContact:
               '{ "name": "Steve Martin", "number":"410-555-0173"}',
             vehicle:

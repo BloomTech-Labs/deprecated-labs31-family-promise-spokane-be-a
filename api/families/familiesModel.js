@@ -12,6 +12,10 @@ const findById = (id) => {
   return db('families').where({ id }).first().select('*');
 };
 
+const findFamilyByUserId = async (id) => {
+  return db('families').where({ user_id: id }).first();
+};
+
 const create = (family) => {
   return db('families').insert(family).returning('*');
 };
@@ -52,6 +56,14 @@ const findAllNotesByFamilyId = async (id, role) => {
     });
 };
 
+// return all family information with each guest and all guest information
+const findAllHouseholdInfo = (family) => {
+  return db('families')
+    .join('members', 'members.family_id', '=', 'families.id')
+    .select('*')
+    .where('family_id', family.id);
+};
+
 module.exports = {
   findAll,
   findBy,
@@ -62,4 +74,6 @@ module.exports = {
   findOrCreateFamily,
   findAllFamilyMembersById,
   findAllNotesByFamilyId,
+  findAllHouseholdInfo,
+  findFamilyByUserId,
 };

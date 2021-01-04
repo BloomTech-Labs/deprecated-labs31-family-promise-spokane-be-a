@@ -12,7 +12,7 @@ exports.seed = function (knex) {
           author_id: '00u2lgca4zIaSTPqE5d6',
           subject: 'Please be aware of sensitive information',
           content:
-            'Family came in after fire destroyed their home, youngest is still in the hostipal.',
+            'Family came in after fire destroyed their home, young Jacob is still in the recovering.',
           date: '2020-12-14T03:15:31.031Z',
           time: '2020-12-14T03:15:31.031Z',
         },
