@@ -53,12 +53,11 @@ const findAllNotesByFamilyId = async (id, role) => {
 };
 
 // return all family information with each guest and all guest information
-const findAllHouseholdInfo = (family_id) => {
-  console.log('should be a family id', family_id);
+const findAllHouseholdInfo = (family) => {
   return db('families')
-    .join('members', 'family_id', '=', 'members.family_id')
+    .join('members', 'members.family_id', '=', 'families.id')
     .select('*')
-    .where('id', family_id);
+    .where('family_id', family.id);
 };
 
 module.exports = {
