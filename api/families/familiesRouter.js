@@ -2,6 +2,7 @@ const express = require('express');
 const authRequired = require('../middleware/authRequired');
 // const checkRole = require('./familiesMiddleware');
 const Families = require('./familiesModel');
+
 const Logs = require('../guestLogs/logsModel');
 
 const router = express.Router();
@@ -39,6 +40,19 @@ router.get('/:id/members', authRequired, function (req, res) {
   Families.findAllFamilyMembersById(req.params.id)
     .then((data) => {
       res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+// this return a family object based on user Id
+router.get('/user/:id', function (req, res) {
+  const { id } = req.params;
+
+  Families.findFamilyByUserId(id)
+    .then((notes) => {
+      res.status(200).json(notes);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

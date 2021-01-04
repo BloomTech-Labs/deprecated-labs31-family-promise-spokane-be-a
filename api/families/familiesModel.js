@@ -12,6 +12,10 @@ const findById = (id) => {
   return db('families').where({ id }).first().select('*');
 };
 
+const findFamilyByUserId = async (id) => {
+  return db('families').where({ user_id: id }).returning('*');
+};
+
 const create = (family) => {
   return db('families').insert(family).returning('*');
 };
@@ -71,4 +75,5 @@ module.exports = {
   findAllFamilyMembersById,
   findAllNotesByFamilyId,
   findAllHouseholdInfo,
+  findFamilyByUserId,
 };
