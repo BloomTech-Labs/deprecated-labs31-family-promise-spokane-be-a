@@ -333,11 +333,11 @@ COPY public.families (id, user_id, case_number, phone_one, phone_two, safe_alter
 --
 
 COPY public.knex_migrations (id, name, batch, migration_time) FROM stdin;
-1	20201209123909_users.js	1	2021-01-04 13:39:03.244-06
-2	20201209130335_families.js	1	2021-01-04 13:39:03.268-06
-3	20201209155624_logs.js	1	2021-01-04 13:39:03.274-06
-4	20201209160611_members.js	1	2021-01-04 13:39:03.281-06
-5	20201209161927_notes.js	1	2021-01-04 13:39:03.287-06
+1	20201209123909_users.js	1	2021-01-04 14:05:14.887-06
+2	20201209130335_families.js	1	2021-01-04 14:05:14.893-06
+3	20201209155624_logs.js	1	2021-01-04 14:05:14.898-06
+4	20201209160611_members.js	1	2021-01-04 14:05:14.903-06
+5	20201209161927_notes.js	1	2021-01-04 14:05:14.928-06
 \.
 
 
@@ -367,9 +367,9 @@ COPY public.logs (id, supervisor_id, family_id, checked_in, on_sight, date, "tim
 --
 
 COPY public.members (id, family_id, date_of_enrollment, household_type, length_of_stay, demographics, barriers, schools, case_members, predicted_exit_destination, flag, percent_complete) FROM stdin;
-1	1	2020-10-09	Adults and Children	16 weeks	{"first_name":"Thomas","last_name":"Shelby","gender":"male","relationship":"Dad","DOB":"10-23-1972","SSN":9999,"income":20000,"employer":"union","race":["White"],"ethnicity":"Caucasian"}	{"alcohol_abuse":true,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":true,"list_indefinite_conditions":"NA","list_issues":"NA"}	{"highest_grade_completed":"12th grade","enrolled_status":false,"reason_not_enrolled":"finished","attendance_status":"inactive","school_type":"NA","school_name":"NA","mckinney_school":false}	3	permanent exit	\N	0
-2	1	2020-10-09	Adults and Children	16 weeks	{"first_name":"Jacob","last_name":"Shelby","gender":"female","relationship":"Mom","DOB":"10-23-2015","SSN":9999,"income":20000,"employer":null,"race":["White"],"ethnicity":"Caucasian"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":"NA","list_issues":"NA"}	{"highest_grade_completed":"Pre-Kindergarten","enrolled_status":true,"reason_not_enrolled":"N/A","attendance_status":"active","school_type":"elementary","school_name":"Wright","mckinney_school":false}	3	temporary exit	\N	0
-3	1	2020-10-09	Adults and Children	16 weeks	{"first_name":"Maria","last_name":"Shelby","gender":"female","relationship":"Mom","DOB":"10-23-1982","SSN":9999,"income":20000,"employer":null,"race":["White"],"ethnicity":"Caucasian"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":null,"list_issues":null}	{"highest_grade_completed":"12th grade","enrolled_status":false,"reason_not_enrolled":"finished","attendance_status":"inactive","school_type":null,"school_name":null,"mckinney_school":false}	3	temporary exit	\N	0
+1	1	2020-10-09	Adults and Children	16 weeks	{"first_name":"Thomas","last_name":"Shelby","gender":"male","relationship":"Dad","DOB":"1-03-1988","SSN":9999,"income":20000,"employer":"union","race":["White"],"ethnicity":"Caucasian"}	{"alcohol_abuse":true,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":true,"list_indefinite_conditions":"NA","list_issues":"NA"}	{"highest_grade_completed":"12th grade","enrolled_status":false,"reason_not_enrolled":"finished","attendance_status":"inactive","school_type":"NA","school_name":"NA","mckinney_school":false}	3	permanent exit	\N	0
+2	1	2020-10-09	Adults and Children	16 weeks	{"first_name":"Jacob","last_name":"Shelby","gender":"female","relationship":"Son","DOB":"10-23-2015","SSN":9999,"income":20000,"employer":null,"race":["White"],"ethnicity":"Caucasian"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":"NA","list_issues":"NA"}	{"highest_grade_completed":"Pre-Kindergarten","enrolled_status":true,"reason_not_enrolled":"N/A","attendance_status":"active","school_type":"elementary","school_name":"Wright","mckinney_school":false}	3	temporary exit	\N	0
+3	1	2020-10-09	Adults and Children	16 weeks	{"first_name":"Maria","last_name":"Shelby","gender":"female","relationship":"Mom","DOB":"12-03-1992","SSN":9999,"income":20000,"employer":null,"race":["White"],"ethnicity":"Caucasian"}	{"alcohol_abuse":false,"developmental_disabilities":false,"chronic_health_issues":false,"drug_abuse":false,"HIV_AIDs":false,"mental_illness":false,"physical_disabilities":false,"list_indefinite_conditions":null,"list_issues":null}	{"highest_grade_completed":"12th grade","enrolled_status":false,"reason_not_enrolled":"finished","attendance_status":"inactive","school_type":null,"school_name":null,"mckinney_school":false}	3	temporary exit	\N	0
 \.
 
 
