@@ -52,6 +52,14 @@ const findAllNotesByFamilyId = async (id, role) => {
     });
 };
 
+// return all family information with each guest and all guest information
+const findAllHouseholdInfo = (id) => {
+  return db('families')
+    .where({ id: id })
+    .join('members', 'id', '=', 'members.family_id')
+    .select('*');
+};
+
 module.exports = {
   findAll,
   findBy,
@@ -62,4 +70,5 @@ module.exports = {
   findOrCreateFamily,
   findAllFamilyMembersById,
   findAllNotesByFamilyId,
+  findAllHouseholdInfo,
 };
