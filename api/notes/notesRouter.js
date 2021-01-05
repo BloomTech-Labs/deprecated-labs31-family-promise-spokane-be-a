@@ -2,6 +2,7 @@ const express = require('express');
 const Notes = require('./notesModel');
 const authRequired = require('../middleware/authRequired');
 const router = express.Router();
+const Families = require('../families/familiesModel');
 
 router.get('/', authRequired, function (req, res) {
   const queries = { ...req.query };
@@ -33,20 +34,17 @@ router.get('/:id', authRequired, function (req, res) {
 
 router.post('/', authRequired, async (req, res) => {
   const notes = req.body;
+  const famId = notes['family_id'] || 0;
   if (notes) {
-    const id = notes['family_id'] || 0;
     try {
-      await Notes.findByFamilyId(id).then(async (pf) => {
-        if (pf) {
-          console.log(pf);
-          //notes not found so lets insert it
-          await Notes.create(notes).then((notes) =>
-            res.status(200).json({ message: 'notes created', notes: notes[0] })
-          );
-        } else {
-          res.status(400).json({ message: 'family id doesnt exist!' });
-        }
-      });
+      const family = await Families.findById(famId);
+
+      if (!family)
+        return res.status(404).json({ message: "family doesn't exist" });
+
+      const note = await Notes.create(notes);
+
+      res.status(200).json({ message: 'notes created', note: note[0] });
     } catch (e) {
       console.error(e);
       res.status(500).json({ message: e.message });
@@ -66,7 +64,7 @@ router.put('/:id', authRequired, (req, res) => {
           .then((updated) => {
             res
               .status(200)
-              .json({ message: `note ${id} updated`, notes: updated[0] });
+              .json({ message: `note ${id} updated`, note: updated[0] });
           })
           .catch((err) => {
             res.status(500).json({
