@@ -52,7 +52,7 @@ router.post('/', authRequired, async (req, res) => {
     const id = members['family_id'] || 0;
     try {
       await Members.findMembersByFamilyId(id).then(async (pf) => {
-        if (pf) {
+        if (pf == undefined) {
           //members not found so lets insert it
           await Members.create(members).then((members) =>
             res
