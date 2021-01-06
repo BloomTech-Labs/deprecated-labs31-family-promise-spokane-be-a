@@ -4,6 +4,7 @@ const axios = require('axios');
 const authRequired = require('../middleware/authRequired');
 const Members = require('./membersModel');
 const router = express.Router();
+const Families = require('../families/familiesModel');
 
 // checkRole.grantAccess('readAny', 'members'),
 router.get('/', authRequired, function (req, res) {
@@ -47,28 +48,22 @@ router.get('/:id', authRequired, function (req, res) {
 
 // checkRole.grantAccess('createOwn', 'members'),
 router.post('/', authRequired, async (req, res) => {
-  const members = req.body;
-  if (members) {
-    const id = members['family_id'] || 0;
-    try {
-      await Members.findMembersByFamilyId(id).then(async (pf) => {
-        if (pf == undefined) {
-          //members not found so lets insert it
-          await Members.create(members).then((members) =>
-            res
-              .status(200)
-              .json({ message: 'members created', members: members[0] })
-          );
-        } else {
-          res.status(400).json({ message: 'family id doesnt exist!' });
-        }
-      });
-    } catch (e) {
-      console.error(e);
-      res.status(500).json({ message: e.message });
+  const memberData = req.body;
+
+  const familyId = memberData['family_id'] || 0;
+
+  try {
+    const family = await Families.findById(familyId);
+
+    if (!family) {
+      return res.status(404).json({ message: "Family doesn't exist" });
     }
-  } else {
-    res.status(404).json({ message: 'members missing' });
+
+    const member = await Members.create(memberData);
+
+    res.status(201).json({ message: 'member created', member: member[0] });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 

@@ -16,6 +16,10 @@ const findByOktaId = async (okta_id) => {
   return db('users').where({ okta_id });
 };
 
+const findFamilyByUserId = (user_id) => {
+  return db('families').where({ user_id }).returning('*');
+};
+
 const create = async (profile) => {
   return db('users').insert(profile).returning('*');
 };
@@ -49,4 +53,5 @@ module.exports = {
   update,
   remove,
   findOrCreateProfile,
+  findFamilyByUserId,
 };

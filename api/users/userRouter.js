@@ -152,6 +152,25 @@ router.get(
   }
 );
 
+router.get('/:id/family', authRequired, async (req, res) => {
+  console.log('hit');
+  try {
+    const family = await Users.findFamilyByUserId(req.params.id);
+
+    console.log(family);
+
+    if (!family) {
+      res.status(404).json({ message: 'Unable to find family for that user' });
+    }
+
+    res.status(200).json({
+      family: family[0],
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 /**
  * @swagger
  * /profile:
