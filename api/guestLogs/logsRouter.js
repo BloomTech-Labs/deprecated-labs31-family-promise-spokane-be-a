@@ -261,7 +261,7 @@ router.put('/:id', (req, res) => {
  *    security:
  *      - okta: []
  *    tags:
- *      -Logs
+ *      - Logs
  *    parameters:
  *      - $ref: '#/components/parameters/logsId'
  *    responses:

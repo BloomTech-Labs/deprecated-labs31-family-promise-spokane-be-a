@@ -13,6 +13,7 @@ const Families = require('../families/familiesModel');
  *    Members:
  *      type: array
  *      required:
+ *        - id
  *        - family_id
  *        - date_of_enrollment
  *        - household_type
@@ -25,6 +26,8 @@ const Families = require('../families/familiesModel');
  *        - flag
  *        - percent_complete
  *      properties:
+ *        id:
+ *          type: integer
  *        family_id:
  *          type: integer
  *        date_of_enrollment:
@@ -67,7 +70,8 @@ const Families = require('../families/familiesModel');
  *              items:
  *                $ref: '#/components/schemas/Members'
  *              example:
- *                - family_id: 1
+ *                - id: 1
+ *                  family_id: 1
  *                  date_of_enrollment: '2020-10-09T17:38:31.123Z'
  *                  household_type: Adults and Children
  *                  length_of_stay: 16 weeks
@@ -133,9 +137,9 @@ router.get('/', authRequired, function (req, res) {
  *      in: path
  *      description: ID of the Member to return
  *      required: true
- *      example: 00uhjfrwdWAQvD8JV4x6
+ *      example: 1
  *      schema:
- *        type: string
+ *        type: integer
  *
  * /members/{id}:
  *  get:
@@ -146,10 +150,10 @@ router.get('/', authRequired, function (req, res) {
  *    tags:
  *      - Members
  *    parameters:
- *      - $ref: '#/components/parameters/familyId'
+ *      - $ref: '#/components/parameters/memberId'
  *    responses:
  *      200:
- *        description: A family object
+ *        description: A member object
  *        content:
  *          application/json:
  *            schema:

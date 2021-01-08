@@ -259,7 +259,7 @@ router.put('/:id', authRequired, (req, res) => {
  *    security:
  *      - okta: []
  *    tags:
- *      -Notes
+ *      - Notes
  *    parameters:
  *      - $ref: '#/components/parameters/notesId'
  *    responses:

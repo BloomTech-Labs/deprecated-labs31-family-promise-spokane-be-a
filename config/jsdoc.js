@@ -2,10 +2,10 @@ module.exports = {
   definition: {
     openapi: '3.0.1',
     info: {
-      title: 'Lambda Labs Starter API',
+      title: 'Family Promise Of Spokane Intake Form API',
       version: '1.0.0',
       description:
-        'A basic API server to act as a starting point for Labs projects',
+        'API endpoint documentation for back-end server of application',
       license: {
         name: 'MIT',
         url: 'https://en.wikipedia.org/wiki/MIT_License',
@@ -37,10 +37,6 @@ module.exports = {
         description: 'Operations for logs',
       },
     ],
-    externalDocs: {
-      description: 'Data Science scaffold service docs',
-      url: 'https://ds.labsscaffolding.dev/',
-    },
     components: {
       securitySchemes: {
         okta: {
