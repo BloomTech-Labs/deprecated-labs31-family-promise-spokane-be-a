@@ -16,38 +16,40 @@ router.get('/me', authRequired, function (req, res) {
  * @swagger
  * components:
  *  schemas:
- *    Profile:
+ *    Users:
  *      type: object
  *      required:
  *        - id
  *        - email
- *        - name
- *        - avatarUrl
+ *        - first_name
+ *        - last_name
+ *        - role
  *      properties:
  *        id:
  *          type: string
  *          description: This is a foreign key (the okta user ID)
  *        email:
  *          type: string
- *        name:
+ *        first_name:
  *          type: string
- *        avatarUrl:
+ *        last_name:
  *          type: string
- *          description: public url of profile avatar
+ *        role:
+ *          type: string
  *      example:
- *        id: '00uhjfrwdWAQvD8JV4x6'
- *        email: 'frank@example.com'
- *        name: 'Frank Martinez'
- *        avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg'
- *
- * /Users:
+ *        - id: '00u2lgpiiPT4y3njs5d6'
+ *          email: 'executivedirector@gmail.com'
+ *          first_name: 'Freddie'
+ *          last_name: 'Thorne'
+ *          role: 'executive_director'
+ * /users:
  *  get:
  *    description: Returns a list of Users
- *    summary: Get a list of all Users
+ *    summary: Get a list of all users
  *    security:
  *      - okta: []
  *    tags:
- *      - profile
+ *      - User
  *    responses:
  *      200:
  *        description: array of Users
@@ -56,16 +58,33 @@ router.get('/me', authRequired, function (req, res) {
  *            schema:
  *              type: array
  *              items:
- *                $ref: '#/components/schemas/Profile'
+ *                $ref: '#/components/schemas/Users'
  *              example:
- *                - id: '00uhjfrwdWAQvD8JV4x6'
- *                  email: 'frank@example.com'
- *                  name: 'Frank Martinez'
- *                  avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg'
- *                - id: '013e4ab94d96542e791f'
- *                  email: 'cathy@example.com'
- *                  name: 'Cathy Warmund'
- *                  avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/geneseleznev/128.jpg'
+ *                 - id: '00u2lgpiiPT4y3njs5d6'
+ *                   email: 'executivedirector@gmail.com'
+ *                   first_name: 'Freddie'
+ *                   last_name: 'Thorne'
+ *                   role: 'executive_director'
+ *                 - id: '00u2lhigtb8N47Jii5d6'
+ *                   email: 'supervisor@gmail.com'
+ *                   first_name: 'Arthur'
+ *                   last_name: 'Shelby'
+ *                   role: 'supervisor'
+ *                 - id: '00u2lgca4zIaSTPqE5d6'
+ *                   email: 'casemanager@gmail.com'
+ *                   first_name: 'Linda'
+ *                   last_name: 'Shelby'
+ *                   role: 'case_manager'
+ *                 - id: '00u2lh0bsAliwLEe75d6'
+ *                   email: 'guest@gmail.com'
+ *                   first_name: 'Thomas'
+ *                   last_name: 'Shelby'
+ *                   role: 'guest'
+ *                 - id: '00u2lhpc533MESNSA5d6'
+ *                   email: 'pending@gmail.com'
+ *                   first_name: 'Ruby'
+ *                   last_name: 'Rose'
+ *                   role: 'pending'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      403:
@@ -101,36 +120,36 @@ router.post('/', authRequired, function (req, res) {
  * @swagger
  * components:
  *  parameters:
- *    profileId:
+ *    userId:
  *      name: id
  *      in: path
- *      description: ID of the profile to return
+ *      description: ID of the user to return
  *      required: true
  *      example: 00uhjfrwdWAQvD8JV4x6
  *      schema:
  *        type: string
  *
- * /profile/{id}:
+ * /users/{id}:
  *  get:
  *    description: Find Users by ID
- *    summary: Returns a single profile
+ *    summary: Returns a single user
  *    security:
  *      - okta: []
  *    tags:
- *      - profile
+ *      - User
  *    parameters:
- *      - $ref: '#/components/parameters/profileId'
+ *      - $ref: '#/components/parameters/userId'
  *    responses:
  *      200:
- *        description: A profile object
+ *        description: A user object
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Profile'
+ *              $ref: '#/components/schemas/Users'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
- *        description: 'Profile not found'
+ *        description: 'User not found'
  */
 router.get(
   '/:id',
@@ -152,6 +171,41 @@ router.get(
   }
 );
 
+/**
+ * @swagger
+ * components:
+ *  parameters:
+ *    userId:
+ *      name: id
+ *      in: path
+ *      description: ID of the user to return
+ *      required: true
+ *      example: 00uhjfrwdWAQvD8JV4x6
+ *      schema:
+ *        type: string
+ *
+ * /users/{id}/family:
+ *  get:
+ *    description: Find families by ID of user
+ *    summary: Returns a family object
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - User
+ *    parameters:
+ *      - $ref: '#/components/parameters/userId'
+ *    responses:
+ *      200:
+ *        description: A family object
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Users'
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ *      404:
+ *        description: 'User not found'
+ */
 router.get('/:id/family', authRequired, async (req, res) => {
   console.log('hit');
   try {
@@ -173,28 +227,28 @@ router.get('/:id/family', authRequired, async (req, res) => {
 
 /**
  * @swagger
- * /profile:
+ * /users:
  *  post:
- *    summary: Add a profile
+ *    summary: Add a user
  *    security:
  *      - okta: []
  *    tags:
- *      - profile
+ *      - User
  *    requestBody:
- *      description: Profile object to to be added
+ *      description: user object to to be added
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Profile'
+ *            $ref: '#/components/schemas/Users'
  *    responses:
  *      400:
  *        $ref: '#/components/responses/BadRequest'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
- *        description: 'Profile not found'
+ *        description: 'User not found'
  *      200:
- *        description: A profile object
+ *        description: A user object
  *        content:
  *          application/json:
  *            schema:
@@ -204,32 +258,32 @@ router.get('/:id/family', authRequired, async (req, res) => {
  *                  type: string
  *                  description: A message about the result
  *                  example: profile created
- *                profile:
- *                  $ref: '#/components/schemas/Profile'
+ *                users:
+ *                  $ref: '#/components/schemas/Users'
  */
 
 /**
  * @swagger
- * /profile:
+ * /users/{id}:
  *  put:
- *    summary: Update a profile
+ *    summary: Update a user
  *    security:
  *      - okta: []
  *    tags:
- *      - profile
+ *      - User
  *    requestBody:
- *      description: Profile object to to be updated
+ *      description: User object to  be updated
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Profile'
+ *            $ref: '#/components/schemas/Users'
  *    responses:
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
  *        $ref: '#/components/responses/NotFound'
  *      200:
- *        description: A profile object
+ *        description: A user object
  *        content:
  *          application/json:
  *            schema:
@@ -238,8 +292,8 @@ router.get('/:id/family', authRequired, async (req, res) => {
  *                message:
  *                  type: string
  *                  description: A message about the result
- *                  example: profile created
- *                profile:
+ *                  example: user updated
+ *                User:
  *                  $ref: '#/components/schemas/Profile'
  */
 router.put(
@@ -274,22 +328,22 @@ router.put(
 );
 /**
  * @swagger
- * /profile/{id}:
+ * /users/{id}:
  *  delete:
- *    summary: Remove a profile
+ *    summary: Remove a user
  *    security:
  *      - okta: []
  *    tags:
- *      - profile
+ *      - User
  *    parameters:
- *      - $ref: '#/components/parameters/profileId'
+ *      - $ref: '#/components/parameters/userId'
  *    responses:
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
  *        $ref: '#/components/responses/NotFound'
  *      200:
- *        description: A profil object
+ *        description: A user object
  *        content:
  *          application/json:
  *            schema:
@@ -298,9 +352,9 @@ router.put(
  *                message:
  *                  type: string
  *                  description: A message about the result
- *                  example: Profile '00uhjfrwdWAQvD8JV4x6' was deleted.
- *                profile:
- *                  $ref: '#/components/schemas/Profile'
+ *                  example: User '00uhjfrwdWAQvD8JV4x6' was deleted.
+ *                User:
+ *                  $ref: '#/components/schemas/Users'
  */
 router.delete('/:id', restrictTo('executive_director'), (req, res) => {
   const id = req.params.id;
@@ -309,12 +363,12 @@ router.delete('/:id', restrictTo('executive_director'), (req, res) => {
       Users.remove(profile.id).then(() => {
         res
           .status(200)
-          .json({ message: `Profile '${id}' was deleted.`, profile: profile });
+          .json({ message: `User '${id}' was deleted.`, profile: profile });
       });
     });
   } catch (err) {
     res.status(500).json({
-      message: `Could not delete profile with ID: ${id}`,
+      message: `Could not delete user with ID: ${id}`,
       error: err.message,
     });
   }

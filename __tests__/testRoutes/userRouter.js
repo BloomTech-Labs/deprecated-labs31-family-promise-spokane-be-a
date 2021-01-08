@@ -16,30 +16,32 @@ router.get('/me', function (req, res) {
  * @swagger
  * components:
  *  schemas:
- *    Profile:
+ *    Users:
  *      type: object
  *      required:
  *        - id
  *        - email
- *        - name
- *        - avatarUrl
+ *        - first_name
+ *        - last_name
+ *        - role
  *      properties:
  *        id:
  *          type: string
  *          description: This is a foreign key (the okta user ID)
  *        email:
  *          type: string
- *        name:
+ *        first_name:
  *          type: string
- *        avatarUrl:
+ *        last_name:
  *          type: string
- *          description: public url of profile avatar
+ *        role:
+ *          type: string
  *      example:
- *        id: '00uhjfrwdWAQvD8JV4x6'
- *        email: 'frank@example.com'
- *        name: 'Frank Martinez'
- *        avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg'
- *
+ *       id: '00u2lgpiiPT4y3njs5d6',
+ *       email: 'executivedirector@gmail.com',
+ *       first_name: 'Freddie',
+ *       last_name: 'Thorne',
+ *       role: 'executive_director',
  * /Users:
  *  get:
  *    description: Returns a list of Users
