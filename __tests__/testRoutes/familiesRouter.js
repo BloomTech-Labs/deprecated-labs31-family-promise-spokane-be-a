@@ -1,14 +1,14 @@
 const express = require('express');
-const authRequired = require('../middleware/authRequired');
+const testRequired = require('../testMiddleWare');
 // const checkRole = require('./familiesMiddleware');
-const Families = require('./familiesModel');
+const Families = require('../../api/families/familiesModel');
 
-const Logs = require('../guestLogs/logsModel');
+const Logs = require('../../api/guestLogs/logsModel');
 
 const router = express.Router();
 
 //  checkRole.grantAccess('readAny', 'families'),
-router.get('/', authRequired, function (req, res) {
+router.get('/', testRequired, function (req, res) {
   Families.findAll()
     .then((families) => {
       res.status(200).json(families);
@@ -20,7 +20,7 @@ router.get('/', authRequired, function (req, res) {
 });
 
 // checkRole.grantAccess('readOwn', 'families'),
-router.get('/:id', authRequired, function (req, res) {
+router.get('/:id', testRequired, function (req, res) {
   const id = String(req.params.id);
   Families.findById(id)
     .then((families) => {
@@ -36,7 +36,7 @@ router.get('/:id', authRequired, function (req, res) {
 });
 
 // this returns all members by family id
-router.get('/:id/members', authRequired, function (req, res) {
+router.get('/:id/members', testRequired, function (req, res) {
   Families.findAllFamilyMembersById(req.params.id)
     .then((data) => {
       res.status(200).json(data);
@@ -72,7 +72,7 @@ router.get('/:id/household', function (req, res) {
     });
 });
 
-router.get('/:id/notes', authRequired, function (req, res) {
+router.get('/:id/notes', testRequired, function (req, res) {
   const { role } = req.user;
   const { id } = req.params;
 
@@ -86,7 +86,7 @@ router.get('/:id/notes', authRequired, function (req, res) {
 });
 
 //get all logs by family id
-router.get('/:id/logs', authRequired, function (req, res) {
+router.get('/:id/logs', testRequired, function (req, res) {
   const family_id = String(req.params.id);
   console.log(family_id);
   Logs.findByFamilyId(family_id)
@@ -103,7 +103,7 @@ router.get('/:id/logs', authRequired, function (req, res) {
 });
 
 // checkRole.grantAccess('createOwn', 'families'),
-router.post('/', async (req, res) => {
+router.post('/', testRequired, async (req, res) => {
   const families = req.body;
   if (families) {
     const user_id = families.id || 0;
@@ -160,7 +160,7 @@ router.put('/', (req, res) => {
 });
 
 // checkRole.grantAccess('deleteAny', 'families'),
-router.delete('/:id', authRequired, (req, res) => {
+router.delete('/:id', testRequired, (req, res) => {
   const id = req.params.id;
   try {
     Families.findById(id).then((families) => {
