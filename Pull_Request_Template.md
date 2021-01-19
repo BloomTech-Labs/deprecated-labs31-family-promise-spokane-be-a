@@ -9,9 +9,12 @@ How many files and/or lines were changed?
 ## Type of Change
 ​
 Types of Change:
+
 - [] New feature
 - [] Refactoring / Bug fix
-- [] Documentation update 
+- [] Documentation update
+- [] Executive Change (technical decision change overwrite)
+    - Reason for change (required):
 ​
 ​
 ## Testing
@@ -24,7 +27,8 @@ Types of Change:
 ## Completeness
 Is this feature complete
 - [] Feature Complete
-- [] Feature Incomplete, user story/trello card linked
+- [] Feature Incomplete
+- [] User story/trello card linked here
 ​
 # PR Requirements
 - [] Clean and concise commenting
