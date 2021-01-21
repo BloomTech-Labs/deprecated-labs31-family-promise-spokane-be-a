@@ -29,6 +29,8 @@ exports.up = function (knex) {
     tbl.date('date');
 
     tbl.datetime('time');
+
+    tbl.integer('beds_reserved');
   });
 };
 
