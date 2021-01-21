@@ -1,7 +1,7 @@
 /* eslint-disable no-debugger, no-console */
 exports.up = function (knex) {
   return knex.schema.createTable('logs', (tbl) => {
-    tbl.increments();
+    tbl.increments('reservation_id');
 
     tbl
       .string('supervisor_id')
@@ -24,13 +24,17 @@ exports.up = function (knex) {
 
     tbl.boolean('checked_in');
 
-    tbl.boolean('on_sight');
+    tbl.boolean('on_site_7pm');
+
+    tbl.boolean('on_site_10pm');
 
     tbl.date('date');
 
     tbl.datetime('time');
 
     tbl.integer('beds_reserved');
+
+    tbl.integer('actual_beds_reserved')
   });
 };
 
