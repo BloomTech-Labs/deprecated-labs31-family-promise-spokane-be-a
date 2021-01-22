@@ -1,11 +1,11 @@
 const express = require('express');
-const authRequired = require('../middleware/authRequired');
+// const authRequired = require('../middleware/authRequired');
 // const checkRole = require('./userMiddleware')
-const Users = require('./userModel');
+const Users = require('../../api/users/userModel');
 const router = express.Router();
-const restrictTo = require('../middleware/restrictTo');
+// const restrictTo = require('../middleware/restrictTo');
 
-router.get('/me', authRequired, function (req, res) {
+router.get('/me', function (req, res) {
   const { user } = req;
   res.status(200).json({
     user,
@@ -37,19 +37,19 @@ router.get('/me', authRequired, function (req, res) {
  *        role:
  *          type: string
  *      example:
- *        - id: '00u2lgpiiPT4y3njs5d6'
- *          email: 'executivedirector@gmail.com'
- *          first_name: 'Freddie'
- *          last_name: 'Thorne'
- *          role: 'executive_director'
- * /users:
+ *       id: '00u2lgpiiPT4y3njs5d6',
+ *       email: 'executivedirector@gmail.com',
+ *       first_name: 'Freddie',
+ *       last_name: 'Thorne',
+ *       role: 'executive_director',
+ * /Users:
  *  get:
  *    description: Returns a list of Users
- *    summary: Get a list of all users
+ *    summary: Get a list of all Users
  *    security:
  *      - okta: []
  *    tags:
- *      - User
+ *      - profile
  *    responses:
  *      200:
  *        description: array of Users
@@ -58,55 +58,33 @@ router.get('/me', authRequired, function (req, res) {
  *            schema:
  *              type: array
  *              items:
- *                $ref: '#/components/schemas/Users'
+ *                $ref: '#/components/schemas/Profile'
  *              example:
- *                 - id: '00u2lgpiiPT4y3njs5d6'
- *                   email: 'executivedirector@gmail.com'
- *                   first_name: 'Freddie'
- *                   last_name: 'Thorne'
- *                   role: 'executive_director'
- *                 - id: '00u2lhigtb8N47Jii5d6'
- *                   email: 'supervisor@gmail.com'
- *                   first_name: 'Arthur'
- *                   last_name: 'Shelby'
- *                   role: 'supervisor'
- *                 - id: '00u2lgca4zIaSTPqE5d6'
- *                   email: 'casemanager@gmail.com'
- *                   first_name: 'Linda'
- *                   last_name: 'Shelby'
- *                   role: 'case_manager'
- *                 - id: '00u2lh0bsAliwLEe75d6'
- *                   email: 'guest@gmail.com'
- *                   first_name: 'Thomas'
- *                   last_name: 'Shelby'
- *                   role: 'guest'
- *                 - id: '00u2lhpc533MESNSA5d6'
- *                   email: 'pending@gmail.com'
- *                   first_name: 'Ruby'
- *                   last_name: 'Rose'
- *                   role: 'pending'
+ *                - id: '00uhjfrwdWAQvD8JV4x6'
+ *                  email: 'frank@example.com'
+ *                  name: 'Frank Martinez'
+ *                  avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg'
+ *                - id: '013e4ab94d96542e791f'
+ *                  email: 'cathy@example.com'
+ *                  name: 'Cathy Warmund'
+ *                  avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/geneseleznev/128.jpg'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      403:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
-router.get(
-  '/',
-  authRequired,
-  restrictTo('executive_director', 'case_manager', 'supervisor'),
-  function (req, res) {
-    Users.findAll()
-      .then((profiles) => {
-        res.status(200).json(profiles);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json({ message: err.message });
-      });
-  }
-);
+router.get('/', function (req, res) {
+  Users.findAll()
+    .then((profiles) => {
+      res.status(200).json(profiles);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ message: err.message });
+    });
+});
 
-router.post('/', authRequired, function (req, res) {
+router.post('/', function (req, res) {
   Users.findOrCreateProfile(req.body)
     .then(() => {
       res.status(201).json({ message: 'Profile created' });
@@ -120,41 +98,40 @@ router.post('/', authRequired, function (req, res) {
  * @swagger
  * components:
  *  parameters:
- *    userId:
+ *    profileId:
  *      name: id
  *      in: path
- *      description: ID of the user to return
+ *      description: ID of the profile to return
  *      required: true
  *      example: 00uhjfrwdWAQvD8JV4x6
  *      schema:
  *        type: string
  *
- * /users/{id}:
+ * /profile/{id}:
  *  get:
  *    description: Find Users by ID
- *    summary: Returns a single user
+ *    summary: Returns a single profile
  *    security:
  *      - okta: []
  *    tags:
- *      - User
+ *      - profile
  *    parameters:
- *      - $ref: '#/components/parameters/userId'
+ *      - $ref: '#/components/parameters/profileId'
  *    responses:
  *      200:
- *        description: A user object
+ *        description: A profile object
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Users'
+ *              $ref: '#/components/schemas/Profile'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
- *        description: 'User not found'
+ *        description: 'Profile not found'
  */
 router.get(
   '/:id',
-  authRequired,
-  restrictTo('executive_director', 'case_manager', 'supervisor'),
+
   function (req, res) {
     const id = String(req.params.id);
     Users.findById(id)
@@ -171,42 +148,7 @@ router.get(
   }
 );
 
-/**
- * @swagger
- * components:
- *  parameters:
- *    userId:
- *      name: id
- *      in: path
- *      description: ID of the user to return
- *      required: true
- *      example: 00uhjfrwdWAQvD8JV4x6
- *      schema:
- *        type: string
- *
- * /users/{id}/family:
- *  get:
- *    description: Find families by ID of user
- *    summary: Returns a family object
- *    security:
- *      - okta: []
- *    tags:
- *      - User
- *    parameters:
- *      - $ref: '#/components/parameters/userId'
- *    responses:
- *      200:
- *        description: A family object
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Users'
- *      401:
- *        $ref: '#/components/responses/UnauthorizedError'
- *      404:
- *        description: 'User not found'
- */
-router.get('/:id/family', authRequired, async (req, res) => {
+router.get('/:id/family', async (req, res) => {
   console.log('hit');
   try {
     const family = await Users.findFamilyByUserId(req.params.id);
@@ -227,28 +169,28 @@ router.get('/:id/family', authRequired, async (req, res) => {
 
 /**
  * @swagger
- * /users:
+ * /profile:
  *  post:
- *    summary: Add a user
+ *    summary: Add a profile
  *    security:
  *      - okta: []
  *    tags:
- *      - User
+ *      - profile
  *    requestBody:
- *      description: user object to to be added
+ *      description: Profile object to to be added
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Users'
+ *            $ref: '#/components/schemas/Profile'
  *    responses:
  *      400:
  *        $ref: '#/components/responses/BadRequest'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
- *        description: 'User not found'
+ *        description: 'Profile not found'
  *      200:
- *        description: A user object
+ *        description: A profile object
  *        content:
  *          application/json:
  *            schema:
@@ -258,32 +200,32 @@ router.get('/:id/family', authRequired, async (req, res) => {
  *                  type: string
  *                  description: A message about the result
  *                  example: profile created
- *                users:
- *                  $ref: '#/components/schemas/Users'
+ *                profile:
+ *                  $ref: '#/components/schemas/Profile'
  */
 
 /**
  * @swagger
- * /users/{id}:
+ * /profile:
  *  put:
- *    summary: Update a user
+ *    summary: Update a profile
  *    security:
  *      - okta: []
  *    tags:
- *      - User
+ *      - profile
  *    requestBody:
- *      description: User object to  be updated
+ *      description: Profile object to to be updated
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Users'
+ *            $ref: '#/components/schemas/Profile'
  *    responses:
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
  *        $ref: '#/components/responses/NotFound'
  *      200:
- *        description: A user object
+ *        description: A profile object
  *        content:
  *          application/json:
  *            schema:
@@ -292,14 +234,13 @@ router.get('/:id/family', authRequired, async (req, res) => {
  *                message:
  *                  type: string
  *                  description: A message about the result
- *                  example: user updated
- *                User:
+ *                  example: profile created
+ *                profile:
  *                  $ref: '#/components/schemas/Profile'
  */
 router.put(
   '/:id',
-  authRequired,
-  restrictTo('executive_director', 'case_manager', 'supervisor'),
+
   (req, res) => {
     const profile = req.body;
     const { id } = req.params;
@@ -328,22 +269,22 @@ router.put(
 );
 /**
  * @swagger
- * /users/{id}:
+ * /profile/{id}:
  *  delete:
- *    summary: Remove a user
+ *    summary: Remove a profile
  *    security:
  *      - okta: []
  *    tags:
- *      - User
+ *      - profile
  *    parameters:
- *      - $ref: '#/components/parameters/userId'
+ *      - $ref: '#/components/parameters/profileId'
  *    responses:
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
  *        $ref: '#/components/responses/NotFound'
  *      200:
- *        description: A user object
+ *        description: A profil object
  *        content:
  *          application/json:
  *            schema:
@@ -352,23 +293,23 @@ router.put(
  *                message:
  *                  type: string
  *                  description: A message about the result
- *                  example: User '00uhjfrwdWAQvD8JV4x6' was deleted.
- *                User:
- *                  $ref: '#/components/schemas/Users'
+ *                  example: Profile '00uhjfrwdWAQvD8JV4x6' was deleted.
+ *                profile:
+ *                  $ref: '#/components/schemas/Profile'
  */
-router.delete('/:id', restrictTo('executive_director'), (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id;
   try {
     Users.findById(id).then((profile) => {
       Users.remove(profile.id).then(() => {
         res
           .status(200)
-          .json({ message: `User '${id}' was deleted.`, profile: profile });
+          .json({ message: `Profile '${id}' was deleted.`, profile: profile });
       });
     });
   } catch (err) {
     res.status(500).json({
-      message: `Could not delete user with ID: ${id}`,
+      message: `Could not delete profile with ID: ${id}`,
       error: err.message,
     });
   }

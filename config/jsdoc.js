@@ -2,10 +2,10 @@ module.exports = {
   definition: {
     openapi: '3.0.1',
     info: {
-      title: 'Lambda Labs Starter API',
+      title: 'Family Promise Of Spokane Intake Form API',
       version: '1.0.0',
       description:
-        'A basic API server to act as a starting point for Labs projects',
+        'API endpoint documentation for back-end server of application',
       license: {
         name: 'MIT',
         url: 'https://en.wikipedia.org/wiki/MIT_License',
@@ -17,18 +17,26 @@ module.exports = {
         description: 'Everything about your status',
       },
       {
-        name: 'profile',
-        description: 'Operations for profile',
+        name: 'User',
+        description: 'Operations for users',
       },
       {
-        name: 'data',
-        description: 'Operations for data science service',
+        name: 'Families',
+        description: 'Operations for families',
+      },
+      {
+        name: 'Members',
+        description: 'Operations for members',
+      },
+      {
+        name: 'Notes',
+        description: 'Operations for notes',
+      },
+      {
+        name: 'Logs',
+        description: 'Operations for logs',
       },
     ],
-    externalDocs: {
-      description: 'Data Science scaffold service docs',
-      url: 'https://ds.labsscaffolding.dev/',
-    },
     components: {
       securitySchemes: {
         okta: {
@@ -42,7 +50,7 @@ module.exports = {
           description: 'Access token is missing or invalid',
         },
         BadRequest: {
-          description: 'Bad request. profile already exists',
+          description: 'Bad request. user already exists',
         },
         NotFound: {
           description: 'Not Found',
