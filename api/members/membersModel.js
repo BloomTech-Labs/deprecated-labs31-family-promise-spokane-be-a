@@ -27,7 +27,6 @@ const create = async (member) => {
 };
 
 const update = (id, member) => {
-  console.log(member);
   return db('members').where({ id: id }).first().update(member).returning('*');
 };
 
