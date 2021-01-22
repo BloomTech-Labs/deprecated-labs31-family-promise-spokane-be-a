@@ -78,18 +78,18 @@ router.put('/:id', authRequired, (req, res) => {
           .then((updated) => {
             res
               .status(200)
-              .json({ message: 'members created', members: updated[0] });
+              .json({ message: 'member updated', members: updated[0] });
           })
           .catch((err) => {
             res.status(500).json({
-              message: `Could not update members '${id}'`,
+              message: `Could not update member '${id}'`,
               error: err.message,
             });
           })
       )
       .catch((err) => {
         res.status(404).json({
-          message: `Could not find members '${id}'`,
+          message: `Could not find member '${id}'`,
           error: err.message,
         });
       });
@@ -104,12 +104,12 @@ router.delete('/:id', authRequired, (req, res) => {
       Members.remove(members['family_id']).then(() => {
         res
           .status(200)
-          .json({ message: `members '${id}' was deleted.`, members: members });
+          .json({ message: `member '${id}' was deleted.`, members: members });
       });
     });
   } catch (err) {
     res.status(500).json({
-      message: `Could not delete members with ID: ${id}`,
+      message: `Could not delete member with ID: ${id}`,
       error: err.message,
     });
   }

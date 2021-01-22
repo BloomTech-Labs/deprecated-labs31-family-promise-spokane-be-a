@@ -1,5 +1,6 @@
 const express = require('express');
 const authRequired = require('../middleware/authRequired');
+const restrictTo = require('../middleware/restrictTo');
 // const checkRole = require('./familiesMiddleware');
 const Families = require('./familiesModel');
 
@@ -8,7 +9,7 @@ const Logs = require('../guestLogs/logsModel');
 const router = express.Router();
 
 //  checkRole.grantAccess('readAny', 'families'),
-router.get('/', authRequired, function (req, res) {
+router.get('/', authRequired, restrictTo, function (req, res) {
   Families.findAll()
     .then((families) => {
       res.status(200).json(families);
@@ -27,7 +28,7 @@ router.get('/:id', authRequired, function (req, res) {
       if (families) {
         res.status(200).json(families);
       } else {
-        res.status(404).json({ error: 'Families Not Found' });
+        res.status(404).json({ error: 'Family Not Found' });
       }
     })
     .catch((err) => {
@@ -114,10 +115,10 @@ router.post('/', authRequired, async (req, res) => {
           await Families.create(families).then((families) =>
             res
               .status(200)
-              .json({ message: 'families created', families: families[0] })
+              .json({ message: 'family created', families: families[0] })
           );
         } else {
-          res.status(400).json({ message: 'families already exists!' });
+          res.status(400).json({ message: 'family already exists!' });
         }
       });
     } catch (e) {
@@ -125,13 +126,13 @@ router.post('/', authRequired, async (req, res) => {
       res.status(500).json({ message: e.message });
     }
   } else {
-    res.status(404).json({ message: 'families missing' });
+    res.status(404).json({ message: 'family missing' });
   }
 });
 
 // not found
 // checkRole.grantAccess('updateOwn', 'families'),
-router.put('/', (req, res) => {
+router.put('/:id', authRequired, (req, res) => {
   const families = req.body;
   const id = req.params.id;
   if (families) {
@@ -141,18 +142,18 @@ router.put('/', (req, res) => {
           .then((updated) => {
             res
               .status(200)
-              .json({ message: 'families created', families: updated[0] });
+              .json({ message: 'Family updated', families: updated[0] });
           })
           .catch((err) => {
             res.status(500).json({
-              message: `Could not update families '${id}'`,
+              message: `Could not update family '${id}'`,
               error: err.message,
             });
           })
       )
       .catch((err) => {
         res.status(404).json({
-          message: `Could not find families '${id}'`,
+          message: `Could not find family '${id}'`,
           error: err.message,
         });
       });
@@ -166,14 +167,14 @@ router.delete('/:id', authRequired, (req, res) => {
     Families.findById(id).then((families) => {
       Families.remove(families.id).then(() => {
         res.status(200).json({
-          message: `families '${id}' was deleted!`,
+          message: `family '${id}' was deleted!`,
           families: families,
         });
       });
     });
   } catch (err) {
     res.status(500).json({
-      message: `Could not delete families with ID: ${id}`,
+      message: `Could not delete family with ID: ${id}`,
       error: err.message,
     });
   }
