@@ -36,7 +36,7 @@ exports.up = function (knex) {
 
     tbl.jsonb('domestic_violence_info');
 
-    tbl.integer('pets');
+    tbl.jsonb('pets');
 
     tbl.string('avatar_url');
 

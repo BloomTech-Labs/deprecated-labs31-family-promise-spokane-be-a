@@ -29,7 +29,7 @@ exports.seed = function (knex) {
               '{"has_insurance": true, "members_covered": 2, "health_insurance_type": "Medicare", "pregnancies": false}',
             domestic_violence_info:
               '{ "fleeing_dv": false, "anonymity_preferred": true, "date_last_incident": false, "has_court_order": false, "YWCA_contacted": false }',
-            pets: 0,
+            pets: '{"shelter": false, "amount": {"value1": false, "value2": false}, "dog": false, "cat": false, "service_animal": false, "support_animal": false, "name_one": null, "name_two": null}',
             avatar_url:
               'https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg',
             percent_complete: 0,
