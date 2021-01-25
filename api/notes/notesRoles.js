@@ -4,7 +4,7 @@ const AccessControl = require('accesscontrol');
 const ac = new AccessControl();
 
 exports.roles = (function () {
-  ac.grant('guest').readOwn('notes').updateOwn('notes');
+  ac.grant('guest').readOwn('notes');
 
   ac.grant('case-manager').extend('guest').readAny('notes').updateAny('notes');
 
