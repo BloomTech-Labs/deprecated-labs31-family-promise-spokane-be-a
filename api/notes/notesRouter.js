@@ -3,8 +3,9 @@ const Notes = require('./notesModel');
 const authRequired = require('../middleware/authRequired');
 const router = express.Router();
 const Families = require('../families/familiesModel');
+const restrictTo = require('../middleware/restrictTo');
 
-router.get('/', authRequired, function (req, res) {
+router.get('/', authRequired, restrictTo('case_manager'), function (req, res) {
   const queries = { ...req.query };
 
   Notes.findAll(queries)
@@ -17,44 +18,54 @@ router.get('/', authRequired, function (req, res) {
     });
 });
 
-router.get('/:id', authRequired, function (req, res) {
-  const { id } = req.params;
-  Notes.findById(id)
-    .then((notes) => {
-      if (notes) {
-        res.status(200).json(notes);
-      } else {
-        res.status(404).json({ error: 'notes Not Found' });
-      }
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
-
-router.post('/', authRequired, async (req, res) => {
-  const notes = req.body;
-  const famId = notes['family_id'] || 0;
-  if (notes) {
-    try {
-      const family = await Families.findById(famId);
-
-      if (!family)
-        return res.status(404).json({ message: "family doesn't exist" });
-
-      const note = await Notes.create(notes);
-
-      res.status(200).json({ message: 'notes created', note: note[0] });
-    } catch (e) {
-      console.error(e);
-      res.status(500).json({ message: e.message });
-    }
-  } else {
-    res.status(404).json({ message: 'notes missing' });
+router.get(
+  '/:id',
+  authRequired,
+  restrictTo('case_manager'),
+  function (req, res) {
+    const { id } = req.params;
+    Notes.findById(id)
+      .then((notes) => {
+        if (notes) {
+          res.status(200).json(notes);
+        } else {
+          res.status(404).json({ error: 'notes Not Found' });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
   }
-});
+);
 
-router.put('/:id', authRequired, (req, res) => {
+router.post(
+  '/',
+  authRequired,
+  restrictTo('case_manager', 'guest'),
+  async (req, res) => {
+    const notes = req.body;
+    const famId = notes['family_id'] || 0;
+    if (notes) {
+      try {
+        const family = await Families.findById(famId);
+
+        if (!family)
+          return res.status(404).json({ message: "family doesn't exist" });
+
+        const note = await Notes.create(notes);
+
+        res.status(200).json({ message: 'notes created', note: note[0] });
+      } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: e.message });
+      }
+    } else {
+      res.status(404).json({ message: 'notes missing' });
+    }
+  }
+);
+
+router.put('/:id', authRequired, restrictTo('case_manager'), (req, res) => {
   const newNote = req.body;
   const id = req.params.id;
   if (newNote) {
@@ -82,7 +93,7 @@ router.put('/:id', authRequired, (req, res) => {
   }
 });
 
-router.delete('/:id', authRequired, (req, res) => {
+router.delete('/:id', authRequired, restrictTo('case_manager'), (req, res) => {
   const id = req.params.id;
   try {
     Notes.findByIdAndRemove(id).then(() => {
