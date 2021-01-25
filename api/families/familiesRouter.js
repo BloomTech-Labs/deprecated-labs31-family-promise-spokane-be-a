@@ -9,7 +9,7 @@ const Logs = require('../guestLogs/logsModel');
 const router = express.Router();
 
 //  checkRole.grantAccess('readAny', 'families'),
-router.get('/', authRequired, restrictTo, function (req, res) {
+router.get('/', authRequired, function (req, res) {
   Families.findAll()
     .then((families) => {
       res.status(200).json(families);
@@ -73,18 +73,24 @@ router.get('/:id/household', function (req, res) {
     });
 });
 
-router.get('/:id/notes', authRequired, function (req, res) {
-  const { role } = req.user;
-  const { id } = req.params;
+// Guests can view their own family notes here
+router.get(
+  '/:id/notes',
+  authRequired,
+  restrictTo('case_manager', 'guest'),
+  function (req, res) {
+    const { role } = req.user;
+    const { id } = req.params;
 
-  Families.findAllNotesByFamilyId(id, role)
-    .then((notes) => {
-      res.status(200).json(notes);
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
+    Families.findAllNotesByFamilyId(id, role)
+      .then((notes) => {
+        res.status(200).json(notes);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  }
+);
 
 //get all logs by family id
 router.get('/:id/logs', authRequired, function (req, res) {
@@ -104,7 +110,7 @@ router.get('/:id/logs', authRequired, function (req, res) {
 });
 
 // checkRole.grantAccess('createOwn', 'families'),
-router.post('/', authRequired, async (req, res) => {
+router.post('/', authRequired, restrictTo('supervisor'), async (req, res) => {
   const families = req.body;
   if (families) {
     const user_id = families.id || 0;
