@@ -36,9 +36,11 @@ exports.up = function (knex) {
 
     tbl.integer('beds_reserved');
 
-    tbl.integer('actual_beds_reserved')
+    tbl.integer('actual_beds_reserved');
 
     tbl.integer('total_beds');
+
+    tbl.specificType('members_staying', 'text ARRAY');
   });
 };
 
