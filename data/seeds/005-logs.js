@@ -16,7 +16,6 @@ exports.seed = function (knex) {
           time: '2020-12-09T17:38:31.123Z',
           beds_reserved: 5,
           actual_beds_reserved: 5,
-          total_beds: null,
           members_staying: ['Thomas Shelby', 'Jacob Shelby', 'Maria Shelby'],
         },
         {
@@ -30,7 +29,6 @@ exports.seed = function (knex) {
           time: '2020-12-10T18:01:40.038Z',
           beds_reserved: 5,
           actual_beds_reserved: 5,
-          total_beds: null,
           members_staying: ['Thomas Shelby', 'Jacob Shelby', 'Maria Shelby'],
         },
         {
@@ -44,7 +42,6 @@ exports.seed = function (knex) {
           time: '2020-12-11T17:38:31.123Z',
           beds_reserved: 5,
           actual_beds_reserved: 5,
-          total_beds: null,
           members_staying: ['Thomas Shelby', 'Jacob Shelby', 'Maria Shelby'],
         },
         {
@@ -58,7 +55,6 @@ exports.seed = function (knex) {
           time: '2020-12-12T17:38:31.123Z',
           beds_reserved: 5,
           actual_beds_reserved: 5,
-          total_beds: null,
           members_staying: ['Thomas Shelby', 'Jacob Shelby', 'Maria Shelby'],
         },
       ]);

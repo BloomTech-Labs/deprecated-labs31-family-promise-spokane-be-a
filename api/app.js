@@ -25,6 +25,7 @@ const familiesRouter = require('./families/familiesRouter');
 const memberRouter = require('./members/membersRouter');
 const notesRouter = require('./notes/notesRouter');
 const logsRouter = require('./guestLogs/logsRouter');
+const bedsRouter = require('./bedCapacity/bedCapacityRouter');
 
 const app = express();
 
@@ -56,6 +57,7 @@ app.use('/families', familiesRouter);
 app.use('/members', memberRouter);
 app.use('/notes', notesRouter);
 app.use('/logs', logsRouter);
+app.use('/beds', bedsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
