@@ -1,3 +1,4 @@
+// single endpoint for storing the total bed capacity
 
 exports.up = function (knex) {
   return knex.schema.createTable('bed_capacity', (tbl) => {
