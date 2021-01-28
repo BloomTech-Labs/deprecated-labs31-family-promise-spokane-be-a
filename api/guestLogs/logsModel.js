@@ -9,23 +9,27 @@ const findBy = (filter) => {
 };
 
 //a function to find log by its id
-const findById = async (id) => {
-  return db('logs').where({ id }).first().select('*');
+const findById = async (reservation_id) => {
+  return db('logs').where({ reservation_id }).first().select('*');
 };
 const findByFamilyId = async (family_id) => {
-  return db('logs').where({ family_id }).first().select('*');
+  return db('logs').where({ family_id }).select('*');
 };
 
 const create = async (log) => {
   return db('logs').insert(log).returning('*');
 };
 
-const update = (id, log) => {
-  return db('logs').where({ id: id }).first().update(log).returning('*');
+const update = (reservation_id, log) => {
+  return db('logs')
+    .where({ reservation_id: reservation_id })
+    .first()
+    .update(log)
+    .returning('*');
 };
 
-const remove = async (id) => {
-  return db('logs').where({ id }).del();
+const remove = async (reservation_id) => {
+  return db('logs').where({ reservation_id }).del();
 };
 
 const findOrCreateLog = async (logObj) => {

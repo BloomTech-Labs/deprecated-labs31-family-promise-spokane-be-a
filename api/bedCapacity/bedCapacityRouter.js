@@ -1,11 +1,11 @@
 // Endpoint for Total Number of beds at the shelter
-
 const express = require('express');
+const authRequired = require('../middleware/authRequired');
 
 const Beds = require('./bedsModel');
 const router = express.Router();
 
-router.get('/', function (req, res) {
+router.get('/', authRequired, function (req, res) {
   Beds.findAll()
     .then((beds) => {
       res.status(200).json(beds);
@@ -57,7 +57,7 @@ router.get('/', function (req, res) {
 //   }
 // });
 
-router.put('/', (req, res) => {
+router.put('/', authRequired, (req, res) => {
   const bed = req.body;
   if (bed) {
     Beds.findAll()
