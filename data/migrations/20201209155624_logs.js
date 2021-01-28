@@ -32,7 +32,7 @@ exports.up = function (knex) {
 
     tbl.date('date');
 
-    tbl.datetime('time');
+    tbl.time('time');
 
     tbl.integer('beds_reserved');
 
