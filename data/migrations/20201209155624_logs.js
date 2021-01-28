@@ -40,7 +40,7 @@ exports.up = function (knex) {
 
     tbl.integer('total_beds');
 
-    tbl.specificType('members_staying', 'text ARRAY');
+    tbl.enu('members_staying', []);
   });
 };
 
