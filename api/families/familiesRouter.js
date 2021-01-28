@@ -60,7 +60,7 @@ router.get('/user/:id', function (req, res) {
     });
 });
 
-// returns alll family info like vehicles as well as all guest info
+// returns all family info like vehicles as well as all guest info
 router.get('/:id/household', function (req, res) {
   const family_id = req.params;
 

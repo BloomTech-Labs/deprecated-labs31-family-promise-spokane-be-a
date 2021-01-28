@@ -40,6 +40,13 @@ exports.seed = function (knex) {
           last_name: 'Rose',
           role: 'pending',
         },
+        {
+          id: '00u2lhpc533MESNSA5b7',
+          email: 'guest2@gmail.com',
+          first_name: 'Rain',
+          last_name: 'Williams',
+          role: 'guest',
+        },
       ]);
     });
 };

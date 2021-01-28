@@ -88,7 +88,7 @@ router.delete('/:id', (req, res) => {
   const id = req.params.id;
   try {
     Logs.findById(id).then((logs) => {
-      Logs.remove(logs['family_id']).then(() => {
+      Logs.remove(logs['reservation_id']).then(() => {
         res
           .status(200)
           .json({ message: `logs '${id}' was deleted.`, logs: logs });

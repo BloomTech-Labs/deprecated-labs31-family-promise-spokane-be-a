@@ -21,7 +21,7 @@ exports.up = function (knex) {
       .notNullable()
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
-    
+
     tbl.boolean('reservation_status');
 
     tbl.boolean('waitlist');
@@ -38,9 +38,7 @@ exports.up = function (knex) {
 
     tbl.integer('actual_beds_reserved');
 
-    tbl.integer('total_beds');
-
-    tbl.enu('members_staying', []);
+    tbl.specificType('members_staying', 'text[]');
   });
 };
 
