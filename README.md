@@ -151,7 +151,7 @@ HTTP Method: **[GET]**
 
 =========================================================================
 
-POST a log: **/logs*
+POST a log: **/logs**
 
 HTTP Method: **[POST]**
  
