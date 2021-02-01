@@ -126,7 +126,7 @@ HTTP Method: **[GET]**
 
 =========================================================================
 
-Get a log: **/logs/:id**
+Get an individual log: **/logs/:id**
 
 HTTP Method: **[GET]**
  
@@ -148,6 +148,96 @@ HTTP Method: **[GET]**
     }
 
 **Response:** (200) - success
+
+=========================================================================
+
+POST a log: **/logs*
+
+HTTP Method: **[POST]**
+ 
+**Example:**
+
+Request Body
+
+    {
+        "reservation_id": 5,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": false,
+        "on_site_10pm": false,
+        "date": null,
+        "time": null,
+        "beds_reserved": 2,
+        "actual_beds_reserved": 2,
+        "members_staying": [
+            "Thomas Shelby",
+            "Jacob Shelby"
+        ]
+    },
+    
+**Response:** (200) - logs created
+
+=========================================================================
+
+PUT (edit) a log: **/logs/:id*
+
+HTTP Method: **[POST]**
+ 
+**Example:**
+
+Request Body
+
+    {
+        "reservation_id": 5,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": false,
+        "on_site_10pm": false,
+        "date": null,
+        "time": null,
+        "beds_reserved": 2,
+        "actual_beds_reserved": 2,
+        "members_staying": [
+            "Thomas Shelby",
+            "Arthur Shelby"
+        ]
+    },
+    
+**Response:** (200) - log 5 updated 
+
+=========================================================================
+
+DELETE a log: **/logs/:id*
+
+HTTP Method: **[DEL]**
+ 
+**Example:**
+
+Request Body
+
+    {
+        "reservation_id": 5,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": false,
+        "on_site_10pm": false,
+        "date": null,
+        "time": null,
+        "beds_reserved": 2,
+        "actual_beds_reserved": 2,
+        "members_staying": [
+            "Thomas Shelby",
+            "Arthur Shelby"
+        ]
+    },
+    
+**Response:** (200) - log 5 deleted
 
 =========================================================================
 
