@@ -241,3 +241,118 @@ Request Body
 
 =========================================================================
 
+## Notes (start here)
+
+GET all notes: **/notes**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+     {
+        "id": 1,
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Please be aware of sensitive information",
+        "content": "Family came in after fire destroyed their home, young Jacob is still in the recovering.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    },
+    {
+        "id": 2,
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Please be aware of sensitive information",
+        "content": "Additional notes for family.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+GET a note: **/notes/:id**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+     {
+        "id": 1,
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Please be aware of sensitive information",
+        "content": "Family came in after fire destroyed their home, young Jacob is still in the recovering.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+POST a note: **/notes**
+
+HTTP Method: **[POST]**
+
+**Example:**
+
+     {
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Skills Workshop Information",
+        "content": "Family has been given information about skills workshops.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    }
+    
+**Response:** (200) - note created
+
+=========================================================================
+
+PUT (edit) a note: **/notes/:id**
+
+HTTP Method: **[PUT]**
+
+**Example:**
+
+     {
+        "id": 1,
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Skills Workshop Information UPDATE",
+        "content": "Family has been given information about skills workshops and ongoing support contacts.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    }
+    
+**Response:** (200) - note updated
+
+=========================================================================
+DELETE a note: **/notes/:id**
+
+HTTP Method: **[DELETE]**
+
+**Example:**
+
+     {
+        "id": 1,
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Skills Workshop Information UPDATE",
+        "content": "Family has been given information about skills workshops and ongoing support contacts.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    }
+    
+**Response:** (204) - note deleted
+
+=========================================================================
+
