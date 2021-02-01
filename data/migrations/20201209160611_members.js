@@ -4,6 +4,9 @@ exports.up = function (knex) {
   return knex.schema.createTable('members', (tbl) => {
     tbl.increments();
 
+    // tbl.json_array_elements('check_in');
+    tbl.specificType('check_in', 'jsonb[]');
+
     tbl
       .integer('family_id')
       .unsigned()

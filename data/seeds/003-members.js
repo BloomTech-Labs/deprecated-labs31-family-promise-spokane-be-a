@@ -8,6 +8,15 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('members').insert([
         {
+          check_in: [
+            {
+              on_site_7pm: false,
+              on_site_10pm: false,
+              waitlist: false,
+              reservation_id: 1,
+              reservation_status: true,
+            },
+          ],
           family_id: 1,
           date_of_enrollment: '2020-10-09T17:38:31.123Z',
           household_type: 'Adults and Children',
@@ -50,6 +59,15 @@ exports.seed = function (knex) {
           percent_complete: 0,
         },
         {
+          check_in: [
+            {
+              on_site_7pm: false,
+              on_site_10pm: false,
+              waitlist: false,
+              reservation_id: 1,
+              reservation_status: true,
+            },
+          ],
           family_id: 1,
           date_of_enrollment: '2020-10-09T17:38:31.123Z',
           household_type: 'Adults and Children',
@@ -92,13 +110,23 @@ exports.seed = function (knex) {
           percent_complete: 0,
         },
         {
+          check_in: [
+            {
+              on_site_7pm: false,
+              on_site_10pm: false,
+              waitlist: false,
+              reservation_id: 1,
+              reservation_status: true,
+            },
+          ],
+
           family_id: 1,
           date_of_enrollment: '2020-10-09T17:38:31.123Z',
           household_type: 'Adults and Children',
           length_of_stay: '16 weeks',
           demographics: {
-            first_name: 'Maria',
-            last_name: 'Shelby',
+            first_name: 'Kai',
+            last_name: 'Benton',
             gender: 'female',
             relationship: 'Mom',
             DOB: '12-03-1992',
