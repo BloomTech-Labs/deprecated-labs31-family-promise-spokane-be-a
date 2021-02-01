@@ -73,7 +73,8 @@ Family Promise REST API
 
 ## Logs
 
-Get all families: **/logs**
+Get all logs: **/logs**
+
 HTTP Method: **[GET]**
  
 **Example:**
@@ -126,6 +127,7 @@ HTTP Method: **[GET]**
 =========================================================================
 
 Get a log: **/logs/:id**
+
 HTTP Method: **[GET]**
  
 **Example:**
