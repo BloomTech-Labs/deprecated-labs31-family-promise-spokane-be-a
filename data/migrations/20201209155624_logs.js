@@ -30,9 +30,9 @@ exports.up = function (knex) {
 
     tbl.boolean('on_site_10pm');
 
-    tbl.date('date');
+    tbl.string('date');
 
-    tbl.time('time');
+    tbl.string('time');
 
     tbl.integer('beds_reserved');
 

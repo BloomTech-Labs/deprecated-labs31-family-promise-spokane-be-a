@@ -66,3 +66,1471 @@ There are 3 options to get postgresql installed locally [Choose one]:
 
 See the [contributing doc](https://github.com/Lambda-School-Labs/labs-api-starter/blob/main/CONTRIBUTING.md)
 for more info.
+
+# REST API - Family Promise
+
+Family Promise REST API
+
+## Logs (start here)
+
+GET all logs: **/logs**
+
+HTTP Method: **[GET]**
+ 
+**Example:**
+
+    {
+        "reservation_id": 1,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": true,
+        "on_site_10pm": true,
+        "date": null,
+        "time": null,
+        "beds_reserved": 5,
+        "actual_beds_reserved": 5,
+        "members_staying": []
+    },
+    {
+        "reservation_id": 2,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": true,
+        "on_site_10pm": true,
+        "date": null,
+        "time": null,
+        "beds_reserved": 5,
+        "actual_beds_reserved": 5,
+        "members_staying": []
+    },
+    {
+        "reservation_id": 3,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": true,
+        "on_site_10pm": true,
+        "date": null,
+        "time": null,
+        "beds_reserved": 5,
+        "actual_beds_reserved": 5,
+        "members_staying": []
+    }
+
+**Response:** (200) - success
+
+=========================================================================
+
+GET an individual log: **/logs/:id**
+
+HTTP Method: **[GET]**
+ 
+**Example:**
+
+    {
+        "reservation_id": 1,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": true,
+        "on_site_10pm": true,
+        "date": null,
+        "time": null,
+        "beds_reserved": 5,
+        "actual_beds_reserved": 5,
+        "members_staying": []
+    }
+
+**Response:** (200) - success
+
+=========================================================================
+
+POST a log: **/logs**
+
+HTTP Method: **[POST]**
+ 
+**Example:**
+
+Request Body
+
+    {
+        "reservation_id": 5,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": false,
+        "on_site_10pm": false,
+        "date": null,
+        "time": null,
+        "beds_reserved": 2,
+        "actual_beds_reserved": 2,
+        "members_staying": [
+            "Thomas Shelby",
+            "Jacob Shelby"
+        ]
+    },
+    
+**Response:** (200) - logs created
+
+=========================================================================
+
+PUT (edit) a log: **/logs/:id*
+
+HTTP Method: **[PUT]**
+ 
+**Example:**
+
+Request Body
+
+    {
+        "reservation_id": 5,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": false,
+        "on_site_10pm": false,
+        "date": null,
+        "time": null,
+        "beds_reserved": 2,
+        "actual_beds_reserved": 2,
+        "members_staying": [
+            "Thomas Shelby",
+            "Arthur Shelby"
+        ]
+    }
+    
+**Response:** (200) - log 5 updated 
+
+=========================================================================
+
+DELETE a log: **/logs/:id*
+
+HTTP Method: **[DEL]**
+ 
+**Example:**
+
+Request Body
+
+    {
+        "reservation_id": 5,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": false,
+        "on_site_10pm": false,
+        "date": null,
+        "time": null,
+        "beds_reserved": 2,
+        "actual_beds_reserved": 2,
+        "members_staying": [
+            "Thomas Shelby",
+            "Arthur Shelby"
+        ]
+    },
+    
+**Response:** (200) - log 5 deleted
+
+=========================================================================
+
+## Notes (start here)
+
+GET all notes: **/notes**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+     {
+        "id": 1,
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Please be aware of sensitive information",
+        "content": "Family came in after fire destroyed their home, young Jacob is still in the recovering.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    },
+    {
+        "id": 2,
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Please be aware of sensitive information",
+        "content": "Additional notes for family.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+GET an individual note: **/notes/:id**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+     {
+        "id": 1,
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Please be aware of sensitive information",
+        "content": "Family came in after fire destroyed their home, young Jacob is still in the recovering.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+POST a note: **/notes**
+
+HTTP Method: **[POST]**
+
+**Example:**
+
+Request Body
+
+     {
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Skills Workshop Information",
+        "content": "Family has been given information about skills workshops.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    }
+    
+**Response:** (200) - note created
+
+=========================================================================
+
+PUT (edit) a note: **/notes/:id**
+
+HTTP Method: **[PUT]**
+
+**Example:**
+
+Request Body
+
+     {
+        "id": 1,
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Skills Workshop Information UPDATE",
+        "content": "Family has been given information about skills workshops and ongoing support contacts.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    }
+    
+**Response:** (200) - note updated
+
+=========================================================================
+
+DELETE a note: **/notes/:id**
+
+HTTP Method: **[DELETE]**
+
+**Example:**
+
+Request Body
+
+     {
+        "id": 1,
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Skills Workshop Information UPDATE",
+        "content": "Family has been given information about skills workshops and ongoing support contacts.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    }
+    
+**Response:** (204) - note deleted
+
+=========================================================================
+
+## Families (start here)
+
+GET all families: **/families**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+     {
+        "id": 1,
+        "user_id": "00u2lh0bsAliwLEe75d6",
+        "case_number": 22,
+        "phone_one": {
+            "name": "Thomas Shelby",
+            "number": "202-555-0177",
+            "safeToLeaveMssg": true
+        },
+        "phone_two": {
+            "name": "Maria Shelby",
+            "number": "770-555-0114",
+            "safeToLeaveMssg": false
+        },
+        "safe_alternate": {
+            "name": "Mark Shelby",
+            "number": "809-323-5959"
+        },
+        "emergencyContact": {
+            "name": "Steve Martin",
+            "number": "410-555-0173"
+        },
+        "vehicle": {
+            "make": "BMW",
+            "year": 2007,
+            "color": "red",
+            "model": "K1200LT",
+            "license_plate": "699-VHT"
+        },
+        "last_permanent_address": "7271 Hickory Rd Sterling VA 20164 ",
+        "homeless_info": {
+            "prior_location": "relatives",
+            "current_location": "car",
+            "num_times_homeless": 2,
+            "total_len_homeless": 1,
+            "homeless_start_date": "26-AUG-2019",
+            "length_at_prior_location": "2 weeks",
+            "length_at_current_location": "3 days"
+        },
+        "gov_benefits": {
+            "RRH": false,
+            "snap": true,
+            "cps_fps": false,
+            "foodstamps": true,
+            "housing_voucher": false,
+            "veteran_services": true
+        },
+        "insurance": {
+            "pregnancies": false,
+            "has_insurance": true,
+            "members_covered": 2,
+            "health_insurance_type": "Medicare"
+        },
+        "domestic_violence_info": {
+            "fleeing_dv": false,
+            "YWCA_contacted": false,
+            "has_court_order": false,
+            "date_last_incident": false,
+            "anonymity_preferred": true
+        },
+        "pets": {
+            "cat": false,
+            "dog": false,
+            "amount": {
+                "value1": false,
+                "value2": false
+            },
+            "shelter": false,
+            "name_one": null,
+            "name_two": null,
+            "service_animal": false,
+            "support_animal": false
+        },
+        "avatar_url": "https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg",
+        "percent_complete": 0
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+GET a family: **/families/:id**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+    {
+    "id": 1,
+    "user_id": "00u2lh0bsAliwLEe75d6",
+    "case_number": 22,
+    "phone_one": {
+        "name": "Thomas Shelby",
+        "number": "202-555-0177",
+        "safeToLeaveMssg": true
+    },
+    "phone_two": {
+        "name": "Maria Shelby",
+        "number": "770-555-0114",
+        "safeToLeaveMssg": false
+    },
+    "safe_alternate": {
+        "name": "Mark Shelby",
+        "number": "809-323-5959"
+    },
+    "emergencyContact": {
+        "name": "Steve Martin",
+        "number": "410-555-0173"
+    },
+    "vehicle": {
+        "make": "BMW",
+        "year": 2007,
+        "color": "red",
+        "model": "K1200LT",
+        "license_plate": "699-VHT"
+    },
+    "last_permanent_address": "7271 Hickory Rd Sterling VA 20164 ",
+    "homeless_info": {
+        "prior_location": "relatives",
+        "current_location": "car",
+        "num_times_homeless": 2,
+        "total_len_homeless": 1,
+        "homeless_start_date": "26-AUG-2019",
+        "length_at_prior_location": "2 weeks",
+        "length_at_current_location": "3 days"
+    },
+    "gov_benefits": {
+        "RRH": false,
+        "snap": true,
+        "cps_fps": false,
+        "foodstamps": true,
+        "housing_voucher": false,
+        "veteran_services": true
+    },
+    "insurance": {
+        "pregnancies": false,
+        "has_insurance": true,
+        "members_covered": 2,
+        "health_insurance_type": "Medicare"
+    },
+    "domestic_violence_info": {
+        "fleeing_dv": false,
+        "YWCA_contacted": false,
+        "has_court_order": false,
+        "date_last_incident": false,
+        "anonymity_preferred": true
+    },
+    "pets": {
+        "cat": false,
+        "dog": false,
+        "amount": {
+            "value1": false,
+            "value2": false
+        },
+        "shelter": false,
+        "name_one": null,
+        "name_two": null,
+        "service_animal": false,
+        "support_animal": false
+    },
+    "avatar_url": "https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg",
+    "percent_complete": 0
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+GET all members of a family: **/families/:id/members**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+     {
+        "id": 1,
+        "check_in": [
+            {
+                "waitlist": false,
+                "on_site_7pm": false,
+                "on_site_10pm": false,
+                "reservation_id": 1,
+                "reservation_status": true
+            }
+        ],
+        "family_id": 1,
+        "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+        "household_type": "Adults and Children",
+        "length_of_stay": "16 weeks",
+        "demographics": {
+            "first_name": "Thomas",
+            "last_name": "Shelby",
+            "gender": "male",
+            "relationship": "Dad",
+            "DOB": "1-03-1988",
+            "SSN": 9999,
+            "income": 20000,
+            "employer": "union",
+            "race": [
+                "White"
+            ],
+            "ethnicity": "Caucasian"
+        },
+        "barriers": {
+            "alcohol_abuse": true,
+            "developmental_disabilities": false,
+            "chronic_health_issues": false,
+            "drug_abuse": false,
+            "HIV_AIDs": false,
+            "mental_illness": false,
+            "physical_disabilities": true,
+            "list_indefinite_conditions": "NA",
+            "list_issues": "NA"
+        },
+        "schools": {
+            "highest_grade_completed": "12th grade",
+            "enrolled_status": false,
+            "reason_not_enrolled": "finished",
+            "attendance_status": "inactive",
+            "school_type": "NA",
+            "school_name": "NA",
+            "mckinney_school": false
+        },
+        "case_members": 3,
+        "predicted_exit_destination": "permanent exit",
+        "flag": null,
+        "percent_complete": 0
+    },
+    {
+        "id": 2,
+        "check_in": [
+            {
+                "waitlist": false,
+                "on_site_7pm": false,
+                "on_site_10pm": false,
+                "reservation_id": 1,
+                "reservation_status": true
+            }
+        ],
+        "family_id": 1,
+        "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+        "household_type": "Adults and Children",
+        "length_of_stay": "16 weeks",
+        "demographics": {
+            "first_name": "Jacob",
+            "last_name": "Shelby",
+            "gender": "female",
+            "relationship": "Son",
+            "DOB": "10-23-2015",
+            "SSN": 9999,
+            "income": 20000,
+            "employer": null,
+            "race": [
+                "White"
+            ],
+            "ethnicity": "Caucasian"
+        },
+        "barriers": {
+            "alcohol_abuse": false,
+            "developmental_disabilities": false,
+            "chronic_health_issues": false,
+            "drug_abuse": false,
+            "HIV_AIDs": false,
+            "mental_illness": false,
+            "physical_disabilities": false,
+            "list_indefinite_conditions": "NA",
+            "list_issues": "NA"
+        },
+        "schools": {
+            "highest_grade_completed": "Pre-Kindergarten",
+            "enrolled_status": true,
+            "reason_not_enrolled": "N/A",
+            "attendance_status": "active",
+            "school_type": "elementary",
+            "school_name": "Wright",
+            "mckinney_school": false
+        },
+        "case_members": 3,
+        "predicted_exit_destination": "temporary exit",
+        "flag": null,
+        "percent_complete": 0
+    },
+    {
+        "id": 3,
+        "check_in": [
+            {
+                "waitlist": false,
+                "on_site_7pm": false,
+                "on_site_10pm": false,
+                "reservation_id": 1,
+                "reservation_status": true
+            }
+        ],
+        "family_id": 1,
+        "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+        "household_type": "Adults and Children",
+        "length_of_stay": "16 weeks",
+        "demographics": {
+            "first_name": "Maria",
+            "last_name": "Shelby",
+            "gender": "female",
+            "relationship": "Mom",
+            "DOB": "12-03-1992",
+            "SSN": 9999,
+            "income": 20000,
+            "employer": null,
+            "race": [
+                "White"
+            ],
+            "ethnicity": "Caucasian"
+        },
+        "barriers": {
+            "alcohol_abuse": false,
+            "developmental_disabilities": false,
+            "chronic_health_issues": false,
+            "drug_abuse": false,
+            "HIV_AIDs": false,
+            "mental_illness": false,
+            "physical_disabilities": false,
+            "list_indefinite_conditions": null,
+            "list_issues": null
+        },
+        "schools": {
+            "highest_grade_completed": "12th grade",
+            "enrolled_status": false,
+            "reason_not_enrolled": "finished",
+            "attendance_status": "inactive",
+            "school_type": null,
+            "school_name": null,
+            "mckinney_school": false
+        },
+        "case_members": 3,
+        "predicted_exit_destination": "temporary exit",
+        "flag": null,
+        "percent_complete": 0
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+GET a family by user ID: **/families/user/:id**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+    {
+    "id": 1,
+    "user_id": "00u2lh0bsAliwLEe75d6",
+    "case_number": 22,
+    "phone_one": {
+        "name": "Thomas Shelby",
+        "number": "202-555-0177",
+        "safeToLeaveMssg": true
+    },
+    "phone_two": {
+        "name": "Maria Shelby",
+        "number": "770-555-0114",
+        "safeToLeaveMssg": false
+    },
+    "safe_alternate": {
+        "name": "Mark Shelby",
+        "number": "809-323-5959"
+    },
+    "emergencyContact": {
+        "name": "Steve Martin",
+        "number": "410-555-0173"
+    },
+    "vehicle": {
+        "make": "BMW",
+        "year": 2007,
+        "color": "red",
+        "model": "K1200LT",
+        "license_plate": "699-VHT"
+    },
+    "last_permanent_address": "7271 Hickory Rd Sterling VA 20164 ",
+    "homeless_info": {
+        "prior_location": "relatives",
+        "current_location": "car",
+        "num_times_homeless": 2,
+        "total_len_homeless": 1,
+        "homeless_start_date": "26-AUG-2019",
+        "length_at_prior_location": "2 weeks",
+        "length_at_current_location": "3 days"
+    },
+    "gov_benefits": {
+        "RRH": false,
+        "snap": true,
+        "cps_fps": false,
+        "foodstamps": true,
+        "housing_voucher": false,
+        "veteran_services": true
+    },
+    "insurance": {
+        "pregnancies": false,
+        "has_insurance": true,
+        "members_covered": 2,
+        "health_insurance_type": "Medicare"
+    },
+    "domestic_violence_info": {
+        "fleeing_dv": false,
+        "YWCA_contacted": false,
+        "has_court_order": false,
+        "date_last_incident": false,
+        "anonymity_preferred": true
+    },
+    "pets": {
+        "cat": false,
+        "dog": false,
+        "amount": {
+            "value1": false,
+            "value2": false
+        },
+        "shelter": false,
+        "name_one": null,
+        "name_two": null,
+        "service_animal": false,
+        "support_animal": false
+    },
+    "avatar_url": "https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg",
+    "percent_complete": 0
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+GET all family household information: **/families/:id/household**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+    {
+        "id": 1,
+        "user_id": "00u2lh0bsAliwLEe75d6",
+        "case_number": 22,
+        "phone_one": {
+            "name": "Thomas Shelby",
+            "number": "202-555-0177",
+            "safeToLeaveMssg": true
+        },
+        "phone_two": {
+            "name": "Maria Shelby",
+            "number": "770-555-0114",
+            "safeToLeaveMssg": false
+        },
+        "safe_alternate": {
+            "name": "Mark Shelby",
+            "number": "809-323-5959"
+        },
+        "emergencyContact": {
+            "name": "Steve Martin",
+            "number": "410-555-0173"
+        },
+        "vehicle": {
+            "make": "BMW",
+            "year": 2007,
+            "color": "red",
+            "model": "K1200LT",
+            "license_plate": "699-VHT"
+        },
+        "last_permanent_address": "7271 Hickory Rd Sterling VA 20164 ",
+        "homeless_info": {
+            "prior_location": "relatives",
+            "current_location": "car",
+            "num_times_homeless": 2,
+            "total_len_homeless": 1,
+            "homeless_start_date": "26-AUG-2019",
+            "length_at_prior_location": "2 weeks",
+            "length_at_current_location": "3 days"
+        },
+        "gov_benefits": {
+            "RRH": false,
+            "snap": true,
+            "cps_fps": false,
+            "foodstamps": true,
+            "housing_voucher": false,
+            "veteran_services": true
+        },
+        "insurance": {
+            "pregnancies": false,
+            "has_insurance": true,
+            "members_covered": 2,
+            "health_insurance_type": "Medicare"
+        },
+        "domestic_violence_info": {
+            "fleeing_dv": false,
+            "YWCA_contacted": false,
+            "has_court_order": false,
+            "date_last_incident": false,
+            "anonymity_preferred": true
+        },
+        "pets": {
+            "cat": false,
+            "dog": false,
+            "amount": {
+                "value1": false,
+                "value2": false
+            },
+            "shelter": false,
+            "name_one": null,
+            "name_two": null,
+            "service_animal": false,
+            "support_animal": false
+        },
+        "avatar_url": "https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg",
+        "percent_complete": 0,
+        "check_in": [
+            {
+                "waitlist": false,
+                "on_site_7pm": false,
+                "on_site_10pm": false,
+                "reservation_id": 1,
+                "reservation_status": true
+            }
+        ],
+        "family_id": 1,
+        "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+        "household_type": "Adults and Children",
+        "length_of_stay": "16 weeks",
+        "demographics": {
+            "first_name": "Thomas",
+            "last_name": "Shelby",
+            "gender": "male",
+            "relationship": "Dad",
+            "DOB": "1-03-1988",
+            "SSN": 9999,
+            "income": 20000,
+            "employer": "union",
+            "race": [
+                "White"
+            ],
+            "ethnicity": "Caucasian"
+        },
+        "barriers": {
+            "alcohol_abuse": true,
+            "developmental_disabilities": false,
+            "chronic_health_issues": false,
+            "drug_abuse": false,
+            "HIV_AIDs": false,
+            "mental_illness": false,
+            "physical_disabilities": true,
+            "list_indefinite_conditions": "NA",
+            "list_issues": "NA"
+        },
+        "schools": {
+            "highest_grade_completed": "12th grade",
+            "enrolled_status": false,
+            "reason_not_enrolled": "finished",
+            "attendance_status": "inactive",
+            "school_type": "NA",
+            "school_name": "NA",
+            "mckinney_school": false
+        },
+        "case_members": 3,
+        "predicted_exit_destination": "permanent exit",
+        "flag": null
+    },
+    {
+        "id": 2,
+        "user_id": "00u2lh0bsAliwLEe75d6",
+        "case_number": 22,
+        "phone_one": {
+            "name": "Thomas Shelby",
+            "number": "202-555-0177",
+            "safeToLeaveMssg": true
+        },
+        "phone_two": {
+            "name": "Maria Shelby",
+            "number": "770-555-0114",
+            "safeToLeaveMssg": false
+        },
+        "safe_alternate": {
+            "name": "Mark Shelby",
+            "number": "809-323-5959"
+        },
+        "emergencyContact": {
+            "name": "Steve Martin",
+            "number": "410-555-0173"
+        },
+        "vehicle": {
+            "make": "BMW",
+            "year": 2007,
+            "color": "red",
+            "model": "K1200LT",
+            "license_plate": "699-VHT"
+        },
+        "last_permanent_address": "7271 Hickory Rd Sterling VA 20164 ",
+        "homeless_info": {
+            "prior_location": "relatives",
+            "current_location": "car",
+            "num_times_homeless": 2,
+            "total_len_homeless": 1,
+            "homeless_start_date": "26-AUG-2019",
+            "length_at_prior_location": "2 weeks",
+            "length_at_current_location": "3 days"
+        },
+        "gov_benefits": {
+            "RRH": false,
+            "snap": true,
+            "cps_fps": false,
+            "foodstamps": true,
+            "housing_voucher": false,
+            "veteran_services": true
+        },
+        "insurance": {
+            "pregnancies": false,
+            "has_insurance": true,
+            "members_covered": 2,
+            "health_insurance_type": "Medicare"
+        },
+        "domestic_violence_info": {
+            "fleeing_dv": false,
+            "YWCA_contacted": false,
+            "has_court_order": false,
+            "date_last_incident": false,
+            "anonymity_preferred": true
+        },
+        "pets": {
+            "cat": false,
+            "dog": false,
+            "amount": {
+                "value1": false,
+                "value2": false
+            },
+            "shelter": false,
+            "name_one": null,
+            "name_two": null,
+            "service_animal": false,
+            "support_animal": false
+        },
+        "avatar_url": "https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg",
+        "percent_complete": 0,
+        "check_in": [
+            {
+                "waitlist": false,
+                "on_site_7pm": false,
+                "on_site_10pm": false,
+                "reservation_id": 1,
+                "reservation_status": true
+            }
+        ],
+        "family_id": 1,
+        "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+        "household_type": "Adults and Children",
+        "length_of_stay": "16 weeks",
+        "demographics": {
+            "first_name": "Jacob",
+            "last_name": "Shelby",
+            "gender": "female",
+            "relationship": "Son",
+            "DOB": "10-23-2015",
+            "SSN": 9999,
+            "income": 20000,
+            "employer": null,
+            "race": [
+                "White"
+            ],
+            "ethnicity": "Caucasian"
+        },
+        "barriers": {
+            "alcohol_abuse": false,
+            "developmental_disabilities": false,
+            "chronic_health_issues": false,
+            "drug_abuse": false,
+            "HIV_AIDs": false,
+            "mental_illness": false,
+            "physical_disabilities": false,
+            "list_indefinite_conditions": "NA",
+            "list_issues": "NA"
+        },
+        "schools": {
+            "highest_grade_completed": "Pre-Kindergarten",
+            "enrolled_status": true,
+            "reason_not_enrolled": "N/A",
+            "attendance_status": "active",
+            "school_type": "elementary",
+            "school_name": "Wright",
+            "mckinney_school": false
+        },
+        "case_members": 3,
+        "predicted_exit_destination": "temporary exit",
+        "flag": null
+    },
+    {
+        "id": 3,
+        "user_id": "00u2lh0bsAliwLEe75d6",
+        "case_number": 22,
+        "phone_one": {
+            "name": "Thomas Shelby",
+            "number": "202-555-0177",
+            "safeToLeaveMssg": true
+        },
+        "phone_two": {
+            "name": "Maria Shelby",
+            "number": "770-555-0114",
+            "safeToLeaveMssg": false
+        },
+        "safe_alternate": {
+            "name": "Mark Shelby",
+            "number": "809-323-5959"
+        },
+        "emergencyContact": {
+            "name": "Steve Martin",
+            "number": "410-555-0173"
+        },
+        "vehicle": {
+            "make": "BMW",
+            "year": 2007,
+            "color": "red",
+            "model": "K1200LT",
+            "license_plate": "699-VHT"
+        },
+        "last_permanent_address": "7271 Hickory Rd Sterling VA 20164 ",
+        "homeless_info": {
+            "prior_location": "relatives",
+            "current_location": "car",
+            "num_times_homeless": 2,
+            "total_len_homeless": 1,
+            "homeless_start_date": "26-AUG-2019",
+            "length_at_prior_location": "2 weeks",
+            "length_at_current_location": "3 days"
+        },
+        "gov_benefits": {
+            "RRH": false,
+            "snap": true,
+            "cps_fps": false,
+            "foodstamps": true,
+            "housing_voucher": false,
+            "veteran_services": true
+        },
+        "insurance": {
+            "pregnancies": false,
+            "has_insurance": true,
+            "members_covered": 2,
+            "health_insurance_type": "Medicare"
+        },
+        "domestic_violence_info": {
+            "fleeing_dv": false,
+            "YWCA_contacted": false,
+            "has_court_order": false,
+            "date_last_incident": false,
+            "anonymity_preferred": true
+        },
+        "pets": {
+            "cat": false,
+            "dog": false,
+            "amount": {
+                "value1": false,
+                "value2": false
+            },
+            "shelter": false,
+            "name_one": null,
+            "name_two": null,
+            "service_animal": false,
+            "support_animal": false
+        },
+        "avatar_url": "https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg",
+        "percent_complete": 0,
+        "check_in": [
+            {
+                "waitlist": false,
+                "on_site_7pm": false,
+                "on_site_10pm": false,
+                "reservation_id": 1,
+                "reservation_status": true
+            }
+        ],
+        "family_id": 1,
+        "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+        "household_type": "Adults and Children",
+        "length_of_stay": "16 weeks",
+        "demographics": {
+            "first_name": "Maria",
+            "last_name": "Shelby",
+            "gender": "female",
+            "relationship": "Mom",
+            "DOB": "12-03-1992",
+            "SSN": 9999,
+            "income": 20000,
+            "employer": null,
+            "race": [
+                "White"
+            ],
+            "ethnicity": "Caucasian"
+        },
+        "barriers": {
+            "alcohol_abuse": false,
+            "developmental_disabilities": false,
+            "chronic_health_issues": false,
+            "drug_abuse": false,
+            "HIV_AIDs": false,
+            "mental_illness": false,
+            "physical_disabilities": false,
+            "list_indefinite_conditions": null,
+            "list_issues": null
+        },
+        "schools": {
+            "highest_grade_completed": "12th grade",
+            "enrolled_status": false,
+            "reason_not_enrolled": "finished",
+            "attendance_status": "inactive",
+            "school_type": null,
+            "school_name": null,
+            "mckinney_school": false
+        },
+        "case_members": 3,
+        "predicted_exit_destination": "temporary exit",
+        "flag": null
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+GET all notes of a family: **/families/:id/notes**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+     {
+        "id": 1,
+        "family_id": 1,
+        "author_id": "00u2lgca4zIaSTPqE5d6",
+        "subject": "Please be aware of sensitive information",
+        "content": "Family came in after fire destroyed their home, young Jacob is still in the recovering.",
+        "shareable": true,
+        "date": "2020-12-14T05:00:00.000Z",
+        "time": "2020-12-14T03:15:31.031Z"
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+GET all logs of a family: **/families/:id/logs**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+        {
+        "reservation_id": 1,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": true,
+        "on_site_10pm": true,
+        "date": null,
+        "time": null,
+        "beds_reserved": 5,
+        "actual_beds_reserved": 5,
+        "members_staying": []
+    },
+    {
+        "reservation_id": 2,
+        "supervisor_id": "00u2lh0bsAliwLEe75d6",
+        "family_id": 1,
+        "reservation_status": true,
+        "waitlist": false,
+        "on_site_7pm": true,
+        "on_site_10pm": true,
+        "date": null,
+        "time": null,
+        "beds_reserved": 5,
+        "actual_beds_reserved": 5,
+        "members_staying": []
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+POST a family: **/families**
+
+HTTP Method: **[POST]**
+ 
+**Example:**
+
+Request Body
+
+     {
+        "user_id": "00u2lh0bsAliwLEe75d6",
+        "case_number": 22,
+        "phone_one": {
+            "name": "Thomas Shelby",
+            "number": "202-555-0177",
+            "safeToLeaveMssg": true
+        },
+        "phone_two": {
+            "name": "Maria Shelby",
+            "number": "770-555-0114",
+            "safeToLeaveMssg": false
+        },
+        "safe_alternate": {
+            "name": "Mark Shelby",
+            "number": "809-323-5959"
+        },
+        "emergencyContact": {
+            "name": "Steve Martin",
+            "number": "410-555-0173"
+        },
+        "vehicle": {
+            "make": "BMW",
+            "year": 2007,
+            "color": "red",
+            "model": "K1200LT",
+            "license_plate": "699-VHT"
+        },
+        "last_permanent_address": "7271 Hickory Rd Sterling VA 20164 ",
+        "homeless_info": {
+            "prior_location": "relatives",
+            "current_location": "car",
+            "num_times_homeless": 2,
+            "total_len_homeless": 1,
+            "homeless_start_date": "26-AUG-2019",
+            "length_at_prior_location": "2 weeks",
+            "length_at_current_location": "3 days"
+        },
+        "gov_benefits": {
+            "RRH": false,
+            "snap": true,
+            "cps_fps": false,
+            "foodstamps": true,
+            "housing_voucher": false,
+            "veteran_services": true
+        },
+        "insurance": {
+            "pregnancies": false,
+            "has_insurance": true,
+            "members_covered": 2,
+            "health_insurance_type": "Medicare"
+        },
+        "domestic_violence_info": {
+            "fleeing_dv": false,
+            "YWCA_contacted": false,
+            "has_court_order": false,
+            "date_last_incident": false,
+            "anonymity_preferred": true
+        },
+        "pets": {
+            "cat": false,
+            "dog": false,
+            "amount": {
+                "value1": false,
+                "value2": false
+            },
+            "shelter": false,
+            "name_one": null,
+            "name_two": null,
+            "service_animal": false,
+            "support_animal": false
+        },
+        "avatar_url": "https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg",
+        "percent_complete": 0
+    }
+    
+**Response:** (200) - family created
+
+=========================================================================
+
+PUT (edit) a family: **/families/:id**
+
+HTTP Method: **[PUT]**
+
+**Example:**
+
+Request Body
+
+        {
+        "id": 1,
+        "user_id": "00u2lh0bsAliwLEe75d6",
+        "case_number": 22,
+        "phone_one": {
+            "name": "Thomas Shelby",
+            "number": "202-555-0177",
+            "safeToLeaveMssg": true
+        },
+        "phone_two": {
+            "name": "Maria Shelby",
+            "number": "770-555-0114",
+            "safeToLeaveMssg": false
+        },
+        "safe_alternate": {
+            "name": "Mark Shelby",
+            "number": "809-323-5959"
+        },
+        "emergencyContact": {
+            "name": "Steve Martin",
+            "number": "410-555-0173"
+        },
+        "vehicle": {
+            "make": "BMW",
+            "year": 2007,
+            "color": "red",
+            "model": "K1200LT",
+            "license_plate": "699-VHT"
+        },
+        "last_permanent_address": "7271 Hickory Rd Sterling VA 20164 ",
+        "homeless_info": {
+            "prior_location": "relatives",
+            "current_location": "car",
+            "num_times_homeless": 2,
+            "total_len_homeless": 1,
+            "homeless_start_date": "26-AUG-2019",
+            "length_at_prior_location": "2 weeks",
+            "length_at_current_location": "3 days"
+        },
+        "gov_benefits": {
+            "RRH": false,
+            "snap": true,
+            "cps_fps": false,
+            "foodstamps": true,
+            "housing_voucher": false,
+            "veteran_services": true
+        },
+        "insurance": {
+            "pregnancies": false,
+            "has_insurance": true,
+            "members_covered": 2,
+            "health_insurance_type": "Medicare"
+        },
+        "domestic_violence_info": {
+            "fleeing_dv": false,
+            "YWCA_contacted": false,
+            "has_court_order": false,
+            "date_last_incident": false,
+            "anonymity_preferred": true
+        },
+        "pets": {
+            "cat": false,
+            "dog": false,
+            "amount": {
+                "value1": false,
+                "value2": false
+            },
+            "shelter": false,
+            "name_one": null,
+            "name_two": null,
+            "service_animal": false,
+            "support_animal": false
+        },
+        "avatar_url": "https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg",
+        "percent_complete": 0
+    }
+    
+**Response:** (200) - family updated
+
+=========================================================================
+
+DELETE a family: **/families/:id**
+
+HTTP Method: **[DELETE]**
+
+**Example:**
+
+Request Body
+
+    {
+    "id": 1,
+    "user_id": "00u2lh0bsAliwLEe75d6",
+    "case_number": 22,
+    "phone_one": {
+        "name": "Thomas Shelby",
+        "number": "202-555-0177",
+        "safeToLeaveMssg": true
+    },
+    "phone_two": {
+        "name": "Maria Shelby",
+        "number": "770-555-0114",
+        "safeToLeaveMssg": false
+    },
+    "safe_alternate": {
+        "name": "Mark Shelby",
+        "number": "809-323-5959"
+    },
+    "emergencyContact": {
+        "name": "Steve Martin",
+        "number": "410-555-0173"
+    },
+    "vehicle": {
+        "make": "BMW",
+        "year": 2007,
+        "color": "red",
+        "model": "K1200LT",
+        "license_plate": "699-VHT"
+    },
+    "last_permanent_address": "7271 Hickory Rd Sterling VA 20164 ",
+    "homeless_info": {
+        "prior_location": "relatives",
+        "current_location": "car",
+        "num_times_homeless": 2,
+        "total_len_homeless": 1,
+        "homeless_start_date": "26-AUG-2019",
+        "length_at_prior_location": "2 weeks",
+        "length_at_current_location": "3 days"
+    },
+    "gov_benefits": {
+        "RRH": false,
+        "snap": true,
+        "cps_fps": false,
+        "foodstamps": true,
+        "housing_voucher": false,
+        "veteran_services": true
+    },
+    "insurance": {
+        "pregnancies": false,
+        "has_insurance": true,
+        "members_covered": 2,
+        "health_insurance_type": "Medicare"
+    },
+    "domestic_violence_info": {
+        "fleeing_dv": false,
+        "YWCA_contacted": false,
+        "has_court_order": false,
+        "date_last_incident": false,
+        "anonymity_preferred": true
+    },
+    "pets": {
+        "cat": false,
+        "dog": false,
+        "amount": {
+            "value1": false,
+            "value2": false
+        },
+        "shelter": false,
+        "name_one": null,
+        "name_two": null,
+        "service_animal": false,
+        "support_animal": false
+    },
+    "avatar_url": "https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg",
+    "percent_complete": 0
+    }
+    
+**Response:** (204) - family 1 was deleted
+
+=========================================================================
+
+
+
