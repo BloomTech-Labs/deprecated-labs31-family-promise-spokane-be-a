@@ -1531,8 +1531,8 @@ Request Body
 **Response:** (204) - family 1 was deleted
 
 =========================================================================
-
-GET all beds : **/beds/**
+## BEDS (start here)
+GET all beds : **/beds**
 
 HTTP Method: **[GET]**
 
@@ -1550,7 +1550,7 @@ Request Body
 
 =========================================================================
 
-PUT to update beds : **/beds/**
+PUT to update beds : **/beds**
 
 HTTP Method: **[PUT]**
 
