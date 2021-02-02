@@ -10,7 +10,7 @@ const findBy = (filter) => {
 
 //a function to find log by its id
 const findById = async (reservation_id) => {
-  return db('logs').where({ reservation_id }).first().select('*');
+  return db('logs').where({ reservation_id }).select('*');
 };
 const findByFamilyId = async (family_id) => {
   return db('logs').where({ family_id }).select('*');
