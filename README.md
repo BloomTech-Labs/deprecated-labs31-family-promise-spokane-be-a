@@ -1532,5 +1532,39 @@ Request Body
 
 =========================================================================
 
+GET all beds : **/beds/**
 
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+    {
+        "id": 1,
+        "total_beds": null
+    }
+    
+**Response:** (200) - success
+
+
+=========================================================================
+
+PUT to update beds : **/beds/**
+
+HTTP Method: **[PUT]**
+
+**Example:**
+
+Request Body
+
+    {
+        "id": 1,
+        "total_beds": 6
+    }
+    
+**Response:** (200) - success
+
+
+=========================================================================
 
