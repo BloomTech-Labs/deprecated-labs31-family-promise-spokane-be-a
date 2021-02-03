@@ -125,8 +125,8 @@ exports.seed = function (knex) {
           household_type: 'Adults and Children',
           length_of_stay: '16 weeks',
           demographics: {
-            first_name: 'Kai',
-            last_name: 'Benton',
+            first_name: 'Maria',
+            last_name: 'Shelby',
             gender: 'female',
             relationship: 'Mom',
             DOB: '12-03-1992',
