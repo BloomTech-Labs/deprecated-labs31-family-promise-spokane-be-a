@@ -5,6 +5,6 @@ exports.seed = function (knex) {
     .del()
     .then(function () {
       // Inserts seed entries
-      return knex('bed_capacity').insert([{ id: 1, total_beds: null }]);
+      return knex('bed_capacity').insert([{ id: 1, total_beds: 60 }]);
     });
 };
