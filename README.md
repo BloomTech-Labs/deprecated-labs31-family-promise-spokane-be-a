@@ -1568,3 +1568,394 @@ Request Body
 
 =========================================================================
 
+## MEMBERS (start here)
+
+GET a member: **/members
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+    
+      [
+    {
+        "id": 2,
+        "check_in": [
+            {
+                "waitlist": false,
+                "on_site_7pm": false,
+                "on_site_10pm": false,
+                "reservation_id": 1,
+                "reservation_status": true
+            }
+        ],
+        "family_id": 1,
+        "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+        "household_type": "Adults and Children",
+        "length_of_stay": "16 weeks",
+        "demographics": {
+            "first_name": "Jacob",
+            "last_name": "Shelby",
+            "gender": "female",
+            "relationship": "Son",
+            "DOB": "10-23-2015",
+            "SSN": 9999,
+            "income": 20000,
+            "employer": null,
+            "race": [
+                "White"
+            ],
+            "ethnicity": "Caucasian"
+        },
+        "barriers": {
+            "alcohol_abuse": false,
+            "developmental_disabilities": false,
+            "chronic_health_issues": false,
+            "drug_abuse": false,
+            "HIV_AIDs": false,
+            "mental_illness": false,
+            "physical_disabilities": false,
+            "list_indefinite_conditions": "NA",
+            "list_issues": "NA"
+        },
+        "schools": {
+            "highest_grade_completed": "Pre-Kindergarten",
+            "enrolled_status": true,
+            "reason_not_enrolled": "N/A",
+            "attendance_status": "active",
+            "school_type": "elementary",
+            "school_name": "Wright",
+            "mckinney_school": false
+        },
+        "case_members": 3,
+        "predicted_exit_destination": "temporary exit",
+        "flag": null,
+        "percent_complete": 0
+    },
+    {
+        "id": 3,
+        "check_in": [
+            {
+                "waitlist": false,
+                "on_site_7pm": false,
+                "on_site_10pm": false,
+                "reservation_id": 1,
+                "reservation_status": true
+            }
+        ],
+        "family_id": 1,
+        "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+        "household_type": "Adults and Children",
+        "length_of_stay": "16 weeks",
+        "demographics": {
+            "first_name": "Kai",
+            "last_name": "Benton",
+            "gender": "female",
+            "relationship": "Mom",
+            "DOB": "12-03-1992",
+            "SSN": 9999,
+            "income": 20000,
+            "employer": null,
+            "race": [
+                "White"
+            ],
+            "ethnicity": "Caucasian"
+        },
+        "barriers": {
+            "alcohol_abuse": false,
+            "developmental_disabilities": false,
+            "chronic_health_issues": false,
+            "drug_abuse": false,
+            "HIV_AIDs": false,
+            "mental_illness": false,
+            "physical_disabilities": false,
+            "list_indefinite_conditions": null,
+            "list_issues": null
+        },
+        "schools": {
+            "highest_grade_completed": "12th grade",
+            "enrolled_status": false,
+            "reason_not_enrolled": "finished",
+            "attendance_status": "inactive",
+            "school_type": null,
+            "school_name": null,
+            "mckinney_school": false
+        },
+        "case_members": 3,
+        "predicted_exit_destination": "temporary exit",
+        "flag": null,
+        "percent_complete": 0
+    },
+    {
+        "id": 1,
+        "check_in": [
+            {
+                "waitlist": false,
+                "on_site_7pm": true,
+                "on_site_10pm": true,
+                "reservation_id": 1,
+                "reservation_status": false
+            },
+            {
+                "waitlist": true,
+                "on_site_7pm": false,
+                "on_site_10pm": false,
+                "reservation_id": 1,
+                "reservation_status": true
+            }
+        ],
+        "family_id": 1,
+        "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+        "household_type": "Adults and Children",
+        "length_of_stay": "16 weeks",
+        "demographics": {
+            "first_name": "Thomas",
+            "last_name": "Shelby",
+            "gender": "male",
+            "relationship": "Dad",
+            "DOB": "1-03-1988",
+            "SSN": 9999,
+            "income": 20000,
+            "employer": "union",
+            "race": [
+                "White"
+            ],
+            "ethnicity": "Caucasian"
+        },
+        "barriers": {
+            "alcohol_abuse": true,
+            "developmental_disabilities": false,
+            "chronic_health_issues": false,
+            "drug_abuse": false,
+            "HIV_AIDs": false,
+            "mental_illness": false,
+            "physical_disabilities": true,
+            "list_indefinite_conditions": "NA",
+            "list_issues": "NA"
+        },
+        "schools": {
+            "highest_grade_completed": "12th grade",
+            "enrolled_status": false,
+            "reason_not_enrolled": "finished",
+            "attendance_status": "inactive",
+            "school_type": "NA",
+            "school_name": "NA",
+            "mckinney_school": false
+        },
+        "case_members": 3,
+        "predicted_exit_destination": "Permanent Exit",
+        "flag": null,
+        "percent_complete": 0
+    }
+]
+
+
+=========================================================================
+
+GET a member by ID: **/members/:id**
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+{
+    "id": 1,
+    "check_in": [
+        {
+            "waitlist": false,
+            "on_site_7pm": true,
+            "on_site_10pm": true,
+            "reservation_id": 1,
+            "reservation_status": false
+        },
+        {
+            "waitlist": true,
+            "on_site_7pm": false,
+            "on_site_10pm": false,
+            "reservation_id": 1,
+            "reservation_status": true
+        }
+    ],
+    "family_id": 1,
+    "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+    "household_type": "Adults and Children",
+    "length_of_stay": "16 weeks",
+    "demographics": {
+        "first_name": "Thomas",
+        "last_name": "Shelby",
+        "gender": "male",
+        "relationship": "Dad",
+        "DOB": "1-03-1988",
+        "SSN": 9999,
+        "income": 20000,
+        "employer": "union",
+        "race": [
+            "White"
+        ],
+        "ethnicity": "Caucasian"
+    },
+    "barriers": {
+        "alcohol_abuse": true,
+        "developmental_disabilities": false,
+        "chronic_health_issues": false,
+        "drug_abuse": false,
+        "HIV_AIDs": false,
+        "mental_illness": false,
+        "physical_disabilities": true,
+        "list_indefinite_conditions": "NA",
+        "list_issues": "NA"
+    },
+    "schools": {
+        "highest_grade_completed": "12th grade",
+        "enrolled_status": false,
+        "reason_not_enrolled": "finished",
+        "attendance_status": "inactive",
+        "school_type": "NA",
+        "school_name": "NA",
+        "mckinney_school": false
+    },
+    "case_members": 3,
+    "predicted_exit_destination": "Permanent Exit",
+    "flag": null,
+    "percent_complete": 0
+}
+
+=========================================================================
+
+POST a member: **/members
+
+HTTP Method: **[POST]**
+
+**Example:**
+
+Request Body
+{
+    "message": "member created",
+    "member": {
+        "id": 4,
+        "check_in": [
+            {
+                "waitlist": true,
+                "on_site_7pm": false,
+                "on_site_10pm": false,
+                "reservation_id": 1,
+                "reservation_status": true
+            }
+        ],
+        "family_id": 1,
+        "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+        "household_type": "Adults and Teenagers",
+        "length_of_stay": "16 weeks",
+        "demographics": {
+            "first_name": "Brad",
+            "last_name": "Pitt",
+            "gender": "female",
+            "relationship": "Mom",
+            "DOB": "12-03-1992",
+            "SSN": 9999,
+            "income": 20000,
+            "employer": null,
+            "race": [
+                "White"
+            ],
+            "ethnicity": "Caucasian"
+        },
+        "barriers": {
+            "alcohol_abuse": false,
+            "developmental_disabilities": false,
+            "chronic_health_issues": false,
+            "drug_abuse": false,
+            "HIV_AIDs": false,
+            "mental_illness": false,
+            "physical_disabilities": false,
+            "list_indefinite_conditions": null,
+            "list_issues": null
+        },
+        "schools": {
+            "highest_grade_completed": "12th grade",
+            "enrolled_status": false,
+            "reason_not_enrolled": "finished",
+            "attendance_status": "inactive",
+            "school_type": null,
+            "school_name": null,
+            "mckinney_school": false
+        },
+        "case_members": 3,
+        "predicted_exit_destination": "temporary exit",
+        "flag": null,
+        "percent_complete": 0
+    }
+}
+
+
+=========================================================================
+DELETE a member by ID: **/members/:id**
+
+HTTP Method: **[DELETE]**
+
+**Example:**
+
+Request Body
+
+{
+    "message": "member '4' was deleted.",
+    "members": {
+        "id": 4,
+        "check_in": [
+            {
+                "waitlist": true,
+                "on_site_7pm": false,
+                "on_site_10pm": false,
+                "reservation_id": 1,
+                "reservation_status": true
+            }
+        ],
+        "family_id": 1,
+        "date_of_enrollment": "2020-10-09T04:00:00.000Z",
+        "household_type": "Adults and Teenagers",
+        "length_of_stay": "16 weeks",
+        "demographics": {
+            "first_name": "Brad",
+            "last_name": "Pitt",
+            "gender": "female",
+            "relationship": "Mom",
+            "DOB": "12-03-1992",
+            "SSN": 9999,
+            "income": 20000,
+            "employer": null,
+            "race": [
+                "White"
+            ],
+            "ethnicity": "Caucasian"
+        },
+        "barriers": {
+            "alcohol_abuse": false,
+            "developmental_disabilities": false,
+            "chronic_health_issues": false,
+            "drug_abuse": false,
+            "HIV_AIDs": false,
+            "mental_illness": false,
+            "physical_disabilities": false,
+            "list_indefinite_conditions": null,
+            "list_issues": null
+        },
+        "schools": {
+            "highest_grade_completed": "12th grade",
+            "enrolled_status": false,
+            "reason_not_enrolled": "finished",
+            "attendance_status": "inactive",
+            "school_type": null,
+            "school_name": null,
+            "mckinney_school": false
+        },
+        "case_members": 3,
+        "predicted_exit_destination": "temporary exit",
+        "flag": null,
+        "percent_complete": 0
+    }
+}
+
+=========================================================================
