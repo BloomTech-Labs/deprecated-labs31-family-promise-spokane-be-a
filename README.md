@@ -1570,7 +1570,7 @@ Request Body
 
 ## MEMBERS (start here)
 
-GET a member: **/members
+GET a member: **/members**
 
 HTTP Method: **[GET]**
 
@@ -1751,6 +1751,7 @@ Request Body
     }
 ]
 
+**Response:** (200) - success
 
 =========================================================================
 
@@ -1823,10 +1824,11 @@ Request Body
     "percent_complete": 0
     }
       
+**Response:** (200) - success
 
 =========================================================================
 
-POST a member: **/members
+POST a member: **/members**
 
 HTTP Method: **[POST]**
 
@@ -1892,9 +1894,11 @@ Request Body
     }
     }
 
+**Response:** (200) - success
 
 =========================================================================
-DELETE a member by ID: **/members/:id**
+
+DELETE a member by id: **/members/:id**
 
 HTTP Method: **[DELETE]**
 
@@ -1961,7 +1965,192 @@ Request Body
            
     }
     
-    ----
+**Response:** (200) - success
+ 
+=========================================================================
+
+## USERS (start here)    
+
+GET current user: **/users/me**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+        {
+            "user": {
+        "id": "00u2lhigtb8N47Jii5d6",
+        "email": "supervisor@gmail.com",
+        "first_name": "Arthur",
+        "last_name": "Shelby",
+        "role": "supervisor"
+       }
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+
+GET all users: **/users**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+        [
+          {
+        "id": "00u2lgpiiPT4y3njs5d6",
+        "email": "executivedirector@gmail.com",
+        "first_name": "Freddie",
+        "last_name": "Thorne",
+        "role": "executive_director"
+    },
+    {
+        "id": "00u2lhigtb8N47Jii5d6",
+        "email": "supervisor@gmail.com",
+        "first_name": "Arthur",
+        "last_name": "Shelby",
+        "role": "supervisor"
+    },
+    {
+        "id": "00u2lgca4zIaSTPqE5d6",
+        "email": "casemanager@gmail.com",
+        "first_name": "Linda",
+        "last_name": "Shelby",
+        "role": "case_manager"
+    },
+    {
+        "id": "00u2lh0bsAliwLEe75d6",
+        "email": "guest@gmail.com",
+        "first_name": "Thomas",
+        "last_name": "Shelby",
+        "role": "guest"
+    },
+    {
+        "id": "00u2lhpc533MESNSA5d6",
+        "email": "pending@gmail.com",
+        "first_name": "Ruby",
+        "last_name": "Rose",
+        "role": "pending"
+    },
+    {
+        "id": "00u2lhpc533MESNSA5b7",
+        "email": "guest2@gmail.com",
+        "first_name": "Rain",
+        "last_name": "Williams",
+        "role": "guest"
+    }
+    ]
     
     
+**Response:** (200) - OK
+
+=========================================================================
+
+POST a user: **/users/**
+
+HTTP Method: **[POST]**
+
+**Example:**
+POST Body
+
+      {
+        "id": "2",
+        "email": "Cameronl@gmail.com",
+        "first_name": "Cameron",
+        "last_name": "Lares",
+        "role": "supervisor"
+      }
     
+
+Request Body
+
+        {
+            "message": "Profile created"
+    }
+    
+    
+**Response:** (201) - success
+
+=========================================================================
+
+GET all users by id: **/users/:id**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+      {
+    "id": "2",
+    "email": "Cameronl@gmail.com",
+    "first_name": "Cameron",
+    "last_name": "Lares",
+    "role": "supervisor"
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+GET family by user id: **/:id/family**
+
+HTTP Method: **[GET]**
+
+**Example:**
+
+Request Body
+
+        {
+    
+    }
+    
+**Response:** (200) - success
+
+=========================================================================
+
+UPDATE user by id: **/users/:id/**
+
+HTTP Method: **[PUT]**
+
+**Cannot update user id or role**
+ 
+**Example:**
+
+Request Body
+
+        {
+    "message": "profile updated",
+    "profile": {
+        "id": "2",
+        "email": "updatedcam@gmail.com",
+        "first_name": "Cam",
+        "last_name": "L",
+        "role": "supervisor"
+        } 
+    }
+    
+    
+**Response:** (200) - success 
+
+=========================================================================
+
+DELETE user by id: **/users/:id**
+
+HTTP Method: **[DELETE]**
+
+**Example:**
+
+Request Body
+
+    {
+       
+    }
+    
+**Response:** (200) - success
