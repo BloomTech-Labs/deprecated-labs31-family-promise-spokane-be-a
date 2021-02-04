@@ -1758,11 +1758,11 @@ GET a member by ID: **/members/:id**
 HTTP Method: **[GET]**
 
 **Example:**
-
+ 
 Request Body
 
-{
-    "id": 1,
+    {
+          "id": 1,
     "check_in": [
         {
             "waitlist": false,
@@ -1821,7 +1821,8 @@ Request Body
     "predicted_exit_destination": "Permanent Exit",
     "flag": null,
     "percent_complete": 0
-}
+    }
+      
 
 =========================================================================
 
@@ -1832,8 +1833,9 @@ HTTP Method: **[POST]**
 **Example:**
 
 Request Body
-{
-    "message": "member created",
+
+        {
+        "message": "member created",
     "member": {
         "id": 4,
         "check_in": [
@@ -1888,7 +1890,7 @@ Request Body
         "flag": null,
         "percent_complete": 0
     }
-}
+    }
 
 
 =========================================================================
@@ -1900,7 +1902,7 @@ HTTP Method: **[DELETE]**
 
 Request Body
 
-{
+       {
     "message": "member '4' was deleted.",
     "members": {
         "id": 4,
@@ -1956,6 +1958,10 @@ Request Body
         "flag": null,
         "percent_complete": 0
     }
-}
-
-=========================================================================
+           
+    }
+    
+    ----
+    
+    
+    
