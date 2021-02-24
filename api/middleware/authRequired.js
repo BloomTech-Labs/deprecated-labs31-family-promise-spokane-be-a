@@ -10,7 +10,7 @@ const makeProfileObj = (claims) => {
     email: claims.email,
     first_name: claims.name.split(' ')[0],
     last_name: claims.name.split(' ')[1],
-    role: 'pending',
+    role: 'guest',
   };
 };
 

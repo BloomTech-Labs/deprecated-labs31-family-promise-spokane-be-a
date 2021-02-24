@@ -12,7 +12,7 @@ const findBy = (filter) => {
   return db('notes').where(filter);
 };
 
-//a function to find member by id
+//a function to find note by id
 const findById = async (id) => {
   return db('notes').where({ id }).first().select('*');
 };
