@@ -40,8 +40,8 @@ const authRequired = async (req, res, next) => {
         }
         next();
       })
-      .catch(() => {
-        res.status(401).json({ message: 'Invalid token' });
+      .catch((error) => {
+        res.status(401).json(error);
       });
   } catch (err) {
     next(createError(401, err.message));
