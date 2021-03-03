@@ -1,6 +1,7 @@
 .vscode
 apidoc
 dist-api
+private.key
 
 # test output
 coverage
