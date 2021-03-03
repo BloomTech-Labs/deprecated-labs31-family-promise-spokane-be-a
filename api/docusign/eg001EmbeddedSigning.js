@@ -7,7 +7,7 @@ const eg001EmbeddedSigning = exports,
   eg = "eg001", // This example reference.
   mustAuthenticate = "/ds/mustAuthenticate",
   minimumBufferMin = 3,
-  signerClientId = 1, // ***************************** The id of the signer within this application. Replace with Okta ID later (It can be whatever we want it to be) *****************************
+  signerClientId = 1, // ***************************** replaced on line 37 with OKTA user ID *****************************
   dsReturnUrl = dsConfig.appUrl + "/staffsig",
   dsPingUrl = dsConfig.appUrl + "/"; // Url that will be pinged by the DocuSign signing via Ajax
 /**
