@@ -3,6 +3,7 @@ apidoc
 dist-api
 private.key
 .key
+*.key
 
 # test output
 coverage
