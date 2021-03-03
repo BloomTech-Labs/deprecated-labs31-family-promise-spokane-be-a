@@ -1,8 +1,6 @@
 .vscode
 apidoc
 dist-api
-private.key
-.key
 *.key
 
 # test output
@@ -44,3 +42,4 @@ jspm_packages/
 
 #commands for back end and database 
 txt
+api/docusign/config/private.key
