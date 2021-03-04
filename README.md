@@ -64,6 +64,12 @@ There are 3 options to get postgresql installed locally [Choose one]:
 > Make sure to update the details of the app name, description and version in
 > the `package.json` and `config/jsdoc.js` files.
 
+
+*Use add --no-verify after your commit message if linting errors are preventing you from pushing
+
+## DocuSign
+There is a DocuSign specific readme in the api/docusign folder
+
 ## Contributing
 
 See the [contributing doc](https://github.com/Lambda-School-Labs/labs-api-starter/blob/main/CONTRIBUTING.md)

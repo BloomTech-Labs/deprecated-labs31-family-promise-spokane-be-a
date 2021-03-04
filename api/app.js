@@ -11,7 +11,6 @@ const dotenv = require('dotenv');
 const config_result = dotenv.config();
 // ******docusign imports**************
 const session = require("express-session");
-// const morgan = require("morgan");
 const MemoryStore = require("memorystore")(session);
 const moment = require('moment');
 const passport = require("passport");
@@ -54,11 +53,7 @@ app.use(
 
 app.use(helmet());
 app.use(express.json());
-app.use(
-  cors({
-    origin: '*',
-  })
-);
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -73,7 +68,6 @@ app.use('/beds', bedsRouter);
 
 // *****************docusign stuff****************
 let max_session_min = 180;
-// app.use(morgan("dev"));
 app.use(
   session({
     secret: dsConfig.sessionSecret,
@@ -89,28 +83,22 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// ********************** creates a JWT token and exchanges it for an access token **************
 app.use((req, res, next) => {
-  console.log("dsAuthJwt")
   req.dsAuthJwt = new DsJwtAuth(req);
   next();
 });
 
+// ********************docusign endpoint, loads createController function in eg001 file***********
 app.post("/callDS", eg001.createController);
 
-// module.exports = server;
+let scope = ["signature"];
+const environment = process.env.ENVIRONMENT || 'development'
+let hostUrl = process.env.FRONT_END_LOCAL //defaults to local front end URL
+if (environment === "production") {
+  hostUrl = process.env.FRONT_END_DEPLOY  //in production use front end deployed URL
+} 
 
-// passport.serializeUser(function (user, done) {
-//   done(null, user);
-// });
-// passport.deserializeUser(function (obj, done) {
-//   done(null, obj);
-// });
-
-const SCOPES = ["signature"];
-
-let scope = SCOPES;
-
-let hostUrl = "http://localhost:3000/";
 
 let docusignStrategy = new DocusignStrategy(
   {
@@ -138,6 +126,8 @@ let docusignStrategy = new DocusignStrategy(
 );
 passport.use(docusignStrategy);
 
+
+// ****************** these must be at the end of the app file ********************
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

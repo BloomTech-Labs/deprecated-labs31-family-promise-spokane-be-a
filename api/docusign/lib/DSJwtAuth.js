@@ -18,13 +18,7 @@ let DsJwtAuth = function _DsJwtAuth(req) {
   this.basePath = req.body && req.body.basePath;
   this._tokenExpiration = req.body && req.body.tokenExpirationTimestamp;
   this.scopes = "signature";
-  if (dsConfig.examplesApi.isRoomsApi) {
-    this.scopes +=
-      " dtr.rooms.read dtr.rooms.write dtr.documents.read dtr.documents.write dtr.profile.read dtr.profile.write dtr.company.read dtr.company.write room_forms";
-  } else if (dsConfig.examplesApi.isClickApi) {
-    this.scopes += " click.manage click.send";
-  }
-
+ 
   // For production use, you'd want to store the refresh token in non-volatile storage since it is
   // good for 30 days. You'd probably want to encrypt it too.
   this._debug = true; // ### DEBUG ### setting
@@ -34,7 +28,7 @@ module.exports = DsJwtAuth; // SET EXPORTS for the module.
 const moment = require("moment"),
   fs = require("fs"),
   docusign = require("docusign-esign"),
-  dsConfig = require("../config/index.js").config,
+  dsConfig = require("../config/index.js").config, //********** this includes appsettings.json *******/
   tokenReplaceMin = 10, // The accessToken must expire at least this number of
   tokenReplaceMinGet = 30,
   rsaKey = fs.readFileSync(dsConfig.privateKeyLocation);
@@ -54,6 +48,8 @@ const moment = require("moment"),
  *              also get the user's information
  * @function
  */
+
+// *************************** checks token *******************************
 DsJwtAuth.prototype.checkToken = function _checkToken(
   bufferMin = tokenReplaceMinGet
 ) {
@@ -87,9 +83,9 @@ DsJwtAuth.prototype.checkToken = function _checkToken(
 // ********************************** This creates the JWT AND gets the access token ********************
 DsJwtAuth.prototype.getToken = async function _getToken() {
   // Data used
-  // dsConfig.dsClientId
-  // dsConfig.impersonatedUserGuid
-  // dsConfig.privateKey
+  // dsConfig.dsClientId (integration key)
+  // dsConfig.impersonatedUserGuid (API username)
+  // dsConfig.privateKey 
   // dsConfig.dsOauthServer
 
   const jwtLifeSec = 10 * 60; // requested lifetime for the JWT is 10 min
@@ -125,6 +121,8 @@ DsJwtAuth.prototype.getToken = async function _getToken() {
  * @returns {promise}
  * @promise
  */
+
+//  ************************ uses access token to make an API call to Docusign to get account info ********************
 DsJwtAuth.prototype.getUserInfo = async function _getUserInfo() {
   // Data used:
   // dsConfig.targetAccountId
@@ -137,7 +135,6 @@ DsJwtAuth.prototype.getUserInfo = async function _getUserInfo() {
 
   dsApi.setOAuthBasePath(dsConfig.dsOauthServer.replace("https://", "")); // it have to be domain name
   const results = await dsApi.getUserInfo(this.accessToken);
-  // console.log(results)
   let accountInfo;
   if (!Boolean(targetAccountId)) {
     // find the default account
@@ -163,6 +160,8 @@ DsJwtAuth.prototype.getUserInfo = async function _getUserInfo() {
     accountName: this.accountName,
   };
 };
+
+// *********************************** not sure about anything after this ******************************
 
 /**
  * Clears the accessToken. Same as logging out
