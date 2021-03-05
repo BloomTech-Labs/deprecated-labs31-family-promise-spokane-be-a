@@ -29,6 +29,8 @@ Labs teams must follow all [Labs Engineering Standards](https://labs.lambdaschoo
 - `OKTA_CLIENT_ID` - the okta client ID.
 
 See .env.sample for example values
+### Private.key
+Contains RSA key from Docusign account. Make sure it's in the gitignore!
 
 ### Setup postgres
 
