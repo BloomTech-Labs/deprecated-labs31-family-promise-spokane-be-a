@@ -29,6 +29,8 @@ Labs teams must follow all [Labs Engineering Standards](https://labs.lambdaschoo
 - `OKTA_CLIENT_ID` - the okta client ID.
 
 See .env.sample for example values
+### Private.key
+Contains RSA key from Docusign account. Make sure it's in the gitignore!
 
 ### Setup postgres
 
@@ -61,6 +63,14 @@ There are 3 options to get postgresql installed locally [Choose one]:
 
 > Make sure to update the details of the app name, description and version in
 > the `package.json` and `config/jsdoc.js` files.
+
+
+*Use add --no-verify after your commit message if linting errors are preventing you from pushing
+## Facebook / Okta
+Left a note in line 34 of api/middleware/authRequired about possible workaround for issue with Facebook log in creating a new user when no email match is found in our database.
+
+## DocuSign
+There is a DocuSign specific readme in the api/docusign folder
 
 ## Contributing
 

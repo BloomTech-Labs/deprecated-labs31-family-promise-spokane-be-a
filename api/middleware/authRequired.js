@@ -24,7 +24,6 @@ const authRequired = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization || '';
     const match = authHeader.match(/Bearer (.+)/);
-
     if (!match) throw new Error('Missing idToken');
 
     const idToken = match[1];
@@ -32,6 +31,8 @@ const authRequired = async (req, res, next) => {
       .verifyAccessToken(idToken, oktaVerifierConfig.expectedAudience)
       .then(async (data) => {
         const jwtUserObj = makeProfileObj(data.claims);
+        // findorCreateProfile is why Facebook login creates a user when no email is matched in our database.
+        // Search through data that okta returns to see if they note that the login is from Facebook. IF SO, you can write a conditional statement here to create the profile OR skip to error page
         const user = await Users.findOrCreateProfile(jwtUserObj);
         if (user) {
           req.user = user;
@@ -41,9 +42,11 @@ const authRequired = async (req, res, next) => {
         next();
       })
       .catch(() => {
+        console.log('invalid token');
         res.status(401).json({ message: 'Invalid token' });
       });
   } catch (err) {
+    console.log('???');
     next(createError(401, err.message));
   }
 };
